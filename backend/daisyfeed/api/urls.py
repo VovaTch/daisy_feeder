@@ -3,6 +3,8 @@ from rest_framework import routers
 from django.urls import path, include
 
 router = routers.DefaultRouter()
-router.register(r"feed-item", FeedItemViewSet)
+router.register(r"feeditem", FeedItemViewSet, basename="feeditem")
 
-urlpatterns = [path("", include(router.urls))]
+# urlpatterns = [path("", include(router.urls))]
+urlpatterns = []
+urlpatterns += router.urls
