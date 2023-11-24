@@ -4,4 +4,4 @@ A project for a small app for logging the feeding of my cat Daisy. Partially als
 
 ## Daisy the good and the magnificent
 
-![Daisy](media/daisy.jpeg)
+![Daisy](readme_media/daisy.jpeg)
