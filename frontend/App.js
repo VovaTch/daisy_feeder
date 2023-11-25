@@ -18,17 +18,17 @@ export default function App() {
   // Submission form related flag whether is visible
   const [submissionVisible, setSubmissionVisible] = useState(false)
 
-  // Temporary adding item handler function
+  // Adding item handler function
   const addFeedItem = (itemName) => {
     console.log(`Adding item ${itemName}`);
-    setSubmissionVisible(true)
+    setSubmissionVisible(true);
   }
 
   useEffect(() => { fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT); }, [submissionVisible])
 
   return (
     <View style={styles.container}>
-      <Table foodItems={data} />
+      <Table foodItems={data} setFoodItems={setData} />
       <FeedItemForm
         isVisible={submissionVisible}
         onClose={() => { setSubmissionVisible(false) }}

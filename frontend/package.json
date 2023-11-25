@@ -10,6 +10,7 @@
   },
   "proxy": "http://127.0.0.1:8000/",
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@react-native-community/datetimepicker": "6.7.3",
     "@react-native-picker/picker": "^2.5.1",
     "axios": "^1.6.2",
