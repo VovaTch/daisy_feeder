@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export const Table = ({ foodItems, isLoading }) => {
+export const Table = ({ foodItems }) => {
 
   return (
     < View style={styles.table} >
@@ -14,9 +14,9 @@ export const Table = ({ foodItems, isLoading }) => {
       </View >
       {/* Fields, loop with map */}
       {
-        foodItems.map((foodItem, index) => (
+        foodItems.map((foodItem) => (
           <View style={styles.tableRow}>
-            <Text style={styles.tableCell}>{foodItem.datetime}</Text>
+            <Text style={styles.tableCell}>{new Date(foodItem.datetime).toLocaleTimeString()}</Text>
             <Text style={styles.tableCell}>{foodItem.feeder}</Text>
             <Text style={styles.tableCell}>{foodItem.amount}</Text>
             <Text style={styles.tableCell}>{foodItem.food_choice}</Text>

@@ -1,37 +1,46 @@
-import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
 import { Table } from './components/Table';
 import { FloatingButton } from './components/FloatingButton';
+import { fetchFeedItem } from './api/fetch/fetchFeedItem';
+import { FeedItemForm } from './components/FeedItemForm';
 
-DUMMY_DATA = [
-  { id: "asd", feeder: "Vova", amount: 30, datetime: "10.10.2023", food_choice: "Dry" },
-  { id: "dsa", feeder: "Vova", amount: 30, datetime: "10.10.2023", food_choice: "Dry" }
-]
+BASE_PATH_DEVELOPMENT = `http://192.168.1.79:8000/`
+
 
 export default function App() {
 
   const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState("True")
+  const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => { fetchData(); }, [])
+  // Submission form related flag whether is visible
+  const [submissionVisible, setSubmissionVisible] = useState(false)
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://192.168.1.79:8000/api/feeditem/");
-      //const response = await axios.get("http://127.0.0.1:8000/api/feeditem/");
-      setData(response.data);
-      setIsLoading(False);
-    } catch (error) {
-      console.log(error);
-    }
+  // Temporary adding item handler function
+  const addFeedItem = (itemName) => {
+    console.log(`Adding item ${itemName}`);
+    setSubmissionVisible(true)
   }
+
+  useEffect(() => { fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT); }, [submissionVisible])
 
   return (
     <View style={styles.container}>
       <Table foodItems={data} />
-      <FloatingButton onPress={() => { fetchData() }} />
+      <FeedItemForm
+        isVisible={submissionVisible}
+        onClose={() => { setSubmissionVisible(false) }}
+        onSubmit={() => {
+          addFeedItem();
+          fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT);
+        }}
+      />
+      <FloatingButton onPress={() => {
+        setSubmissionVisible(true);
+        fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT);
+      }} />
       <StatusBar style="auto" />
     </View>
   );
@@ -40,8 +49,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: `white`,
+    alignItems: `center`,
+    justifyContent: `center`,
   },
 });

@@ -10,11 +10,13 @@
   },
   "proxy": "http://127.0.0.1:8000/",
   "dependencies": {
+    "@react-native-community/datetimepicker": "6.7.3",
+    "@react-native-picker/picker": "^2.5.1",
     "axios": "^1.6.2",
-    "expo": "^49.0.20",
-    "expo-status-bar": "~1.6.0",
+    "expo": "^48.0.21",
+    "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
-    "react-native": "0.72.6"
+    "react-native": "0.71.14"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
