@@ -18,12 +18,6 @@ export default function App() {
   // Submission form related flag whether is visible
   const [submissionVisible, setSubmissionVisible] = useState(false)
 
-  // Adding item handler function
-  const addFeedItem = (itemName) => {
-    console.log(`Adding item ${itemName}`);
-    setSubmissionVisible(true);
-  }
-
   useEffect(() => { fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT); }, [submissionVisible])
 
   return (
@@ -33,7 +27,7 @@ export default function App() {
         isVisible={submissionVisible}
         onClose={() => { setSubmissionVisible(false) }}
         onSubmit={() => {
-          addFeedItem();
+          setSubmissionVisible(false);
           fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT);
         }}
       />

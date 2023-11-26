@@ -102,8 +102,8 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
 
           {/* Submit and cancel buttons */}
           <Button title="Submit" onPress={() => {
+            onSubmit();
             handleSubmit();
-            onClose();
           }} />
           <Button title="Cancel" onPress={onClose} />
         </View>
