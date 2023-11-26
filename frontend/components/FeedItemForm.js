@@ -3,7 +3,6 @@ import { View, Modal, TextInput, Button, StyleSheet, Text } from 'react-native';
 import { Picker } from "@react-native-picker/picker"
 import DateTimePicker from '@react-native-community/datetimepicker'
 
-import { makeId } from '../utils/others';
 import { sendFeedItem } from '../api/send/sendFeedItem';
 
 BASE_PATH_DEVELOPMENT = `http://192.168.1.79:8000/`

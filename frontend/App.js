@@ -1,6 +1,9 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Button, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Table } from './components/Table';
 import { FloatingButton } from './components/FloatingButton';
@@ -9,8 +12,9 @@ import { FeedItemForm } from './components/FeedItemForm';
 
 BASE_PATH_DEVELOPMENT = `http://192.168.1.79:8000/`
 
+const Drawer = createDrawerNavigator()
 
-export default function App() {
+const homeScreen = () => {
 
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -37,6 +41,25 @@ export default function App() {
       }} />
       <StatusBar style="auto" />
     </View>
+  );
+}
+
+function historyScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>History Screen of Dais-Dais cuteness, PLACEHOLDER</Text>
+    </View>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={homeScreen} />
+        <Drawer.Screen name="History" component={historyScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
 
