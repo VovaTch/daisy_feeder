@@ -16,7 +16,7 @@ export const Table = ({ foodItems, setFoodItems }) => {
 
       {/* Fields, loop with map */}
       {
-        foodItems.map((foodItem) => (
+        foodItems.map((foodItem, idx) => (
           <View style={styles.container}>
             <View style={styles.leftColumn}>
               <Text>Time: {new Date(foodItem.datetime).toLocaleTimeString()}</Text>
