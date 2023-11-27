@@ -14,7 +14,7 @@ BASE_PATH_DEVELOPMENT = `http://192.168.1.79:8000/`
 
 const Drawer = createDrawerNavigator()
 
-const homeScreen = () => {
+const HomeScreen = () => {
 
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -44,7 +44,7 @@ const homeScreen = () => {
   );
 }
 
-function historyScreen() {
+function HistoryScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>History Screen of Dais-Dais cuteness, PLACEHOLDER</Text>
@@ -56,8 +56,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={homeScreen} />
-        <Drawer.Screen name="History" component={historyScreen} />
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="History" component={HistoryScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
