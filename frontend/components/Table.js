@@ -13,28 +13,28 @@ export const Table = ({ foodItems, setFoodItems }) => {
 
   return (
     <View style={styles.table} >
-
       {/* Fields, loop with map */}
       {
         foodItems.map((foodItem, idx) => (
-          <View style={styles.container}>
-            <View style={styles.leftColumn}>
-              <Text>Time: {new Date(foodItem.datetime).toLocaleTimeString()}</Text>
-              <Text>Feeder: {foodItem.feeder}</Text>
-              <Text>Type: {foodItem.food_choice}</Text>
+          <View key={`box-container-${idx}`} style={styles.container} >
+            <View key={`left-side-${idx}`} style={styles.leftColumn}>
+              <Text key={`time-${idx}`} >Time: {new Date(foodItem.datetime).toLocaleTimeString()}</Text>
+              <Text key={`feeder-${idx}`}>Feeder: {foodItem.feeder}</Text>
+              <Text key={`type-${idx}`}>Type: {foodItem.food_choice}</Text>
             </View>
-            <View style={styles.rightColumn}>
-              <Text style={foodItem.food_choice === "wet" ? styles.amount_wet : styles.amount_dry}>{foodItem.amount}</Text>
+            <View key={`right-side-${idx}`} style={styles.rightColumn}>
+              <Text
+                key={`amount-${idx}`}
+                style={foodItem.food_choice === "wet" ? styles.amount_wet : styles.amount_dry}>{foodItem.amount}
+              </Text>
               <TouchableOpacity
+                key={`delete-${idx}`}
                 onPress={() => { deleteFeedItem(foodItem.id, foodItems, setFoodItems); }}><Feather
                   name="delete"
                   color={"black"}
                   size={24}
                 /></TouchableOpacity>
             </View>
-
-
-
           </View>
         ))
       }
