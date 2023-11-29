@@ -7,15 +7,18 @@ import { deleteFeedItem } from "../api/send/deleteFeedItem";
 BASE_PATH_DEVELOPMENT = `http://192.168.1.79:8000/`
 
 
-export const Table = ({ foodItems, setFoodItems }) => {
+export const Table = ({ foodItems, setFoodItems, requiredDate }) => {
 
-
+  filteredFoodItems = foodItems.filter(item => {
+    const itemDate = new Date(item.datetime).toISOString().split('T')[0];
+    return itemDate === requiredDate
+  })
 
   return (
     <View style={styles.table} >
       {/* Fields, loop with map */}
       {
-        foodItems.map((foodItem, idx) => (
+        filteredFoodItems.map((foodItem, idx) => (
           <View key={`box-container-${idx}`} style={styles.container} >
             <View key={`left-side-${idx}`} style={styles.leftColumn}>
               <Text key={`time-${idx}`} >Time: {new Date(foodItem.datetime).toLocaleTimeString()}</Text>

@@ -10,6 +10,7 @@
   },
   "proxy": "http://127.0.0.1:8000/",
   "dependencies": {
+    "@ant-design/react-native": "^5.0.5",
     "@expo/vector-icons": "^13.0.0",
     "@react-native-community/datetimepicker": "6.7.3",
     "@react-native-masked-view/masked-view": "^0.3.0",
@@ -22,6 +23,7 @@
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-native": "0.71.14",
+    "react-native-element-dropdown": "^2.10.0",
     "react-native-gesture-handler": "~2.9.0",
     "react-native-reanimated": "~2.14.4",
     "react-native-svg": "13.4.0",

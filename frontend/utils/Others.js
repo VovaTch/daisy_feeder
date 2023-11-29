@@ -14,3 +14,30 @@ export function makeId(length) {
   }
   return result;
 }
+
+export function getDateArray(feedItemData) {
+  let runningArray = [];
+  for (let idx = 0; idx < feedItemData.length; idx++) {
+    console.log(feedItemData[idx])
+    runningArray = [...runningArray,
+    new Date(feedItemData[idx].datetime).toISOString().split('T')[0],
+    ];
+  }
+  return runningArray
+}
+
+export function getUniqueDateArray(dateArray) {
+  return [...new Set(dateArray)]
+}
+
+export function getDateDropdownData(dateArray) {
+  let runningArray = [];
+  for (let idx = 0; idx < dateArray.length; idx++) {
+    runningArray = [...runningArray, {
+      label: dateArray[idx],
+      value: dateArray[idx],
+    }];
+  }
+  console.log(runningArray);
+  return runningArray;
+}
