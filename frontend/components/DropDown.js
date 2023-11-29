@@ -44,7 +44,7 @@ const DropdownComponent = ({ dateData, setDateSelected }) => {
       }}
       renderLeftIcon={() => (
         // <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
-        <Text style={{ fontSize: 16, color: "#aaa" }}>Select date...</Text>
+        <Text style={{ fontSize: 16, color: "#aaa" }}>Select a date...</Text>
       )}
       renderItem={renderItem}
     />

@@ -112,7 +112,7 @@ export default function App() {
           <CustomDrawerContent {...props} />
         )
       }}>
-        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Today's Feeding" component={HomeScreen} />
         <Drawer.Screen name="History" component={HistoryScreen} />
       </Drawer.Navigator>
     </NavigationContainer>

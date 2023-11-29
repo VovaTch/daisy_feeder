@@ -77,9 +77,11 @@ const styles = StyleSheet.create({
   amount_wet: {
     fontSize: 50,
     color: "blue",
+    fontWeight: "bold",
   },
   amount_dry: {
     fontSize: 50,
     color: "red",
+    fontWeight: "bold",
   },
 });
