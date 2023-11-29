@@ -3,16 +3,6 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
-const data = [
-  { label: 'Item 1', value: '1' },
-  { label: 'Item 2', value: '2' },
-  { label: 'Item 3', value: '3' },
-  { label: 'Item 4', value: '4' },
-  { label: 'Item 5', value: '5' },
-  { label: 'Item 6', value: '6' },
-  { label: 'Item 7', value: '7' },
-  { label: 'Item 8', value: '8' },
-];
 
 const DropdownComponent = ({ dateData, setDateSelected }) => {
   const [value, setValue] = useState(null);
@@ -45,7 +35,7 @@ const DropdownComponent = ({ dateData, setDateSelected }) => {
       maxHeight={300}
       labelField="label"
       valueField="value"
-      placeholder="Select item"
+      placeholder="Select date..."
       searchPlaceholder="Search..."
       value={value}
       onChange={item => {
@@ -53,7 +43,8 @@ const DropdownComponent = ({ dateData, setDateSelected }) => {
         setDateSelected(item.value);
       }}
       renderLeftIcon={() => (
-        <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
+        // <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
+        <Text style={{ fontSize: 16, color: "#aaa" }}>Select date...</Text>
       )}
       renderItem={renderItem}
     />
@@ -99,6 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   iconStyle: {
+    marginLeft: 150,
     width: 20,
     height: 20,
   },

@@ -143,4 +143,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  drawerScreen: {
+    fontSize: 16,
+    fontWeight: "bold",
+  }
 });
