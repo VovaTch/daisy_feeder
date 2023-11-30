@@ -11,39 +11,42 @@ import DropdownComponent from './components/DropDown';
 import { fetchFeedItem } from './api/fetch/fetchFeedItem';
 import { FeedItemForm } from './components/FeedItemForm';
 import { HexagonMask } from './components/HexagonMask';
-import { getDateArray, getUniqueDateArray, getDateDropdownData } from './utils/Others';
+import { getDateArray, getUniqueDateArray, getDateDropdownData, getFilteredFoodItems } from './utils/Others';
+import { FloatingSumView } from './components/FloatingSummation';
+import HistoryScreen from './screens/History';
 // import homeScreen from './screens/Home';
 
 BASE_PATH_DEVELOPMENT = `http://192.168.1.79:8000/`
 
 const Drawer = createDrawerNavigator()
 
-function HistoryScreen() {
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true);
-  const [dateSelected, setDateSelected] = useState("");
+// function HistoryScreen() {
+//   const [data, setData] = useState([])
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [dateSelected, setDateSelected] = useState("");
 
-  const getDropdownUniqueDates = (originalData) => {
-    console.log(originalData);
-    dateArray = getDateArray(originalData);
-    uniqueDataArray = getUniqueDateArray(dateArray)
-    return getDateDropdownData(uniqueDataArray);
-  }
+//   const getDropdownUniqueDates = (originalData) => {
+//     console.log(originalData);
+//     dateArray = getDateArray(originalData);
+//     uniqueDataArray = getUniqueDateArray(dateArray)
+//     return getDateDropdownData(uniqueDataArray);
+//   }
 
-  // temp data
-  const todayDate = new Date().toISOString().split('T')[0];
+//   // temp data
+//   const todayDate = new Date().toISOString().split('T')[0];
 
-  useEffect(() => { fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT); }, []);
-  // useEffect(() => [...dateDropdownData, {label: }])
+//   useEffect(() => { fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT); }, []);
+//   // useEffect(() => [...dateDropdownData, {label: }])
 
-  return (
-    <View style={styles.container}>
-      <DropdownComponent dateData={getDropdownUniqueDates(data)} setDateSelected={setDateSelected} />
-      <Table foodItems={data} setFoodItems={setData} requiredDate={dateSelected} />
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+//   return (
+//     <View style={styles.container}>
+//       <DropdownComponent dateData={getDropdownUniqueDates(data)} setDateSelected={setDateSelected} />
+//       <Table foodItems={data} setFoodItems={setData} requiredDate={dateSelected} />
+//       <FloatingSumView data={getFilteredFoodItems(data, dateSelected)} />
+//       <StatusBar style="auto" />
+//     </View>
+//   );
+// }
 
 
 function HomeScreen() {
@@ -74,6 +77,7 @@ function HomeScreen() {
         setSubmissionVisible(true);
         // fetchFeedItem(setData, setUniqueDates, setIsLoading, BASE_PATH_DEVELOPMENT);
       }} />
+      <FloatingSumView data={getFilteredFoodItems(data, todayDate)} />
       <StatusBar style="auto" />
     </View>
   );

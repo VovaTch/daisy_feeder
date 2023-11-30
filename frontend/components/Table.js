@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-nati
 import { Feather } from "@expo/vector-icons";
 
 import { deleteFeedItem } from "../api/send/deleteFeedItem";
+import { FloatingSumView } from "./FloatingSummation";
 
 BASE_PATH_DEVELOPMENT = `http://192.168.1.79:8000/`
 
