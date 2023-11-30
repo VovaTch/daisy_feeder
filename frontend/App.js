@@ -14,7 +14,8 @@ import { HexagonMask } from './components/HexagonMask';
 import { getDateArray, getUniqueDateArray, getDateDropdownData, getFilteredFoodItems } from './utils/Others';
 import { FloatingSumView } from './components/FloatingSummation';
 import HistoryScreen from './screens/History';
-// import homeScreen from './screens/Home';
+import SettingsScreen from './screens/Settings';
+import PlotScreen from './screens/Plots';
 
 BASE_PATH_DEVELOPMENT = `http://192.168.1.79:8000/`
 
@@ -118,6 +119,8 @@ export default function App() {
       }}>
         <Drawer.Screen name="Today's Feeding" component={HomeScreen} />
         <Drawer.Screen name="History" component={HistoryScreen} />
+        <Drawer.Screen name="Plots" component={PlotScreen} />
+        <Drawer.Screen name="Settings" component={SettingsScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
