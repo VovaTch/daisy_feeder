@@ -1,12 +1,10 @@
-import React from 'react'
+import React from "react";
 
-function getDataForPlot (data) {
-  return data.map(item => ({
+function getDataForPlot(data) {
+  return data.map((item) => ({
     x: item.datetime,
-    y: item.amount
-  }))
+    y: item.amount,
+  }));
 }
 
-export const TimeLinePlot = ({ data }) => {
-
-}
+export const TimeLinePlot = ({ data }) => {};

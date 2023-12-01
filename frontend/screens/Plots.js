@@ -1,12 +1,55 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useState, useEffect } from "react";
+import { ScrollView, View } from "react-native";
+import { VictoryChart, VictoryLine, VictoryAxis } from "victory-native";
 
-export default function PlotScreen () {
+import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
+
+const BASE_PATH_DEVELOPMENT = "http://192.168.1.79:8000/";
+
+export default function PlotScreen() {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT);
+  }, []);
+
   return (
-    <View>
-      <Text>
-        This screen displays plots.
-      </Text>
-    </View>
-  )
+    <ScrollView>
+      <View>
+        <VictoryChart width={350} height={350}>
+          <VictoryAxis
+            dependentAxis
+            tickFormat={(tick) => `${tick}`}
+            style={{
+              axis: { stroke: "#756f6a" },
+              ticks: { stroke: "grey", size: 5 },
+              tickLabels: { fontSize: 10, padding: 5 },
+            }}
+          />
+          <VictoryAxis
+            tickFormat={(tick) => new Date(tick).toLocaleDateString()}
+            style={{
+              axis: { stroke: "#756f6a" },
+              ticks: { stroke: "grey", size: 5 },
+              tickLabels: { fontSize: 10, padding: 5 },
+            }}
+          />
+          <VictoryLine
+            data={data}
+            x="datetime"
+            y="amount"
+            style={{
+              data: { stroke: "#c43a31" },
+              parent: { border: "1px solid #ccc" },
+            }}
+          />
+        </VictoryChart>
+      </View>
+    </ScrollView>
+  );
 }
+
+const filterFoodType = (data, foodType) => {
+  return data.filter((item) => item.food_choice === foodType);
+};
