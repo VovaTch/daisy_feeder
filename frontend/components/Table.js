@@ -1,17 +1,12 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { Feather } from '@expo/vector-icons'
 
-import { deleteFeedItem } from "../api/send/deleteFeedItem";
-import { FloatingSumView } from "./FloatingSummation";
-
-BASE_PATH_DEVELOPMENT = `http://192.168.1.79:8000/`
-
+import { deleteFeedItem } from '../api/send/deleteFeedItem'
 
 export const Table = ({ foodItems, setFoodItems, requiredDate }) => {
-
-  filteredFoodItems = foodItems.filter(item => {
-    const itemDate = new Date(item.datetime).toISOString().split('T')[0];
+  const filteredFoodItems = foodItems.filter(item => {
+    const itemDate = new Date(item.datetime).toISOString().split('T')[0]
     return itemDate === requiredDate
   })
 
@@ -32,16 +27,16 @@ export const Table = ({ foodItems, setFoodItems, requiredDate }) => {
             <View key={`middle-${idx}`} style={styles.rightColumn}>
               <Text
                 key={`amount-${idx}`}
-                style={foodItem.food_choice === "wet" ? styles.amount_wet : styles.amount_dry}>{foodItem.amount}
+                style={foodItem.food_choice === 'wet' ? styles.amount_wet : styles.amount_dry}>{foodItem.amount}
               </Text>
 
             </View>
             <View key={`right-${idx}`} style={styles.rightColumn}>
-              <TouchableOpacity style={{ alignContent: "center", padding: 10 }}
+              <TouchableOpacity style={{ alignContent: 'center', padding: 10 }}
                 key={`delete-${idx}`}
-                onPress={() => { deleteFeedItem(foodItem.id, foodItems, setFoodItems); }}><Feather
+                onPress={() => { deleteFeedItem(foodItem.id, foodItems, setFoodItems) }}><Feather
                   name="delete"
-                  color={"black"}
+                  color={'black'}
                   size={24}
                 /></TouchableOpacity></View>
           </View>
@@ -60,29 +55,30 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 10,
-    marginTop: 5
+    marginTop: 5,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)'
   },
   innerText: {
-    textAlign: "center",
-    fontSize: 18,
+    textAlign: 'center',
+    fontSize: 18
   },
   leftColumn: {
-    color: "red",
+    color: 'red',
     padding: 10,
-    alignItems: 'flex-start',
+    alignItems: 'flex-start'
   },
   rightColumn: {
     padding: 10,
-    alignItems: 'center', // Align the text to the right
+    alignItems: 'center' // Align the text to the right
   },
   amount_wet: {
     fontSize: 50,
-    color: "blue",
-    fontWeight: "bold",
+    color: 'blue',
+    fontWeight: 'bold'
   },
   amount_dry: {
     fontSize: 50,
-    color: "red",
-    fontWeight: "bold",
-  },
-});
+    color: 'red',
+    fontWeight: 'bold'
+  }
+})

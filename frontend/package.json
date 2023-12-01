@@ -1,36 +1,43 @@
 {
-  "name": "frontend",
-  "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
-  "proxy": "http://127.0.0.1:8000/",
-  "dependencies": {
-    "@ant-design/react-native": "^5.0.5",
-    "@expo/vector-icons": "^13.0.0",
-    "@react-native-community/datetimepicker": "6.7.3",
-    "@react-native-masked-view/masked-view": "^0.3.0",
-    "@react-native-picker/picker": "^2.5.1",
-    "@react-navigation/drawer": "^6.6.6",
-    "@react-navigation/native": "^6.1.9",
-    "@react-navigation/stack": "^6.3.20",
-    "axios": "^1.6.2",
-    "expo": "^48.0.21",
-    "expo-status-bar": "~1.4.4",
-    "react": "18.2.0",
-    "react-native": "0.71.14",
-    "react-native-element-dropdown": "^2.10.0",
-    "react-native-gesture-handler": "~2.9.0",
-    "react-native-reanimated": "~2.14.4",
-    "react-native-svg": "13.4.0",
-    "react-native-svg-transformer": "^1.1.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.0"
-  },
-  "private": true
+    "name": "frontend",
+    "version": "1.0.0",
+    "main": "node_modules/expo/AppEntry.js",
+    "scripts": {
+        "start": "expo start",
+        "android": "expo start --android",
+        "ios": "expo start --ios",
+        "web": "expo start --web"
+    },
+    "proxy": "http://127.0.0.1:8000/",
+    "dependencies": {
+        "@ant-design/react-native": "^5.0.5",
+        "@expo/vector-icons": "^13.0.0",
+        "@react-native-community/datetimepicker": "6.7.3",
+        "@react-native-masked-view/masked-view": "^0.3.0",
+        "@react-native-picker/picker": "^2.5.1",
+        "@react-navigation/drawer": "^6.6.6",
+        "@react-navigation/native": "^6.1.9",
+        "@react-navigation/stack": "^6.3.20",
+        "axios": "^1.6.2",
+        "expo": "^48.0.21",
+        "expo-status-bar": "~1.4.4",
+        "react": "18.2.0",
+        "react-native": "0.71.14",
+        "react-native-element-dropdown": "^2.10.0",
+        "react-native-gesture-handler": "~2.9.0",
+        "react-native-reanimated": "~2.14.4",
+        "react-native-svg": "13.4.0",
+        "react-native-svg-transformer": "^1.1.0",
+        "victory": "^36.7.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.20.0",
+        "eslint": "^8.54.0",
+        "eslint-config-standard": "^17.1.0",
+        "eslint-plugin-import": "^2.29.0",
+        "eslint-plugin-n": "^16.3.1",
+        "eslint-plugin-promise": "^6.1.1",
+        "eslint-plugin-react": "^7.33.2"
+    },
+    "private": true
 }

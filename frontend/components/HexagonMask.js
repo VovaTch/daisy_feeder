@@ -1,10 +1,9 @@
-import React from 'react';
-import { View, Image } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
-import MaskedView from '@react-native-masked-view/masked-view';
+import React from 'react'
+import { View, Image } from 'react-native'
+import Svg, { Path } from 'react-native-svg'
+import MaskedView from '@react-native-masked-view/masked-view'
 
 export const HexagonMask = ({ imageSource, size, cornerRadius }) => {
-
   const roundedHexagonPath = `
     M${size / 2} 0
     Q${size} ${size / 8} ${size} ${size / 4}
@@ -13,9 +12,9 @@ export const HexagonMask = ({ imageSource, size, cornerRadius }) => {
     L0 ${(3 / 4) * size}
     Q0 ${(5 / 8) * size} 0 ${(3 / 4) * size / 2}
     Z
-  `;
+  `
 
-  console.log(imageSource);
+  console.log(imageSource)
 
   return (
     <MaskedView
@@ -33,5 +32,5 @@ export const HexagonMask = ({ imageSource, size, cornerRadius }) => {
         style={{ width: size, height: size, resizeMode: 'cover', borderRadius: cornerRadius }}
       />
     </MaskedView>
-  );
-};
+  )
+}

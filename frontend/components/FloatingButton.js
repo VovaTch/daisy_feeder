@@ -1,13 +1,13 @@
-import React from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react'
+import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 export const FloatingButton = ({ onPress }) => {
   return (
     <TouchableOpacity style={styles.floatingButton} onPress={onPress}>
       <Text style={styles.buttonText}>+</Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   floatingButton: {
@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
     right: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 3, // Android-only: Add a subtle shadow
+    elevation: 3 // Android-only: Add a subtle shadow
   },
   buttonText: {
     color: '#fff',
     fontSize: 24,
-    fontWeight: 'bold',
-  },
-});
+    fontWeight: 'bold'
+  }
+})
