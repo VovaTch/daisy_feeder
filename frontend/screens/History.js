@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 
 import {
   getDateArray,
@@ -13,8 +13,7 @@ import DropdownComponent from "../components/DropDown";
 import { FloatingSumView } from "../components/FloatingSummation";
 import { StatusBar } from "expo-status-bar";
 import { Table } from "../components/Table";
-
-const BASE_PATH_DEVELOPMENT = "http://192.168.1.79:8000/";
+import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
 
 export default function HistoryScreen() {
   const [data, setData] = useState([]);
@@ -34,19 +33,27 @@ export default function HistoryScreen() {
 
   return (
     <View style={styles.container}>
-      <DropdownComponent
-        dateData={getDropdownUniqueDates(data)}
-        setDateSelected={setDateSelected}
-      />
-      <View style={styles.table}>
-        <Table
-          foodItems={data}
-          setFoodItems={setData}
-          requiredDate={dateSelected}
-        />
-      </View>
-      <FloatingSumView data={getFilteredFoodItems(data, dateSelected)} />
-      <StatusBar style="auto" />
+      {isLoading ? (
+        // Display a spinner while data is loading
+        <ActivityIndicator size="large" color="#884400" />
+      ) : (
+        // Render content based on the fetched data
+        <View>
+          <DropdownComponent
+            dateData={getDropdownUniqueDates(data)}
+            setDateSelected={setDateSelected}
+          />
+          <View style={styles.table}>
+            <Table
+              foodItems={data}
+              setFoodItems={setData}
+              requiredDate={dateSelected}
+            />
+          </View>
+          <FloatingSumView data={getFilteredFoodItems(data, dateSelected)} />
+          <StatusBar style="auto" />
+        </View>
+      )}
     </View>
   );
 }

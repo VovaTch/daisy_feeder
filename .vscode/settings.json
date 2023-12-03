@@ -6,7 +6,7 @@
     "[javascript]": {
         "editor.tabSize": 2
     },
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
     "editor.formatOnPaste": true, // required 
     "editor.formatOnType": false, // required
     "editor.formatOnSave": true, // optional 

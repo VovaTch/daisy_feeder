@@ -3,8 +3,7 @@ import { ScrollView, View } from "react-native";
 import { VictoryChart, VictoryLine, VictoryAxis } from "victory-native";
 
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
-
-const BASE_PATH_DEVELOPMENT = "http://192.168.1.79:8000/";
+import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
 
 export default function PlotScreen() {
   const [data, setData] = useState([]);
@@ -49,7 +48,3 @@ export default function PlotScreen() {
     </ScrollView>
   );
 }
-
-const filterFoodType = (data, foodType) => {
-  return data.filter((item) => item.food_choice === foodType);
-};

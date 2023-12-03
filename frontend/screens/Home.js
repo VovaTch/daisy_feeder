@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { Table } from "../components/Table";
@@ -8,8 +8,7 @@ import { FeedItemForm } from "../components/FeedItemForm";
 import { FloatingSumView } from "../components/FloatingSummation";
 import { getFilteredFoodItems } from "../utils/Others";
 import { FloatingButton } from "../components/FloatingButton";
-
-const BASE_PATH_DEVELOPMENT = "http://192.168.1.79:8000/";
+import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
 
 export default function HomeScreen() {
   const [data, setData] = useState([]);
@@ -27,14 +26,20 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.table}>
-        <Table
-          foodItems={data}
-          setFoodItems={setData}
-          requiredDate={todayDate}
-        />
-      </View>
+      {/* Show loading screen */}
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#884400" />
+      ) : (
+        <View style={styles.table}>
+          <Table
+            foodItems={data}
+            setFoodItems={setData}
+            requiredDate={todayDate}
+          />
+        </View>
+      )}
 
+      {/* Invisible feed item form */}
       <FeedItemForm
         isVisible={submissionVisible}
         onClose={() => {
@@ -44,6 +49,8 @@ export default function HomeScreen() {
           setSubmissionVisible(false);
         }}
       />
+
+      {/* Add item floating button */}
       <FloatingButton
         onPress={() => {
           setSubmissionVisible(true);
