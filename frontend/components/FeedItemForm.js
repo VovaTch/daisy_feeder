@@ -12,8 +12,7 @@ import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { sendFeedItem } from "../api/send/sendFeedItem";
-
-const BASE_PATH_DEVELOPMENT = "http://192.168.1.79:8000/";
+import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
 
 export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
   const [amount, setAmount] = useState("");
