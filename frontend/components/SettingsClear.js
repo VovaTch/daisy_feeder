@@ -11,7 +11,7 @@ import {
 import { clearHistory } from "../api/send/deleteFeedItem";
 import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
 
-const SettingsComponent = ({ data, setData }) => {
+const SettingsClearComponent = ({ data, setData }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleClearHistory = () => {
@@ -147,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsComponent;
+export default SettingsClearComponent;
