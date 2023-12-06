@@ -3,10 +3,10 @@ import {
   View,
   Modal,
   TextInput,
-  Button,
   StyleSheet,
   Text,
   Platform,
+  TouchableOpacity,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -74,22 +74,27 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
 
           {/* Dry or wet */}
           <Text>Food Type:</Text>
-          <Picker
-            selectedValue={foodType}
-            onValueChange={(itemValue) => setFoodType(itemValue)}
-          >
-            <Picker.Item label="Dry" value="dry" />
-            <Picker.Item label="Wet" value="wet" />
-          </Picker>
+          <View>
+            <Picker
+              selectedValue={foodType}
+              onValueChange={(itemValue) => setFoodType(itemValue)}
+            >
+              <Picker.Item label="Dry" value="dry" />
+              <Picker.Item label="Wet" value="wet" />
+            </Picker>
+          </View>
 
           {/* Time of feeding */}
           <Text>Feeding Time:</Text>
-          <Button
-            title={`Pick ${feedingTime.toLocaleTimeString()}`}
+          <TouchableOpacity
+            style={styles.buttonTime}
             onPress={() => setShowDatePicker(true)}
-          />
+          >
+            <Text>{`Pick ${feedingTime.toLocaleTimeString()}`}</Text>
+          </TouchableOpacity>
           {showDatePicker && (
             <DateTimePicker
+              style={styles.button}
               value={feedingTime}
               mode="time"
               is24Hour={true}
@@ -99,14 +104,18 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
           )}
 
           {/* Submit and cancel buttons */}
-          <Button
-            title="Submit"
+          <TouchableOpacity
+            style={styles.buttonSubmit}
             onPress={() => {
               onSubmit();
               handleSubmit();
             }}
-          />
-          <Button title="Cancel" onPress={onClose} />
+          >
+            <Text style={styles.textSubmit}>Submit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonCancel} onPress={onClose}>
+            <Text style={styles.textCancel}>Cancel</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -133,5 +142,52 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
+  },
+  button: {
+    backgroundColor: "white",
+    borderColor: "#dddddd",
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 5,
+    padding: 10,
+  },
+  buttonSubmit: {
+    backgroundColor: "rgba(191,255,191,0.2)",
+    borderColor: "#dddddd",
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 5,
+    padding: 10,
+  },
+  textSubmit: {
+    fontSize: 24,
+    color: "rgb(0, 70, 0)",
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  textCancel: {
+    fontSize: 24,
+    color: "rgb(70, 0, 0)",
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  buttonCancel: {
+    backgroundColor: "rgba(255,191,191,0.2)",
+    borderColor: "#dddddd",
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 5,
+    padding: 10,
+  },
+  buttonTime: {
+    backgroundColor: "white",
+    borderColor: "#dddddd",
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 5,
+    marginBottom: 25,
+    paddingTop: 30,
+    paddingBottom: 30,
+    padding: 10,
   },
 });

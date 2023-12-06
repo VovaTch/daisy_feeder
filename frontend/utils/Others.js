@@ -43,7 +43,6 @@ export function getDateDropdownData(dateArray) {
       },
     ];
   }
-  console.log(runningArray);
   return runningArray;
 }
 
@@ -51,5 +50,12 @@ export function getFilteredFoodItems(foodItems, requiredDate) {
   return foodItems.filter((item) => {
     const itemDate = new Date(item.datetime).toISOString().split("T")[0];
     return itemDate === requiredDate;
+  });
+}
+
+export function getReverseFilteredFoodItems(foodItems, exceptDate) {
+  return foodItems.filter((item) => {
+    const itemDate = new Date(item.datetime).toISOString().split("T")[0];
+    return itemDate !== exceptDate;
   });
 }

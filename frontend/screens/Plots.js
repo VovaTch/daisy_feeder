@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View } from "react-native";
-import { VictoryChart, VictoryLine, VictoryAxis } from "victory-native";
+import {
+  ScrollView,
+  ActivityIndicator,
+  View,
+  Text,
+  StyleSheet,
+} from "react-native";
 
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
+import { TimeLinePlot } from "../components/Plot";
 
 export default function PlotScreen() {
   const [data, setData] = useState([]);
@@ -14,37 +20,55 @@ export default function PlotScreen() {
   }, []);
 
   return (
-    <ScrollView>
-      <View>
-        <VictoryChart width={350} height={350}>
-          <VictoryAxis
-            dependentAxis
-            tickFormat={(tick) => `${tick}`}
-            style={{
-              axis: { stroke: "#756f6a" },
-              ticks: { stroke: "grey", size: 5 },
-              tickLabels: { fontSize: 10, padding: 5 },
-            }}
-          />
-          <VictoryAxis
-            tickFormat={(tick) => new Date(tick).toLocaleDateString()}
-            style={{
-              axis: { stroke: "#756f6a" },
-              ticks: { stroke: "grey", size: 5 },
-              tickLabels: { fontSize: 10, padding: 5 },
-            }}
-          />
-          <VictoryLine
+    <ScrollView style={styles.totalView}>
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#884400" />
+      ) : (
+        <View>
+          <PlotCard
             data={data}
-            x="datetime"
-            y="amount"
-            style={{
-              data: { stroke: "#c43a31" },
-              parent: { border: "1px solid #ccc" },
-            }}
+            foodType="none"
+            titleText="Accumulated Feeding Amount"
           />
-        </VictoryChart>
-      </View>
+          <PlotCard
+            data={data}
+            foodType="dry"
+            titleText="Accumulated Dry Food Amount"
+          />
+          <PlotCard
+            data={data}
+            foodType="wet"
+            titleText="Accumulated Wet Food Amount"
+          />
+        </View>
+      )}
     </ScrollView>
   );
 }
+
+const PlotCard = ({ data, foodType, titleText }) => {
+  return (
+    <View style={styles.plotCard}>
+      <Text style={styles.title}>{titleText}</Text>
+      <TimeLinePlot data={data} foodType={foodType} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  totalView: {
+    backgroundColor: "white",
+  },
+  plotCard: {
+    backgroundColor: "white",
+    borderColor: "#eee",
+    borderWidth: 1,
+    borderRadius: 5,
+    margin: 15,
+  },
+  title: {
+    fontSize: 18,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+});
