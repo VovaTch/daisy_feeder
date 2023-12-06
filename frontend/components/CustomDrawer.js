@@ -8,12 +8,12 @@ import {
 export const CustomDrawerHeader = () => {
   return (
     <View style={styles.drawerHeader}>
+      {/* <HexagonMask size={100} /> */}
       <Image
         source={require("../assets/daisy_navigator.jpeg")} // Replace with the actual path
         style={styles.logo}
       />
-      {/* <HexagonMask imageSource={'./assets/daisy_navigator.jpeg'} size={200} cornerRadius={10} /> */}
-      <Text style={styles.drawerHeaderText}>Daisy Feeder</Text>
+      <Text style={styles.drawerHeaderText}>Daisy{"\n"}Feeder</Text>
     </View>
   );
 };
@@ -35,10 +35,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
   },
+  drawerHeaderText: {
+    fontSize: 24,
+    color: "rgb(100, 60, 0)",
+    fontWeight: "bold",
+  },
   logo: {
-    width: 80,
-    height: 80,
+    width: 120,
+    height: 120,
     borderRadius: 20,
     marginRight: 12,
   },
+  imageHex: {},
 });

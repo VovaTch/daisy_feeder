@@ -37,6 +37,7 @@ export const clearHistory = async (
     filteredData.forAll(async (item) => {
       deleteFeedItem(item.id, data, setData, basePath);
     });
+    console.log("Cleared feeding history up to today.");
   } catch (error) {
     console.log(error);
   }

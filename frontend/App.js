@@ -39,7 +39,9 @@ export default function App() {
       <Drawer.Navigator
         initialRouteName="Home"
         drawerContent={(props) => {
-          return <CustomDrawerContent {...props} />;
+          return (
+            <CustomDrawerContent {...props} style={styles.drawerHeaderText} />
+          );
         }}
       >
         <Drawer.Screen name="Today's Feeding" component={HomeScreen} />

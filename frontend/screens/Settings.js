@@ -1,14 +1,7 @@
 import React from "react";
-import { View, Text, useEffect, useState } from "react-native";
 
-import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
+import SettingsClearComponent from "../components/SettingsClear";
 
-export default function SettingsScreen() {
-  return (
-    <View>
-      <Text>This screen displays settings.</Text>
-    </View>
-  );
+export default function SettingsScreen({ data, setData }) {
+  return <SettingsClearComponent data={data} setData={setData} />;
 }
-
-const ClearButton = () => {};

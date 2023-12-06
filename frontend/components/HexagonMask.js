@@ -1,43 +1,36 @@
 import React from "react";
-import { View, Image } from "react-native";
-import Svg, { Path } from "react-native-svg";
-import MaskedView from "@react-native-masked-view/masked-view";
+import { View } from "react-native";
+import { Svg } from "react-native-svg";
+import Defs from "react-native-svg";
+import ClipPath from "react-native-svg";
+import Polygon from "react-native-svg";
 
-export const HexagonMask = ({ imageSource, size, cornerRadius }) => {
-  const roundedHexagonPath = `
-    M${size / 2} 0
-    Q${size} ${size / 8} ${size} ${size / 4}
-    L${size} ${(3 / 4) * size}
-    Q${size} ${(7 / 8) * size} ${size / 2} ${size}
-    L0 ${(3 / 4) * size}
-    Q0 ${(5 / 8) * size} 0 ${((3 / 4) * size) / 2}
-    Z
-  `;
+const HexagonMask = ({ size }) => {
+  const hexagonWidth = size;
+  const hexagonHeight = (Math.sqrt(3) * hexagonWidth) / 2;
 
-  console.log(imageSource);
+  const points = [
+    `${hexagonWidth / 2},0`,
+    `${hexagonWidth}, ${hexagonHeight / 4}`,
+    `${hexagonWidth}, ${(hexagonHeight * 3) / 4}`,
+    `${hexagonWidth / 2}, ${hexagonHeight}`,
+    `0, ${(hexagonHeight * 3) / 4}`,
+    `0, ${hexagonHeight / 4}`,
+  ];
+  console.log(points.join(" "));
 
   return (
-    <MaskedView
-      style={{ flex: 1 }}
-      maskElement={
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <Svg height={size} width={size}>
-            <Path d={roundedHexagonPath} fill="#ffffff" />
-          </Svg>
-        </View>
-      }
-    >
-      <Image
-        source={imageSource}
-        style={{
-          width: size,
-          height: size,
-          resizeMode: "cover",
-          borderRadius: cornerRadius,
-        }}
-      />
-    </MaskedView>
+    <View>
+      <Svg height={hexagonHeight} width={hexagonWidth}>
+        <Defs>
+          <ClipPath id="hexagonClip">
+            <Polygon points={points.join(" ")} fill="black" />
+          </ClipPath>
+        </Defs>
+        <Polygon points={points.join(" ")} fill="#fff" />
+      </Svg>
+    </View>
   );
 };
+
+export default HexagonMask;
