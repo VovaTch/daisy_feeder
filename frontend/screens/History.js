@@ -21,7 +21,6 @@ export default function HistoryScreen() {
   const [dateSelected, setDateSelected] = useState("");
 
   const getDropdownUniqueDates = (originalData) => {
-    console.log(originalData);
     const dateArray = getDateArray(originalData);
     const uniqueDataArray = getUniqueDateArray(dateArray);
     return getDateDropdownData(uniqueDataArray);

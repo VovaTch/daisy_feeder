@@ -82,7 +82,6 @@ const accumulatePerDate = (data, foodType) => {
     return { date: date, accumulatedAmount: accumulatedAmount };
   });
 
-  console.log(dates);
   return resultArray;
 };
 

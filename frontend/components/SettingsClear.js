@@ -52,12 +52,10 @@ export const SettingsClearComponent = ({ foodItems, setFoodItems }) => {
 };
 
 const handleClearHistory = (setIsModalVisible) => {
-  console.log("1111");
   setIsModalVisible(true);
 };
 
 const handleConfirmation = (data, setData, setIsModalVisible) => {
-  console.log("2222");
   clearHistory(data, setData, BASE_PATH_DEVELOPMENT);
 
   // After clearing history, close the modal
@@ -69,7 +67,6 @@ const handleConfirmation = (data, setData, setIsModalVisible) => {
 
 const handleCancel = (setIsModalVisible) => {
   // If the user cancels, simply close the modal
-  console.log("3333");
   setIsModalVisible(false);
 };
 

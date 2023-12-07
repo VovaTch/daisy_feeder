@@ -22,8 +22,6 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const handleSubmit = () => {
-    console.log({ amount, feederName, foodType, feedingTime });
-
     // Store all the fields in a dictionary
     const feedingData = {
       feeder: feederName,
