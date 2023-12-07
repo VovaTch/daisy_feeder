@@ -24,8 +24,8 @@ export const deleteFeedItem = async (
 };
 
 export const clearHistory = async (
-  data,
-  setData,
+  data2delete,
+  setData2delete,
   basePath = "http://192.168.1.79:8000/"
 ) => {
   try {
@@ -33,10 +33,15 @@ export const clearHistory = async (
       `Attempting to clear history from ${basePath + "api/feeditem/"}...`
     );
     const todayDate = new Date().toISOString().split("T")[0];
-    const filteredData = getReverseFilteredFoodItems(data, todayDate);
-    filteredData.forAll(async (item) => {
-      deleteFeedItem(item.id, data, setData, basePath);
-    });
+    const filteredData = getReverseFilteredFoodItems(data2delete, todayDate);
+    for (let idx = 0; idx < filteredData.length; idx++) {
+      deleteFeedItem(
+        filteredData[idx].id,
+        data2delete,
+        setData2delete,
+        basePath
+      );
+    }
     console.log("Cleared feeding history up to today.");
   } catch (error) {
     console.log(error);

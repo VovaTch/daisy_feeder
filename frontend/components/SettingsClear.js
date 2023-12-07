@@ -1,46 +1,17 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Alert,
-  StyleSheet,
-  Modal,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, Modal, TouchableOpacity } from "react-native";
 
 import { clearHistory } from "../api/send/deleteFeedItem";
 import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
 
-const SettingsClearComponent = ({ data, setData }) => {
-  const [isModalVisible, setModalVisible] = useState(false);
-
-  const handleClearHistory = () => {
-    setModalVisible(true);
-  };
-
-  const handleConfirmation = () => {
-    clearHistory(data, setData, BASE_PATH_DEVELOPMENT);
-
-    // After clearing history, close the modal
-    setModalVisible(false);
-
-    // Optionally, you can show a success message
-    Alert.alert(
-      "History Cleared",
-      "Your history has been cleared successfully."
-    );
-  };
-
-  const handleCancel = () => {
-    // If the user cancels, simply close the modal
-    setModalVisible(false);
-  };
+export const SettingsClearComponent = ({ foodItems, setFoodItems }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
       {/* Clear History Button */}
       <View style={styles.settingsCard}>
-        <TouchableOpacity onPress={handleClearHistory}>
+        <TouchableOpacity onPress={() => handleClearHistory(setIsModalVisible)}>
           <Text>Clear History</Text>
         </TouchableOpacity>
       </View>
@@ -49,7 +20,7 @@ const SettingsClearComponent = ({ data, setData }) => {
       <Modal
         transparent={true}
         visible={isModalVisible}
-        onRequestClose={() => setModalVisible(false)}
+        onRequestClose={() => setIsModalVisible(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -60,13 +31,15 @@ const SettingsClearComponent = ({ data, setData }) => {
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={styles.okButton}
-                onPress={handleConfirmation}
+                onPress={() =>
+                  handleConfirmation(foodItems, setFoodItems, setIsModalVisible)
+                }
               >
                 <Text style={styles.buttonText}>OK</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.cancelButton}
-                onPress={handleCancel}
+                onPress={() => handleCancel(setIsModalVisible)}
               >
                 <Text style={styles.buttonText}>Cancel</Text>
               </TouchableOpacity>
@@ -76,6 +49,28 @@ const SettingsClearComponent = ({ data, setData }) => {
       </Modal>
     </View>
   );
+};
+
+const handleClearHistory = (setIsModalVisible) => {
+  console.log("1111");
+  setIsModalVisible(true);
+};
+
+const handleConfirmation = (data, setData, setIsModalVisible) => {
+  console.log("2222");
+  clearHistory(data, setData, BASE_PATH_DEVELOPMENT);
+
+  // After clearing history, close the modal
+  setIsModalVisible(false);
+
+  // Optionally, you can show a success message
+  // Alert.alert("History Cleared", "Your history has been cleared successfully.");
+};
+
+const handleCancel = (setIsModalVisible) => {
+  // If the user cancels, simply close the modal
+  console.log("3333");
+  setIsModalVisible(false);
 };
 
 const styles = StyleSheet.create({
@@ -146,5 +141,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default SettingsClearComponent;
