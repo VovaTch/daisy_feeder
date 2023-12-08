@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, StyleSheet, Modal, TouchableOpacity } from "react-native";
 
 import { clearHistory } from "../api/send/deleteFeedItem";
-import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
+import { context } from "../context/global";
 
 export const SettingsClearComponent = ({ foodItems, setFoodItems }) => {
+  // context
+  const globalContext = useContext(context);
+  const { domain } = globalContext;
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
@@ -32,7 +36,12 @@ export const SettingsClearComponent = ({ foodItems, setFoodItems }) => {
               <TouchableOpacity
                 style={styles.okButton}
                 onPress={() =>
-                  handleConfirmation(foodItems, setFoodItems, setIsModalVisible)
+                  handleConfirmation(
+                    foodItems,
+                    setFoodItems,
+                    setIsModalVisible,
+                    domain
+                  )
                 }
               >
                 <Text style={styles.buttonText}>OK</Text>
@@ -55,8 +64,8 @@ const handleClearHistory = (setIsModalVisible) => {
   setIsModalVisible(true);
 };
 
-const handleConfirmation = (data, setData, setIsModalVisible) => {
-  clearHistory(data, setData, BASE_PATH_DEVELOPMENT);
+const handleConfirmation = (data, setData, setIsModalVisible, domain) => {
+  clearHistory(data, setData, domain);
 
   // After clearing history, close the modal
   setIsModalVisible(false);

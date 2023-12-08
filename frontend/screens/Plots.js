@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   ScrollView,
   ActivityIndicator,
@@ -7,16 +7,27 @@ import {
   StyleSheet,
 } from "react-native";
 
-import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
-import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
 import { TimeLinePlot } from "../components/Plot";
+import { context } from "../context/global";
+import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 
 export default function PlotScreen() {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // context
+  const globalContext = useContext(context);
+  const {
+    isLoggedIn,
+    domain,
+    feedItems,
+    setFeedItems,
+    setIsLoading,
+    isLoading,
+  } = globalContext;
+
+  // const [feedItems, setFeedItems] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT);
+    fetchFeedItem(setFeedItems, setIsLoading, domain);
   }, []);
 
   return (
@@ -26,17 +37,17 @@ export default function PlotScreen() {
       ) : (
         <View>
           <PlotCard
-            data={data}
+            data={feedItems}
             foodType="none"
             titleText="Accumulated Feeding Amount"
           />
           <PlotCard
-            data={data}
+            data={feedItems}
             foodType="dry"
             titleText="Accumulated Dry Food Amount"
           />
           <PlotCard
-            data={data}
+            data={feedItems}
             foodType="wet"
             titleText="Accumulated Wet Food Amount"
           />

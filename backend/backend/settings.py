@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "users.apps.UsersConfig",
     "rest_framework",
     "corsheaders",
     "daisyfeed",
@@ -130,3 +132,22 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_WHITELIST = ["http://192.168.1.79:19000", "http://127.0.0.1:19000"]
+
+# User authentication related
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication', 
+    ),
+}
+
+JWT_AUTH = {
+    # how long the original token is valid for
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
+    # allow refreshing of tokens
+    'JWT_ALLOW_REFRESH': True,
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -8,16 +8,27 @@ import {
 import { StatusBar } from "expo-status-bar";
 
 import { Table } from "../components/Table";
-import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { FeedItemForm } from "../components/FeedItemForm";
 import { FloatingSumView } from "../components/FloatingSummation";
 import { getFilteredFoodItems } from "../utils/Others";
 import { FloatingButton } from "../components/FloatingButton";
-import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
+import { context } from "../context/global";
+import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 
 export default function HomeScreen() {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // context
+  const globalContext = useContext(context);
+  const {
+    isLoggedIn,
+    domain,
+    feedItems,
+    setFeedItems,
+    isLoading,
+    setIsLoading,
+  } = globalContext;
+
+  // const [feedItems, setFeedItems] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
 
   // Submission form related flag whether is visible
   const [submissionVisible, setSubmissionVisible] = useState(false);
@@ -26,7 +37,7 @@ export default function HomeScreen() {
   const todayDate = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
-    fetchFeedItem(setData, setIsLoading, BASE_PATH_DEVELOPMENT);
+    fetchFeedItem(setFeedItems, setIsLoading, domain);
   }, [submissionVisible]);
 
   return (
@@ -37,8 +48,8 @@ export default function HomeScreen() {
       ) : (
         <View style={styles.table}>
           <Table
-            foodItems={data}
-            setFoodItems={setData}
+            foodItems={feedItems}
+            setFoodItems={setFeedItems}
             requiredDate={todayDate}
           />
         </View>
@@ -61,7 +72,7 @@ export default function HomeScreen() {
           setSubmissionVisible(true);
         }}
       />
-      <FloatingSumView data={getFilteredFoodItems(data, todayDate)} />
+      <FloatingSumView data={getFilteredFoodItems(feedItems, todayDate)} />
       <StatusBar style="auto" />
     </SafeAreaView>
   );

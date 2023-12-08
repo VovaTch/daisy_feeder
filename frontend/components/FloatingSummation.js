@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   floatingView: {
     position: "absolute",
     bottom: "5%",
-    left: "15%",
+    left: "10%",
     right: "15%",
     borderColor: "#ccc",
     // borderWidth: 1,

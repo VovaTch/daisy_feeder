@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Modal,
@@ -12,9 +12,13 @@ import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { sendFeedItem } from "../api/send/sendFeedItem";
-import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
+import { context } from "../context/global";
 
 export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
+  // context
+  const globalContext = useContext(context);
+  const { domain } = globalContext;
+
   const [amount, setAmount] = useState("");
   const [feederName, setFeederName] = useState("");
   const [foodType, setFoodType] = useState("dry");
@@ -31,7 +35,7 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
     };
 
     // Send data
-    sendFeedItem(feedingData, BASE_PATH_DEVELOPMENT);
+    sendFeedItem(feedingData, domain);
 
     // Reset the form variables
     setAmount("");
