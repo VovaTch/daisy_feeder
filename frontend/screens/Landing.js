@@ -13,6 +13,8 @@ const LandingScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
+  const [securePassword, setSecurePassword] = useState(true);
+
   // const handleLogin = () => {
   //   // Implement your login logic here
   //   console.log('Logging in...');
@@ -29,6 +31,8 @@ const LandingScreen = ({ navigation }) => {
         <Text style={styles.label}>Email or Name</Text>
         <TextInput
           style={styles.input}
+          autoCompleteType="email"
+          textContentType="username"
           placeholder="Enter your email or name"
           value={emailOrName}
           onChangeText={setEmailOrName}
@@ -37,8 +41,10 @@ const LandingScreen = ({ navigation }) => {
         <Text style={styles.label}>Password</Text>
         <TextInput
           style={styles.input}
+          autoCompleteType="password"
+          textContentType="password"
           placeholder="Enter your password"
-          secureTextEntry
+          secureTextEntry={securePassword}
           value={password}
           onChangeText={setPassword}
         />
