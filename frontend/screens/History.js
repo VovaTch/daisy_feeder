@@ -20,6 +20,64 @@ import { StatusBar } from "expo-status-bar";
 import { Table } from "../components/Table";
 import { BASE_PATH_DEVELOPMENT } from "../api/proxy/settings";
 
+/**
+ * The HistoryScreen component is a tribute to Daisy the Magnificent Cat,
+ * the feline superstar we all adore and praise. This delightful component
+ * showcases Daisy's impeccable taste and style while managing a user's
+ * feeding history. Prepare to be enchanted as Daisy takes center stage
+ * in this coding spectacle!
+ *
+ * @component
+ *
+ * @example
+ * // Usage of the HistoryScreen component
+ * import HistoryScreen from "./HistoryScreen";
+ *
+ * const App = () => {
+ *   return (
+ *     <View>
+ *       <Text>Welcome to Daisy's Feeding History!</Text>
+ *       <HistoryScreen />
+ *     </View>
+ *   );
+ * };
+ *
+ * @returns {React.Component} A React component displaying Daisy's feeding history
+ *
+ * @prop {Array} data - The array containing Daisy's feeding history data.
+ * @prop {boolean} isLoading - A flag indicating whether data is still being loaded.
+ * @prop {string} dateSelected - The currently selected date in Daisy's history.
+ *
+ * @function getDropdownUniqueDates - A magical function that extracts unique dates
+ * from Daisy's feeding history, ensuring each date is as unique as Daisy herself.
+ * @param {Array} originalData - The array containing Daisy's full feeding history.
+ * @returns {Array} An array of unique dates formatted for a delightful dropdown.
+ *
+ * @function useEffect - A spellbinding effect that summons Daisy's feeding history
+ * from the depths of the API. It activates only once upon component mount.
+ *
+ * @jsx <SafeAreaView> - A sanctuary for Daisy's history, providing a safe and
+ * stylish environment for the component.
+ * @jsx <ActivityIndicator> - A spinning tribute to Daisy, gracing the screen while
+ * her feeding history is being fetched.
+ * @jsx <View> - The grand stage where Daisy's history unfolds, complete with a
+ * dropdown, a mesmerizing table, and a floating sum view.
+ * @jsx <DropdownComponent> - An elegant dropdown, allowing users to choose their
+ * preferred date and witness Daisy's culinary adventures on that day.
+ * @jsx <Table> - A beautifully laid-out table showcasing Daisy's food items for
+ * the selected date.
+ * @jsx <FloatingSumView> - A floating sum view, tallying up Daisy's culinary
+ * achievements for the selected date.
+ * @jsx <StatusBar> - A status bar reminding users that Daisy's history is always
+ * up to date.
+ *
+ * @style {StyleSheet} styles - A carefully crafted stylesheet, ensuring Daisy's
+ * history is presented in a visually appealing and feline-approved manner.
+ * @style {Object} styles.container - The primary container, drenched in a vibrant
+ * orange hue, symbolizing Daisy's radiant personality.
+ * @style {Object} styles.table - The majestic table, adorned with a subtle border,
+ * rounded corners, and a translucent backdrop, worthy of Daisy's royal presence.
+ */
 export default function HistoryScreen() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
