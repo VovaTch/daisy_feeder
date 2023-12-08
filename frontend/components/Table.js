@@ -68,9 +68,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderColor: "#ccc",
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 10,
     marginTop: 5,
+    margin: 5,
     backgroundColor: "rgba(255, 255, 255, 0.3)",
   },
   innerText: {

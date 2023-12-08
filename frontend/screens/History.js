@@ -1,6 +1,11 @@
 import "react-native-gesture-handler";
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  SafeAreaView,
+} from "react-native";
 
 import {
   getDateArray,
@@ -31,7 +36,7 @@ export default function HistoryScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {isLoading ? (
         // Display a spinner while data is loading
         <ActivityIndicator size="large" color="#884400" />
@@ -53,14 +58,14 @@ export default function HistoryScreen() {
           <StatusBar style="auto" />
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "orange",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -69,7 +74,8 @@ const styles = StyleSheet.create({
     marginTop: "15%",
     marginBottom: "25%",
     borderColor: "#eee",
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 10,
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
   },
 });

@@ -57,17 +57,18 @@ const PlotCard = ({ data, foodType, titleText }) => {
 
 const styles = StyleSheet.create({
   totalView: {
-    backgroundColor: "white",
+    backgroundColor: "orange",
   },
   plotCard: {
-    backgroundColor: "white",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
     borderColor: "#eee",
-    borderWidth: 1,
-    borderRadius: 5,
+    borderWidth: 0,
+    borderRadius: 10,
     margin: 15,
   },
   title: {
     fontSize: 18,
+    padding: 10,
     textAlign: "center",
     fontWeight: "bold",
   },

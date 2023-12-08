@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  SafeAreaView,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { Table } from "../components/Table";
@@ -25,7 +30,7 @@ export default function HomeScreen() {
   }, [submissionVisible]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Show loading screen */}
       {isLoading ? (
         <ActivityIndicator size="large" color="#884400" />
@@ -58,14 +63,14 @@ export default function HomeScreen() {
       />
       <FloatingSumView data={getFilteredFoodItems(data, todayDate)} />
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgb(255, 255, 255)",
+    backgroundColor: "orange",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
     marginTop: "15%",
     marginBottom: "25%",
     borderColor: "#eee",
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 10,
     backgroundColor: "rgba(255, 255, 255, 0.3)",
   },

@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     background: "rgba(255, 255, 255, 0.2)",
   },
   settingsCard: {
-    background: "rgba(1, 1, 1, 0.5)",
+    background: "rgba(255, 255, 255, 0.3)",
     margin: 15,
     padding: 15,
     borderWidth: 1,

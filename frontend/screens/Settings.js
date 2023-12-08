@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 
 import { SettingsClearComponent } from "../components/SettingsClear";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
@@ -15,20 +15,20 @@ export default function SettingsScreen() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {isLoading ? (
         <ActivityIndicator size="large" color="#884400" />
       ) : (
         <SettingsClearComponent foodItems={data} setFoodItems={setData} />
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "orange",
     alignItems: "center",
     justifyContent: "center",
   },
