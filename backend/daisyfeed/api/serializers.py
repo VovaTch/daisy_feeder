@@ -1,7 +1,5 @@
-from typing import Any
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from sympy import true
 
 from ..models import Profile, FriendRequest, FeedItem
 
@@ -22,19 +20,29 @@ class FriendRequestSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    # profile = FriendlyUserSerializer(write_only=True)
+    profile = ProfileSerializer()
+
+    def create(self, validated_data):
+        profile_data = validated_data.pop("profile", {})
+        friends_data = profile_data.get("friends", [])
+
+        user = User.objects.create(**validated_data)
+        profile = Profile.objects.create(user=user)
+        profile.friends.set(friends_data)
+
+        return user
+
+    def update(self, instance, validated_data):
+        instance.username = validated_data.get("username", instance.username)
+        if "profile" in validated_data:
+            instance.profile.friends = validated_data["profile"].get(
+                "friends", instance.profile.friends
+            )
+        return instance
 
     class Meta:
         model = User
-        fields = ("id", "username", "email", "password")  # , "user")
-
-    extra_kwargs = {"password": {"write_only": True}}
-
-    # def create(self, validated_data: dict[str, Any]) -> User:
-    #     profile_data = validated_data.pop("user")
-    #     user = User.objects.create_user(**validated_data)
-    #     FriendlyUser.objects.create(user=user, **profile_data)
-    #     return user
+        fields = ("id", "username", "email", "password", "profile")
 
 
 class FeedItemSerializer(serializers.ModelSerializer):

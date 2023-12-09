@@ -39,6 +39,7 @@ def login(request: HttpRequest) -> Response:
         return Response({"detail": "Not found"}, status=status.HTTP_404_NOT_FOUND)
     token, _ = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(instance=user)
+
     return Response(
         {"token": token.key, "user": serializer.data}, status=status.HTTP_202_ACCEPTED
     )
@@ -52,6 +53,11 @@ def signup(request: HttpRequest) -> Response:
         user = User.objects.get(username=request.data["username"])  # type: ignore
         user.set_password(request.data["password"])  # type: ignore
         user.save()
+
+        # Now that the user and profile are created, handle many-to-many relationships
+        friends_data = request.data.get("profile", {}).get("friends", [])  # type: ignore
+        user.profile.friends.set(friends_data)  # type: ignore
+
         token = Token.objects.create(user=user)
         return Response(
             {"token": token.key, "user": serializer.data},
@@ -65,6 +71,17 @@ def signup(request: HttpRequest) -> Response:
 @permission_classes([IsAuthenticated])
 def test_token(request: HttpRequest) -> Response:
     return Response({"detail": f"Passed for user with email: {request.user.email}"})  # type: ignore
+
+
+# Friend request sending
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def send_friend_request(request: HttpRequest) -> Response:
+    serializer = FriendRequestSerializer(data=request.data)  # type: ignore
+    if serializer.is_valid():
+        serializer.save(from_user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # Feeding item view

@@ -4,7 +4,7 @@
 POST http://0.0.0.0:8000/api/signup/
 Content-Type: application/json
 
-{"username": "fakevova1", "email": "fake.vova1@gmail.com" ,"password": "12341234"}
+{"username": "fakevova3", "email": "fake.vova3@gmai.com" ,"password": "12341234", "profile": {"friends": []}}
 
 ### ---------------------- LOG-IN-REQUEST
 
@@ -17,5 +17,12 @@ Content-Type: application/json
 
 GET http://0.0.0.0:8000/api/test-token/
 Content-Type: application/json
-Authorization: token 7cb342df8ee33d04e21f93eb4662105ce93a6ec2
+Authorization: token 8488dd40e658a28b5ab6118626bd32007733eb9d
 
+
+### ---------------------- SEND-FRIEND-REQUEST
+
+POST http://0.0.0.0:8000/api/friend-requests/
+Content-Type: application/json
+
+{"to_user": "2", "from_user": "3"}
