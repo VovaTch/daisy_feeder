@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,22 +8,34 @@ import {
 } from "react-native";
 import CheckBox from "expo-checkbox";
 
+import { context } from "../context/global";
+
 const LandingScreen = ({ navigation }) => {
+  // context
+  const globalContext = useContext(context);
+  const { setIsLoggedIn } = globalContext;
+
   const [emailOrName, setEmailOrName] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   const [securePassword, setSecurePassword] = useState(true);
 
-  // const handleLogin = () => {
-  //   // Implement your login logic here
-  //   console.log('Logging in...');
-  // };
+  // If we are at the logging screen, we aren't logged in.
+  useEffect(() => setIsLoggedIn(false), []);
 
-  // const handleSignUp = () => {
-  //   // Implement your sign-up logic here
-  //   console.log('Signing up...');
-  // };
+  const handleLogin = () => {
+    // Implement your login logic here
+    console.log(`Logging in with email or username ${emailOrName}.`);
+    setIsLoggedIn(true);
+    navigation.navigate("Home");
+  };
+
+  const handleSignUp = () => {
+    // Implement your sign-up logic here
+    console.log("Signing up...");
+    navigation.navigate("Sign Up");
+  };
 
   return (
     <View style={styles.container}>
@@ -58,17 +70,11 @@ const LandingScreen = ({ navigation }) => {
           <Text style={styles.checkboxLabel}>Remember me</Text>
         </View>
 
-        <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => navigation.navigate("Home")}
-        >
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.signUpButton}
-          onPress={() => navigation.navigate("Sign Up")}
-        >
+        <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>

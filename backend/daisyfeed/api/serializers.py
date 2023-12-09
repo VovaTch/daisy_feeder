@@ -1,20 +1,43 @@
+from typing import Any
 from rest_framework import serializers
-from ..models import FeedItem
+from django.contrib.auth.models import User
+from sympy import true
+
+from ..models import FriendlyUser, FriendRequest, FeedItem
+
+
+class FriendlyUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FriendlyUser
+        fields = (
+            "id",
+            "friends",
+        )
+
+
+class FriendRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FriendRequest
+        fields = ("id", "from_user", "to_user")
+
+
+class UserSerializer(serializers.ModelSerializer):
+    # profile = FriendlyUserSerializer(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ("id", "username", "email", "password")  # , "user")
+
+    extra_kwargs = {"password": {"write_only": True}}
+
+    # def create(self, validated_data: dict[str, Any]) -> User:
+    #     profile_data = validated_data.pop("user")
+    #     user = User.objects.create_user(**validated_data)
+    #     FriendlyUser.objects.create(user=user, **profile_data)
+    #     return user
 
 
 class FeedItemSerializer(serializers.ModelSerializer):
-    """
-    Serializer class for the FeedItem model.
-
-    Serializes FeedItem instances into JSON representations and parses JSON data
-    into valid FeedItem objects for use with Django REST Framework.
-
-    Attributes:
-        Meta:
-            model (type): The Django model associated with this serializer.
-            fields (tuple): The fields from the model to be included in the serialized output.
-    """
-
     class Meta:
         model = FeedItem
-        fields = ("id", "feeder", "amount", "datetime", "food_choice")
+        fields = ("id", "feeder", "amount", "datetime", "amount", "food_choice")

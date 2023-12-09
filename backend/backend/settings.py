@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "users.apps.UsersConfig",
     "rest_framework",
+    "rest_framework.authtoken",
+    "djoser",  # (optional, for user registration and authentication views),
     "corsheaders",
     "daisyfeed",
 ]
@@ -135,19 +136,17 @@ CORS_ORIGIN_WHITELIST = ["http://192.168.1.79:19000", "http://127.0.0.1:19000"]
 
 # User authentication related
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication', 
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
 }
 
 JWT_AUTH = {
     # how long the original token is valid for
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(days=3),
     # allow refreshing of tokens
-    'JWT_ALLOW_REFRESH': True,
+    "JWT_ALLOW_REFRESH": True,
 }
