@@ -35,7 +35,7 @@ class FriendRequestViewSet(viewsets.ModelViewSet):
 @api_view(["POST"])
 def login(request: HttpRequest) -> Response:
     user = get_object_or_404(User, username=request.data["username"])  # type: ignore
-    if not user.check_password(request.data["password"]):  # type: ignore
+    if not user.check_password(request.data["password"]) or not user.is_active:  # type: ignore
         return Response({"detail": "Not found"}, status=status.HTTP_404_NOT_FOUND)
     token, _ = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(instance=user)
@@ -82,6 +82,14 @@ def send_friend_request(request: HttpRequest) -> Response:
         serializer.save(from_user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET"])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_user(request: HttpRequest) -> Response:
+    user_serializer = UserSerializer(request.user)
+    return Response(user_serializer.data, status=status.HTTP_200_OK)
 
 
 # Feeding item view

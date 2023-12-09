@@ -26,3 +26,10 @@ POST http://0.0.0.0:8000/api/friend-requests/
 Content-Type: application/json
 
 {"to_user": "2", "from_user": "3"}
+
+
+### ---------------------- GET-USER-BY-TOKEN
+
+GET http://0.0.0.0:8000/api/get-user/
+Content-Type: application/json
+Authorization: token 345f72712d9ccc18bf207216004167f2f5b4f26a

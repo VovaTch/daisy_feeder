@@ -4,6 +4,7 @@ from .views import (
     FriendRequestViewSet,
     FeedItemViewSet,
     ProfileViewSet,
+    get_user,
     login,
     signup,
     test_token,
@@ -19,5 +20,6 @@ urlpatterns = [
     re_path("login", login),
     re_path("signup", signup),
     re_path("test-token", test_token),
+    re_path("get-user", get_user),
 ]
 urlpatterns += router.urls
