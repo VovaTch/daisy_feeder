@@ -3,14 +3,14 @@ from django.urls import re_path
 from .views import (
     FriendRequestViewSet,
     FeedItemViewSet,
-    FriendlyUserViewSet,
+    ProfileViewSet,
     login,
     signup,
     test_token,
 )
 
 router = DefaultRouter()
-router.register(r"friendly-user", FriendlyUserViewSet, basename="friendly-user")
+router.register(r"profile", ProfileViewSet, basename="profile")
 router.register(r"friend-requests", FriendRequestViewSet, basename="friend-request")
 router.register(r"feeditem", FeedItemViewSet, basename="feeditem")
 

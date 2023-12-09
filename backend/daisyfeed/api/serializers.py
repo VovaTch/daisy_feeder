@@ -3,12 +3,12 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from sympy import true
 
-from ..models import FriendlyUser, FriendRequest, FeedItem
+from ..models import Profile, FriendRequest, FeedItem
 
 
-class FriendlyUserSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FriendlyUser
+        model = Profile
         fields = (
             "id",
             "friends",

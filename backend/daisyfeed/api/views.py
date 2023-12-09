@@ -2,9 +2,9 @@ from django.http import HttpRequest
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
-from ..models import FriendlyUser, FriendRequest, FeedItem
+from ..models import Profile, FriendRequest, FeedItem
 from .serializers import (
-    FriendlyUserSerializer,
+    ProfileSerializer,
     FriendRequestSerializer,
     FeedItemSerializer,
     UserSerializer,
@@ -21,9 +21,9 @@ from rest_framework.authtoken.models import Token
 
 
 # Specific FriendlyUser views, for the user itself and the friend requests.
-class FriendlyUserViewSet(viewsets.ModelViewSet):
-    queryset = FriendlyUser.objects.all()
-    serializer_class = FriendlyUserSerializer
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
 
 
 class FriendRequestViewSet(viewsets.ModelViewSet):

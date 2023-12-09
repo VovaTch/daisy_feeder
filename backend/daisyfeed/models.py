@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser, User
 
 
 # Friendly user models
-class FriendlyUser(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     friends = models.ManyToManyField(
         "self",
@@ -32,12 +32,12 @@ class FriendlyUser(models.Model):
 
 class FriendRequest(models.Model):
     from_user = models.ForeignKey(
-        FriendlyUser,
+        Profile,
         related_name="%(app_label)s_%(class)s_from_user",
         on_delete=models.CASCADE,
     )
     to_user = models.ForeignKey(
-        FriendlyUser,
+        Profile,
         related_name="%(app_label)s_%(class)s_to_user",
         on_delete=models.CASCADE,
     )
@@ -47,7 +47,7 @@ class FriendRequest(models.Model):
 class FeedItem(models.Model):
     FOOD_CHOICES = [("wet", "Wet"), ("dry", "Dry")]
 
-    feeder = models.ForeignKey(FriendlyUser, on_delete=models.CASCADE)
+    feeder = models.ForeignKey(Profile, on_delete=models.CASCADE)
     amount = models.IntegerField()
     datetime = models.DateTimeField()
     food_choice = models.CharField(max_length=4, choices=FOOD_CHOICES, default="dry")
