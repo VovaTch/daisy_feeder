@@ -25,6 +25,7 @@ export default function HomeScreen() {
     setFeedItems,
     isLoading,
     setIsLoading,
+    activeUser,
   } = globalContext;
 
   // const [feedItems, setFeedItems] = useState([]);

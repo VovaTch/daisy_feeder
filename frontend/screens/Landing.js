@@ -9,26 +9,39 @@ import {
 import CheckBox from "expo-checkbox";
 
 import { context } from "../context/global";
+import { fetchLoginUser } from "../api/fetch/fetchLoginUser";
+import { validateToken } from "../api/fetch/validateToken";
 
 const LandingScreen = ({ navigation }) => {
   // context
   const globalContext = useContext(context);
-  const { setIsLoggedIn } = globalContext;
+  const { domain, setIsLoggedIn, setActiveUser } = globalContext;
 
-  const [emailOrName, setEmailOrName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [loginError, setLoginError] = useState();
+  const [token, setToken] = useState("");
 
   const [securePassword, setSecurePassword] = useState(true);
 
   // If we are at the logging screen, we aren't logged in.
-  useEffect(() => setIsLoggedIn(false), []);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Implement your login logic here
-    console.log(`Logging in with email or username ${emailOrName}.`);
-    setIsLoggedIn(true);
-    navigation.navigate("Home");
+    try {
+      const response = await fetchLoginUser(
+        username,
+        password,
+        setLoginError,
+        domain
+      );
+      const user = await validateToken(response.token);
+      setActiveUser(user);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   };
 
   const handleSignUp = () => {
@@ -40,14 +53,15 @@ const LandingScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
-        <Text style={styles.label}>Email or Name</Text>
+        <Text style={styles.label}>Username</Text>
+        {loginError ? <Text>{loginError}</Text> : <></>}
         <TextInput
           style={styles.input}
-          autoCompleteType="email"
+          autoCompleteType="name"
           textContentType="username"
-          placeholder="Enter your email or name"
-          value={emailOrName}
-          onChangeText={setEmailOrName}
+          placeholder="Enter your username"
+          value={username}
+          onChangeText={setUsername}
         />
 
         <Text style={styles.label}>Password</Text>

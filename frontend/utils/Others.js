@@ -59,3 +59,14 @@ export function getReverseFilteredFoodItems(foodItems, exceptDate) {
     return itemDate !== exceptDate;
   });
 }
+
+export function identifyInputType(input) {
+  // Regular expression to check for email pattern
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (emailPattern.test(input)) {
+    return "email";
+  } else {
+    return "username";
+  }
+}

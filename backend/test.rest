@@ -17,7 +17,7 @@ Content-Type: application/json
 
 GET http://0.0.0.0:8000/api/test-token/
 Content-Type: application/json
-Authorization: token 8488dd40e658a28b5ab6118626bd32007733eb9d
+Authorization: token 345f72712d9ccc18bf207216004167f2f5b4f26a
 
 
 ### ---------------------- SEND-FRIEND-REQUEST

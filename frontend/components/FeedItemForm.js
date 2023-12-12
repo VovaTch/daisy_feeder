@@ -17,10 +17,10 @@ import { context } from "../context/global";
 export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
   // context
   const globalContext = useContext(context);
-  const { domain } = globalContext;
+  const { domain, activeUser } = globalContext;
 
   const [amount, setAmount] = useState("");
-  const [feederName, setFeederName] = useState("");
+  // const [feederName, setFeederName] = useState("");
   const [foodType, setFoodType] = useState("dry");
   const [feedingTime, setFeedingTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -28,7 +28,7 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
   const handleSubmit = () => {
     // Store all the fields in a dictionary
     const feedingData = {
-      feeder: feederName,
+      feeder: activeUser.username,
       amount: parseInt(amount),
       datetime: feedingTime.toISOString(),
       food_choice: foodType,
@@ -39,7 +39,6 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
 
     // Reset the form variables
     setAmount("");
-    setFeederName("");
     setFoodType("dry");
     setFeedingTime(new Date());
   };
@@ -56,13 +55,7 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
       <View style={styles.modalContainer}>
         <View style={styles.formContainer}>
           {/* Feeder name */}
-          <Text>Feeder&apos;s Name:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter feeder's name"
-            value={feederName}
-            onChangeText={(text) => setFeederName(text)}
-          />
+          <Text>Feeder&apos;s Name: {activeUser.username}</Text>
 
           {/* Food amount */}
           <Text>Food amount:</Text>

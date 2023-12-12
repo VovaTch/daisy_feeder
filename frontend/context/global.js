@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, createContext } from "react";
-import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
+import React, { useState, createContext } from "react";
 
 const context = createContext();
 
@@ -7,10 +6,11 @@ const Provider = ({ children }) => {
   // TODO: to be filled
 
   // User state
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState();
+  const [errorMsg, setErrorMsg] = useState();
+  const [activeUser, setActiveUser] = useState();
 
   // Set domain
-  // eslint-disable-next-line no-unused-vars
   const [domain, setDomain] = useState("http://192.168.1.79:8000/");
 
   // Data # TODO: to be updated
@@ -19,12 +19,17 @@ const Provider = ({ children }) => {
 
   const globalContext = {
     domain,
-    isLoggedIn,
     feedItems,
     isLoading,
-    setIsLoggedIn,
+    token,
+    errorMsg,
+    activeUser,
     setFeedItems,
     setIsLoading,
+    setToken,
+    setDomain,
+    setActiveUser,
+    setErrorMsg,
   };
 
   return <context.Provider value={globalContext}>{children}</context.Provider>;
