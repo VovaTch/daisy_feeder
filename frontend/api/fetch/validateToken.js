@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const validateToken = async (
   token,
+  setError,
   basePath = "http://192.168.1.79/"
 ) => {
   try {
@@ -9,19 +10,10 @@ export const validateToken = async (
     const response = await axios.get(basePath + "api/get-user/", {
       heads: { Authorization: `Token ${token}` },
     });
-    await axios
-      .get(basePath + "api/get-user/", {
-        headers: { Authorization: `Token ${token}` },
-      })
-      .then((response) => {
-        console.log(`Token validated, passing user ${response.data.username}`);
-        return response.data;
-      })
-      .catch((error) => {
-        throw error;
-      });
+    console.log(`User ${response.data.username} authenticated the token.`);
+    return response.data
   } catch (error) {
-    console.log(error);
+    setError(`Failed to authenticate the token ${token}`);
     throw error;
   }
 };

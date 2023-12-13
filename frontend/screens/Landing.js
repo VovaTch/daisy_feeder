@@ -36,7 +36,7 @@ const LandingScreen = ({ navigation }) => {
         setLoginError,
         domain
       );
-      const user = await validateToken(response.token);
+      const user = await validateToken(response.token, setLoginError, domain);
       setActiveUser(user);
     } catch (error) {
       console.log(error);
