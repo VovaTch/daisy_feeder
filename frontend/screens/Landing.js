@@ -38,6 +38,7 @@ const LandingScreen = ({ navigation }) => {
       );
       const user = await validateToken(response.token, setLoginError, domain);
       setActiveUser(user);
+      navigation.navigate("Home");
     } catch (error) {
       console.log(error);
       throw error;

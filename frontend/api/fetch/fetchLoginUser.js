@@ -12,7 +12,7 @@ export const fetchLoginUser = async (
       username: usernameQuery,
       password: passwordQuery,
     });
-    console.log(`User ${usernameQuery} has a token ${response.data.token}`);
+    console.log(`User ${usernameQuery} has a token`);
     return response.data; // Explicitly return the response data
   } catch (error) {
     setError(

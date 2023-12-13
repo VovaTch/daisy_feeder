@@ -16,7 +16,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class FriendRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = FriendRequest
-        fields = ("id", "from_user", "to_user")
+        fields = ("id", "from_user", "to_user", "approved")
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -43,6 +43,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("id", "username", "email", "password", "profile")
+
+
+class MinimalUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("id", "username", "email")
 
 
 class FeedItemSerializer(serializers.ModelSerializer):

@@ -28,11 +28,13 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
   const handleSubmit = () => {
     // Store all the fields in a dictionary
     const feedingData = {
-      feeder: activeUser.username,
+      feeder: activeUser.id,
       amount: parseInt(amount),
       datetime: feedingTime.toISOString(),
       food_choice: foodType,
     };
+
+    console.log(activeUser);
 
     // Send data
     sendFeedItem(feedingData, domain);

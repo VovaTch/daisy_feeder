@@ -19,7 +19,6 @@ export default function HomeScreen() {
   // context
   const globalContext = useContext(context);
   const {
-    isLoggedIn,
     domain,
     feedItems,
     setFeedItems,

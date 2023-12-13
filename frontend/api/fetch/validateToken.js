@@ -6,14 +6,14 @@ export const validateToken = async (
   basePath = "http://192.168.1.79/"
 ) => {
   try {
-    console.log(`Trying to validate token ${token}...`);
+    console.log(`Trying to validate token...`);
     const response = await axios.get(basePath + "api/get-user/", {
-      heads: { Authorization: `Token ${token}` },
+      headers: { Authorization: `Token ${token}` },
     });
     console.log(`User ${response.data.username} authenticated the token.`);
-    return response.data
+    return response.data;
   } catch (error) {
-    setError(`Failed to authenticate the token ${token}`);
+    setError(`Failed to authenticate the token`);
     throw error;
   }
 };

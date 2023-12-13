@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { CustomDrawerContent } from "../components/CustomDrawer";
 import { StyleSheet } from "react-native";
@@ -18,7 +18,7 @@ const stack = createStackNavigator();
 export function DrawerNavigator() {
   // load context
   const globalContext = useContext(context);
-  const { isLoggedIn, token } = globalContext;
+  const { activeUser } = globalContext;
 
   return (
     <Drawer.Navigator
@@ -29,7 +29,7 @@ export function DrawerNavigator() {
         );
       }}
     >
-      {isLoggedIn && token ? (
+      {activeUser ? (
         <>
           <Drawer.Screen name="Today's Feeding" component={HomeScreen} />
           <Drawer.Screen name="History" component={HistoryScreen} />
@@ -62,9 +62,6 @@ const styles = StyleSheet.create({
 });
 
 export function StackNavigator() {
-  // const globalContext = useContext(context);
-  // const { isLoggedIn, token, setIsLoggedIn } = globalContext;
-
   return (
     <stack.Navigator initialRouteName="Landing">
       <stack.Screen

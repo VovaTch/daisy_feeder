@@ -1,9 +1,10 @@
 from django.http import HttpRequest
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, views
 from ..models import Profile, FriendRequest, FeedItem
 from .serializers import (
+    MinimalUserSerializer,
     ProfileSerializer,
     FriendRequestSerializer,
     FeedItemSerializer,
@@ -64,6 +65,18 @@ def signup(request: HttpRequest) -> Response:
             status=status.HTTP_201_CREATED,
         )
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetUserById(views.APIView):
+    def get(self, request, user_id):
+        try:
+            user = User.objects.get(id=user_id)
+            serializer = MinimalUserSerializer(user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response(
+                {"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND
+            )
 
 
 @api_view(["GET"])

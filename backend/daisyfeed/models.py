@@ -10,22 +10,6 @@ class Profile(models.Model):
         blank=True,
     )
 
-    # # Add a unique related_name for the groups field
-    # groups = models.ManyToManyField(
-    #     "auth.Group",
-    #     related_name="%(app_label)s_%(class)s_groups",
-    #     related_query_name="%(app_label)s_%(class)ss_groups",
-    #     blank=True,
-    # )
-
-    # # Add a unique related_name for the user_permissions field
-    # user_permissions = models.ManyToManyField(
-    #     "auth.Permission",
-    #     related_name="%(app_label)s_%(class)s_user_permissions",
-    #     related_query_name="%(app_label)s_%(class)s_user_permissions",
-    #     blank=True,
-    # )
-
     def __str__(self):
         return self.user.username
 
@@ -41,6 +25,7 @@ class FriendRequest(models.Model):
         related_name="%(app_label)s_%(class)s_to_user",
         on_delete=models.CASCADE,
     )
+    approved = models.BooleanField(blank=True)
 
 
 # Feeding item
