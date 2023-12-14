@@ -2,7 +2,7 @@ from django.http import HttpRequest
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status, views
-from ..models import Profile, FriendRequest, FeedItem
+from ..models import MinimalUser, Profile, FriendRequest, FeedItem
 from .serializers import (
     MinimalUserSerializer,
     ProfileSerializer,
@@ -70,10 +70,10 @@ def signup(request: HttpRequest) -> Response:
 class GetUserById(views.APIView):
     def get(self, request, user_id):
         try:
-            user = User.objects.get(id=user_id)
+            user = MinimalUser.objects.get(id=user_id)
             serializer = MinimalUserSerializer(user)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        except User.DoesNotExist:
+        except MinimalUser.DoesNotExist:
             return Response(
                 {"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND
             )

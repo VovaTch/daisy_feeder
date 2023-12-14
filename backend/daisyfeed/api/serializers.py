@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
-from ..models import Profile, FriendRequest, FeedItem
+from ..models import MinimalUser, Profile, FriendRequest, FeedItem
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -47,7 +47,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class MinimalUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = MinimalUser
         fields = ("id", "username", "email")
 
 

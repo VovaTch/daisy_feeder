@@ -14,6 +14,11 @@ class Profile(models.Model):
         return self.user.username
 
 
+class MinimalUser(models.Model):
+    username = models.CharField(max_length=256)
+    email = models.CharField(max_length=256)
+
+
 class FriendRequest(models.Model):
     from_user = models.ForeignKey(
         Profile,
