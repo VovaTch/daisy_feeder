@@ -32,6 +32,11 @@ class FriendRequestViewSet(viewsets.ModelViewSet):
     serializer_class = FriendRequestSerializer
 
 
+class MinimalUserViewSet(viewsets.ModelViewSet):
+    queryset = MinimalUser.objects.all()
+    serializer_class = MinimalUserSerializer
+
+
 # User API view, maybe messy to do it like that, but first time I'm dealing with Django so deal with it
 @api_view(["POST"])
 def login(request: HttpRequest) -> Response:
@@ -48,12 +53,19 @@ def login(request: HttpRequest) -> Response:
 
 @api_view(["POST"])
 def signup(request: HttpRequest) -> Response:
-    serializer = UserSerializer(data=request.data)  # type: ignore
-    if serializer.is_valid():
-        serializer.save()
+    user_serializer = UserSerializer(data=request.data)  # type: ignore
+    min_user_serializer = MinimalUserSerializer(data=request.data)  # type: ignore
+    if user_serializer.is_valid() and min_user_serializer.is_valid():
+        # Handle user serializer
+        user_serializer.save()
         user = User.objects.get(username=request.data["username"])  # type: ignore
         user.set_password(request.data["password"])  # type: ignore
         user.save()
+
+        # Handle minimal user serializer
+        min_user_serializer.save()
+        min_user = MinimalUser.objects.get(username=request.data["username"])  # type: ignore
+        min_user.save()
 
         # Now that the user and profile are created, handle many-to-many relationships
         friends_data = request.data.get("profile", {}).get("friends", [])  # type: ignore
@@ -61,22 +73,20 @@ def signup(request: HttpRequest) -> Response:
 
         token = Token.objects.create(user=user)
         return Response(
-            {"token": token.key, "user": serializer.data},
+            {
+                "token": token.key,
+                "user": user_serializer.data,
+                "min_user": min_user_serializer.data,
+            },
             status=status.HTTP_201_CREATED,
         )
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class GetUserById(views.APIView):
-    def get(self, request, user_id):
-        try:
-            user = MinimalUser.objects.get(id=user_id)
-            serializer = MinimalUserSerializer(user)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except MinimalUser.DoesNotExist:
-            return Response(
-                {"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND
-            )
+    return Response(
+        {
+            "user_error": user_serializer.errors,
+            "min_user_error": min_user_serializer.errors,
+        },
+        status=status.HTTP_400_BAD_REQUEST,
+    )
 
 
 @api_view(["GET"])

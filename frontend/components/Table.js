@@ -30,7 +30,7 @@ export const Table = ({ foodItems, setFoodItems, requiredDate }) => {
               Time: {new Date(foodItem.datetime).toLocaleTimeString()}
             </Text>
             <Text key={`feeder-${idx}`} style={styles.innerText}>
-              Feeder: {foodItem.feeder.username}
+              Feeder: {foodItem.feeder}
             </Text>
             <Text key={`type-${idx}`} style={styles.innerText}>
               Type: {foodItem.food_choice}

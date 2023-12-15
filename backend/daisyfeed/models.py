@@ -30,7 +30,8 @@ class FriendRequest(models.Model):
         related_name="%(app_label)s_%(class)s_to_user",
         on_delete=models.CASCADE,
     )
-    approved = models.BooleanField(blank=True)
+    pending = models.BooleanField(default=True)
+    approved = models.BooleanField(default=False)
 
 
 # Feeding item

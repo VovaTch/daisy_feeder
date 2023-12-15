@@ -3,7 +3,7 @@ from django.urls import re_path, path
 from .views import (
     FriendRequestViewSet,
     FeedItemViewSet,
-    GetUserById,
+    MinimalUserViewSet,
     ProfileViewSet,
     get_user,
     login,
@@ -15,6 +15,7 @@ router = DefaultRouter()
 router.register(r"profile", ProfileViewSet, basename="profile")
 router.register(r"friend-requests", FriendRequestViewSet, basename="friend-request")
 router.register(r"feeditem", FeedItemViewSet, basename="feeditem")
+router.register(r"minimal-user", MinimalUserViewSet, basename="min-user")
 
 # urlpatterns = [path("", include(router.urls))]
 urlpatterns = [
@@ -22,6 +23,5 @@ urlpatterns = [
     re_path("signup", signup),
     re_path("test-token", test_token),
     re_path("get-user", get_user),
-    path("get-user-by-id/<int:user_id>/", GetUserById.as_view(), name="get_user_by_id"),
 ]
 urlpatterns += router.urls
