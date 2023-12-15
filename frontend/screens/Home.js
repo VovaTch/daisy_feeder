@@ -10,10 +10,14 @@ import { StatusBar } from "expo-status-bar";
 import { Table } from "../components/Table";
 import { FeedItemForm } from "../components/FeedItemForm";
 import { FloatingSumView } from "../components/FloatingSummation";
-import { getFilteredFoodItems } from "../utils/Others";
+import {
+  getDateFilteredFoodItems,
+  getUserFilteredFoodItems,
+} from "../utils/Others";
 import { FloatingButton } from "../components/FloatingButton";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
+import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
 
 export default function HomeScreen() {
   // context
@@ -24,6 +28,8 @@ export default function HomeScreen() {
     setFeedItems,
     isLoading,
     setIsLoading,
+    minUsers,
+    setMinUsers,
     activeUser,
   } = globalContext;
 
@@ -38,6 +44,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     fetchFeedItem(setFeedItems, setIsLoading, domain);
+    fetchMinUsers(setMinUsers, setIsLoading, domain);
   }, [submissionVisible]);
 
   return (
@@ -48,8 +55,9 @@ export default function HomeScreen() {
       ) : (
         <View style={styles.table}>
           <Table
-            foodItems={feedItems}
+            foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
             setFoodItems={setFeedItems}
+            minUsers={minUsers}
             requiredDate={todayDate}
           />
         </View>
@@ -72,7 +80,12 @@ export default function HomeScreen() {
           setSubmissionVisible(true);
         }}
       />
-      <FloatingSumView data={getFilteredFoodItems(feedItems, todayDate)} />
+      <FloatingSumView
+        data={getDateFilteredFoodItems(
+          getUserFilteredFoodItems(feedItems, activeUser),
+          todayDate
+        )}
+      />
       <StatusBar style="auto" />
     </SafeAreaView>
   );

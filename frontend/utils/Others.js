@@ -19,7 +19,6 @@ export function makeId(length) {
 export function getDateArray(feedItemData) {
   let runningArray = [];
   for (let idx = 0; idx < feedItemData.length; idx++) {
-    console.log(feedItemData[idx]);
     runningArray = [
       ...runningArray,
       new Date(feedItemData[idx].datetime).toISOString().split("T")[0],
@@ -46,7 +45,7 @@ export function getDateDropdownData(dateArray) {
   return runningArray;
 }
 
-export function getFilteredFoodItems(foodItems, requiredDate) {
+export function getDateFilteredFoodItems(foodItems, requiredDate) {
   return foodItems.filter((item) => {
     const itemDate = new Date(item.datetime).toISOString().split("T")[0];
     return itemDate === requiredDate;
@@ -69,4 +68,14 @@ export function identifyInputType(input) {
   } else {
     return "username";
   }
+}
+
+export function getUsernameById(minUsers, id) {
+  const selectedUser = minUsers.find((minUsers) => minUsers.id === id);
+  return selectedUser ? selectedUser.username : "";
+}
+
+export function getUserFilteredFoodItems(foodItems, activeUser) {
+  const sendingIds = [activeUser.id, ...activeUser.profile.friends];
+  return foodItems.filter((item) => sendingIds.includes(item.feeder));
 }

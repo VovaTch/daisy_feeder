@@ -28,6 +28,13 @@ Content-Type: application/json
 {"to_user": "2", "from_user": "3"}
 
 
+### ---------------------- GET-FRIEND-REQUESTS
+
+GET http://0.0.0.0:8000/api/friend-requests/
+Content-Type: application/json
+
+
+
 ### ---------------------- GET-USER-BY-TOKEN
 
 GET http://0.0.0.0:8000/api/get-user/
@@ -37,4 +44,4 @@ Authorization: token 231977513fb46554489432160ee289df7d5a6fdc
 
 ### ---------------------- GET-USER-BY-ID
 
-GET http://0.0.0.0:8000/api/minimal-user/
+GET http://0.0.0.0:8000/api/minimal-user/2/

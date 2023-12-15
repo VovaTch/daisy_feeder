@@ -9,6 +9,8 @@ const Provider = ({ children }) => {
   const [token, setToken] = useState();
   const [errorMsg, setErrorMsg] = useState();
   const [activeUser, setActiveUser] = useState();
+  const [minUsers, setMinUsers] = useState([]);
+  const [friendRequests, setFriendRequests] = useState([]);
 
   // Set domain
   const [domain, setDomain] = useState("http://192.168.1.79:8000/");
@@ -24,12 +26,16 @@ const Provider = ({ children }) => {
     token,
     errorMsg,
     activeUser,
+    minUsers,
+    friendRequests,
     setFeedItems,
     setIsLoading,
     setToken,
     setDomain,
     setActiveUser,
     setErrorMsg,
+    setMinUsers,
+    setFriendRequests,
   };
 
   return <context.Provider value={globalContext}>{children}</context.Provider>;

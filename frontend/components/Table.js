@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -9,12 +9,9 @@ import {
 import { Feather } from "@expo/vector-icons";
 
 import { deleteFeedItem } from "../api/send/deleteFeedItem";
-import { context } from "../context/global";
+import { getUsernameById } from "../utils/Others";
 
-export const Table = ({ foodItems, setFoodItems, requiredDate }) => {
-  const globalContext = useContext(context);
-  const { activeUser } = globalContext;
-
+export const Table = ({ foodItems, setFoodItems, minUsers, requiredDate }) => {
   const filteredFoodItems = foodItems.filter((item) => {
     const itemDate = new Date(item.datetime).toISOString().split("T")[0];
     return itemDate === requiredDate;
@@ -30,7 +27,7 @@ export const Table = ({ foodItems, setFoodItems, requiredDate }) => {
               Time: {new Date(foodItem.datetime).toLocaleTimeString()}
             </Text>
             <Text key={`feeder-${idx}`} style={styles.innerText}>
-              Feeder: {foodItem.feeder}
+              Feeder: {getUsernameById(minUsers, foodItem.feeder)}
             </Text>
             <Text key={`type-${idx}`} style={styles.innerText}>
               Type: {foodItem.food_choice}

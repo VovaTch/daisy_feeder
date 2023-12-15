@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -15,13 +15,12 @@ import { validateToken } from "../api/fetch/validateToken";
 const LandingScreen = ({ navigation }) => {
   // context
   const globalContext = useContext(context);
-  const { domain, setIsLoggedIn, setActiveUser } = globalContext;
+  const { domain, setActiveUser } = globalContext;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [loginError, setLoginError] = useState();
-  const [token, setToken] = useState("");
 
   const [securePassword, setSecurePassword] = useState(true);
 

@@ -11,7 +11,8 @@ import {
   getDateArray,
   getUniqueDateArray,
   getDateDropdownData,
-  getFilteredFoodItems,
+  getDateFilteredFoodItems,
+  getUserFilteredFoodItems,
 } from "../utils/Others";
 import DropdownComponent from "../components/DropDown";
 import { FloatingSumView } from "../components/FloatingSummation";
@@ -19,17 +20,20 @@ import { StatusBar } from "expo-status-bar";
 import { Table } from "../components/Table";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
+import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
 
 export default function HistoryScreen() {
   // context
   const globalContext = useContext(context);
   const {
-    isLoggedIn,
     domain,
     feedItems,
     setFeedItems,
     isLoading,
     setIsLoading,
+    minUsers,
+    setMinUsers,
+    activeUser,
   } = globalContext;
 
   // const [feedItems, setFeedItems] = useState([]);
@@ -43,6 +47,7 @@ export default function HistoryScreen() {
   };
 
   useEffect(() => {
+    fetchMinUsers(setMinUsers, setIsLoading, domain);
     fetchFeedItem(setFeedItems, setIsLoading, domain);
   }, []);
 
@@ -55,18 +60,24 @@ export default function HistoryScreen() {
         // Render content based on the fetched data
         <View>
           <DropdownComponent
-            dateData={getDropdownUniqueDates(feedItems)}
+            dateData={getDropdownUniqueDates(
+              getUserFilteredFoodItems(feedItems, activeUser)
+            )}
             setDateSelected={setDateSelected}
           />
           <View style={styles.table}>
             <Table
-              foodItems={feedItems}
+              foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
               setFoodItems={setFeedItems}
+              minUsers={minUsers}
               requiredDate={dateSelected}
             />
           </View>
           <FloatingSumView
-            data={getFilteredFoodItems(feedItems, dateSelected)}
+            data={getDateFilteredFoodItems(
+              getUserFilteredFoodItems(feedItems, activeUser),
+              dateSelected
+            )}
           />
           <StatusBar style="auto" />
         </View>

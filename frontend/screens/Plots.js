@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import {
   ScrollView,
   ActivityIndicator,
@@ -10,17 +10,18 @@ import {
 import { TimeLinePlot } from "../components/Plot";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
+import { getUserFilteredFoodItems } from "../utils/Others";
 
 export default function PlotScreen() {
   // context
   const globalContext = useContext(context);
   const {
-    isLoggedIn,
     domain,
     feedItems,
     setFeedItems,
     setIsLoading,
     isLoading,
+    activeUser,
   } = globalContext;
 
   // const [feedItems, setFeedItems] = useState([]);
@@ -37,17 +38,17 @@ export default function PlotScreen() {
       ) : (
         <View>
           <PlotCard
-            data={feedItems}
+            data={getUserFilteredFoodItems(feedItems, activeUser)}
             foodType="none"
             titleText="Accumulated Feeding Amount"
           />
           <PlotCard
-            data={feedItems}
+            data={getUserFilteredFoodItems(feedItems, activeUser)}
             foodType="dry"
             titleText="Accumulated Dry Food Amount"
           />
           <PlotCard
-            data={feedItems}
+            data={getUserFilteredFoodItems(feedItems, activeUser)}
             foodType="wet"
             titleText="Accumulated Wet Food Amount"
           />

@@ -56,9 +56,6 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
     <Modal transparent={true} visible={isVisible} onRequestClose={onClose}>
       <View style={styles.modalContainer}>
         <View style={styles.formContainer}>
-          {/* Feeder name */}
-          <Text>Feeder&apos;s Name: {activeUser.username}</Text>
-
           {/* Food amount */}
           <Text>Food amount:</Text>
           <TextInput
