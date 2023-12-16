@@ -53,7 +53,7 @@ export const Table = ({ foodItems, setFoodItems, minUsers, requiredDate }) => {
                 deleteFeedItem(foodItem.id, foodItems, setFoodItems);
               }}
             >
-              <Feather name="delete" color={"black"} size={24} />
+              <Feather name="delete" color={"black"} size={40} />
             </TouchableOpacity>
           </View>
         </View>

@@ -12,11 +12,14 @@ export const SettingsClearComponent = ({ foodItems, setFoodItems }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <View>
       {/* Clear History Button */}
-      <View style={styles.settingsCard}>
-        <TouchableOpacity onPress={() => handleClearHistory(setIsModalVisible)}>
-          <Text>Clear History</Text>
+      <View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => handleClearHistory(setIsModalVisible)}
+        >
+          <Text style={styles.buttonText}>Clear History</Text>
         </TouchableOpacity>
       </View>
 
@@ -145,5 +148,15 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: "#884400",
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    alignSelf: "center",
+    marginVertical: "1.5%",
+    marginTop: "4%",
+    width: "100%",
   },
 });

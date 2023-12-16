@@ -41,7 +41,9 @@ export const updateFriendStatus = async (
       profile: { id: activeUser.profile.id, friends: combinedFriendsArray },
     };
     setActiveUser(updatedActiveUser);
-    console.log(`Updated the friend list of ${activeUser.username}`);
+    console.log(
+      `Updated the friend list of ${activeUser.username} to include ${activeUser.profile.friends.length} friends`
+    );
   } catch (error) {
     console.log(
       `Could not update friend list for ${activeUser.username}: ${error}`

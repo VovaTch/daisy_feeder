@@ -1,5 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
 import { SettingsClearComponent } from "../components/SettingsClear";
 import { ActivityIndicator } from "react-native";
@@ -10,8 +16,12 @@ import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
 import { fetchFriendRequests } from "../api/fetch/fetchFriendRequests";
 import { getUserFilteredFoodItems } from "../utils/Others";
 import { updateFriendStatus } from "../api/send/updateFriendRequestStatus";
+import { FriendListView } from "../components/FriendsList";
+import { SendFriendRequestPopup } from "../components/CreateFriendRequestPopup";
 
 export default function SettingsScreen() {
+  const [createRequestVisible, setCreateRequestVisible] = useState(false);
+
   // context
   const globalContext = useContext(context);
   const {
@@ -28,16 +38,23 @@ export default function SettingsScreen() {
     setFriendRequests,
   } = globalContext;
 
-  // const [feedItems, setFeedItems] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
+  // Handle friend request window
+  const handleOpenPopup = () => {
+    setCreateRequestVisible(true);
+  };
 
+  const handleClosePopup = () => {
+    setCreateRequestVisible(false);
+  };
+
+  // Handle status gathering
   useEffect(() => {
     fetchFeedItem(setFeedItems, setIsLoading, domain);
     fetchMinUsers(setMinUsers, setIsLoading, domain);
-    updateFriendStatus(activeUser, setActiveUser, friendRequests, domain);
-  }, [friendRequests]);
+  }, []);
 
   useEffect(() => {
+    updateFriendStatus(activeUser, setActiveUser, friendRequests, domain);
     fetchFriendRequests(setFriendRequests, setIsLoading, domain);
   }, []);
 
@@ -50,6 +67,19 @@ export default function SettingsScreen() {
           <SettingsClearComponent
             foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
             setFoodItems={setFeedItems}
+          />
+          <TouchableOpacity onPress={handleOpenPopup} style={styles.button}>
+            <Text style={styles.buttonText}>Create Friend Request</Text>
+          </TouchableOpacity>
+          <SendFriendRequestPopup
+            isVisible={createRequestVisible}
+            onClose={handleClosePopup}
+            onSubmit={handleClosePopup}
+          />
+          <FriendListView
+            activeUser={activeUser}
+            setActiveUser={setActiveUser}
+            minUsers={minUsers}
           />
           <FriendRequestView
             activeUser={activeUser}
@@ -68,5 +98,19 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
     alignItems: "center",
     justifyContent: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: "#884400",
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    alignSelf: "center",
+    paddingHorizontal: "15%",
+    marginVertical: "1.5%",
+    width: "70%",
   },
 });

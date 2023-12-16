@@ -19,6 +19,7 @@ import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
 import { updateFriendStatus } from "../api/send/updateFriendRequestStatus";
+import { deleteAnsweredFriendRequests } from "../api/send/deleteFriendRequest";
 
 export default function HomeScreen() {
   // context
@@ -30,14 +31,12 @@ export default function HomeScreen() {
     isLoading,
     setIsLoading,
     friendRequests,
+    setFriendRequests,
     minUsers,
     setMinUsers,
     activeUser,
     setActiveUser,
   } = globalContext;
-
-  // const [feedItems, setFeedItems] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
 
   // Submission form related flag whether is visible
   const [submissionVisible, setSubmissionVisible] = useState(false);
@@ -49,6 +48,12 @@ export default function HomeScreen() {
     fetchFeedItem(setFeedItems, setIsLoading, domain);
     fetchMinUsers(setMinUsers, setIsLoading, domain);
     updateFriendStatus(activeUser, setActiveUser, friendRequests, domain);
+    deleteAnsweredFriendRequests(
+      activeUser,
+      friendRequests,
+      setFriendRequests,
+      domain
+    );
   }, [submissionVisible]);
 
   return (

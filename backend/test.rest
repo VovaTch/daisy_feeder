@@ -11,7 +11,7 @@ Content-Type: application/json
 POST http://0.0.0.0:8000/api/login/
 Content-Type: application/json
 
-{"username": "fakevova2", "password": "12341234"}
+{"username": "fakevova1", "password": "12341234"}
 
 ### ---------------------- USER-AUTHENTICATION-REQUEST
 
@@ -25,7 +25,7 @@ Authorization: token 231977513fb46554489432160ee289df7d5a6fdc
 POST http://0.0.0.0:8000/api/friend-requests/
 Content-Type: application/json
 
-{"to_user": "2", "from_user": "3"}
+{"to_user": "3", "from_user": "1"}
 
 
 ### ---------------------- GET-FRIEND-REQUESTS

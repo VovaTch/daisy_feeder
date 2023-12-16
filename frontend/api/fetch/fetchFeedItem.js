@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios";
 
 /**
  * Fetches feedItem objects from a Django backend API for a React Native frontend.
@@ -14,14 +14,18 @@ import axios from 'axios'
  * // Or with a custom base path:
  * fetchFeedItem(setDataFunction, setIsLoadingFunction, "http://example.com/");
  */
-export const fetchFeedItem = async (setData, setIsLoading, basePath = 'http://192.168.1.79/') => {
+export const fetchFeedItem = async (
+  setData,
+  setIsLoading,
+  basePath = "http://192.168.1.79/"
+) => {
   try {
-    console.log('Fetching...')
-    const response = await axios.get(basePath + 'api/feeditem/')
-    setData(response.data)
-    setIsLoading(false)
-    console.log(`Successfully fetched ${response.data.length} data-points.`)
+    console.log("Fetching feeding items...");
+    const response = await axios.get(`${basePath}api/feeditem/`);
+    setData(response.data);
+    setIsLoading(false);
+    console.log(`Successfully fetched ${response.data.length} data-points.`);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
