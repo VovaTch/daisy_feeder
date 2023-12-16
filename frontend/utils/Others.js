@@ -79,3 +79,7 @@ export function getUserFilteredFoodItems(foodItems, activeUser) {
   const sendingIds = [activeUser.id, ...activeUser.profile.friends];
   return foodItems.filter((item) => sendingIds.includes(item.feeder));
 }
+
+export function getPendingFriendRequests(friendRequests) {
+  return friendRequests.filter((item) => item.pending);
+}

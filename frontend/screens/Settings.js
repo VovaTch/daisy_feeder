@@ -9,6 +9,7 @@ import { FriendRequestView } from "../components/OpenFriendRequestWindow";
 import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
 import { fetchFriendRequests } from "../api/fetch/fetchFriendRequests";
 import { getUserFilteredFoodItems } from "../utils/Others";
+import { updateFriendStatus } from "../api/send/updateFriendRequestStatus";
 
 export default function SettingsScreen() {
   // context
@@ -22,6 +23,7 @@ export default function SettingsScreen() {
     minUsers,
     setMinUsers,
     activeUser,
+    setActiveUser,
     friendRequests,
     setFriendRequests,
   } = globalContext;
@@ -32,6 +34,10 @@ export default function SettingsScreen() {
   useEffect(() => {
     fetchFeedItem(setFeedItems, setIsLoading, domain);
     fetchMinUsers(setMinUsers, setIsLoading, domain);
+    updateFriendStatus(activeUser, setActiveUser, friendRequests, domain);
+  }, [friendRequests]);
+
+  useEffect(() => {
     fetchFriendRequests(setFriendRequests, setIsLoading, domain);
   }, []);
 

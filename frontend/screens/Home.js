@@ -18,6 +18,7 @@ import { FloatingButton } from "../components/FloatingButton";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
+import { updateFriendStatus } from "../api/send/updateFriendRequestStatus";
 
 export default function HomeScreen() {
   // context
@@ -28,9 +29,11 @@ export default function HomeScreen() {
     setFeedItems,
     isLoading,
     setIsLoading,
+    friendRequests,
     minUsers,
     setMinUsers,
     activeUser,
+    setActiveUser,
   } = globalContext;
 
   // const [feedItems, setFeedItems] = useState([]);
@@ -45,6 +48,7 @@ export default function HomeScreen() {
   useEffect(() => {
     fetchFeedItem(setFeedItems, setIsLoading, domain);
     fetchMinUsers(setMinUsers, setIsLoading, domain);
+    updateFriendStatus(activeUser, setActiveUser, friendRequests, domain);
   }, [submissionVisible]);
 
   return (

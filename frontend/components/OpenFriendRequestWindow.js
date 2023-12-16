@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -7,17 +7,33 @@ import {
   View,
 } from "react-native";
 
+import { updateRequestStatus } from "../api/send/updateFriendRequestStatus";
+import { context } from "../context/global";
+import { useFocusEffect } from "@react-navigation/native";
+
 export const FriendRequestView = ({ activeUser, friendRequests, minUsers }) => {
   const userFriendRequests = friendRequests.filter(
     (friendRequest) =>
       friendRequest.to_user === activeUser.id && friendRequest.pending
   );
+
+  const refreshScreen = useCallback(() => {
+    // Perform actions to refresh the content of your screen
+    console.log("Screen is focused, refreshing content...");
+  }, []);
+
+  useFocusEffect(refreshScreen);
+
   return (
     <ScrollView>
-      <Text>Open friend requests</Text>
+      <Text>
+        {userFriendRequests.length === 0
+          ? `No pending friend requests`
+          : `Pending friend requests:`}
+      </Text>
       {userFriendRequests.map((friendRequest, idx) => (
         <FriendRequestCard
-          friendRequest={friendRequest}
+          friendRequestId={friendRequest.id}
           senderInfo={minUsers.find(
             (item) => friendRequest.from_user === item.id
           )}
@@ -28,22 +44,38 @@ export const FriendRequestView = ({ activeUser, friendRequests, minUsers }) => {
   );
 };
 
-const FriendRequestCard = ({ friendRequest, senderInfo }) => {
+const FriendRequestCard = ({ friendRequestId, senderInfo }) => {
+  // get context
+  const globalContext = useContext(context);
+  const { domain, friendRequests, setFriendRequests } = globalContext;
+
   const onAccept = () => {
-    // TODO: temporary
-    console.log(`Accepting friend request`);
+    updateRequestStatus(
+      friendRequestId,
+      friendRequests,
+      setFriendRequests,
+      true,
+      domain
+    );
+    console.log(`Accepting friend request ${friendRequestId}`);
   };
 
   const onReject = () => {
-    // TODO: temporary
-    console.log(`Rejecting friend request`);
+    updateRequestStatus(
+      friendRequestId,
+      friendRequests,
+      setFriendRequests,
+      false,
+      domain
+    );
+    console.log(`Rejecting friend request ${friendRequestId}`);
   };
 
   return (
     <View style={styles.container}>
       <View>
-        <Text>Username: {senderInfo.username}</Text>
-        <Text>Email: {senderInfo.email}</Text>
+        <Text>{senderInfo.username}</Text>
+        <Text>{senderInfo.email}</Text>
       </View>
       <View>
         <TouchableOpacity onPress={onAccept}>
