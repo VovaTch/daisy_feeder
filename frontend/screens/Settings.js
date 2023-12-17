@@ -74,7 +74,9 @@ export default function SettingsScreen() {
           <SendFriendRequestPopup
             isVisible={createRequestVisible}
             onClose={handleClosePopup}
-            onSubmit={handleClosePopup}
+            onSubmit={() => {}}
+            minUsers={minUsers}
+            activeUser={activeUser}
           />
           <FriendListView
             activeUser={activeUser}
@@ -111,6 +113,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingHorizontal: "15%",
     marginVertical: "1.5%",
-    width: "70%",
+    width: "90%",
   },
 });
