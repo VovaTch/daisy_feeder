@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -7,17 +7,37 @@ import {
   StyleSheet,
 } from "react-native";
 
+import { context } from "../context/global";
+import { createUser } from "../api/send/createUser";
+
 const SignUpScreen = ({ navigation }) => {
+  // context
+  const globalContext = useContext(context);
+  const { domain, setMinUsers } = globalContext;
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [securePassword, setSecurePassword] = useState(true);
+  const [confirmSecurePassword, setConfirmSecurePassword] = useState(true);
 
   const handleSignUp = () => {
-    // Implement your sign-up logic here
-    console.log("Signing up...");
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    } else {
+      const newUser = {
+        username: username,
+        email: email,
+        password: password,
+        profile: { friends: [] },
+      };
+      createUser(newUser, setMinUsers, domain);
+      alert(`Username ${username} was created!`);
+      navigation.navigate("Landing");
+    }
   };
 
   const handleBackToLogin = () => {
@@ -58,7 +78,7 @@ const SignUpScreen = ({ navigation }) => {
           autoCompleteType="password"
           textContentType="password"
           placeholder="Enter your password"
-          secureTextEntry
+          secureTextEntry={securePassword}
           onChangeText={setPassword}
         />
 
@@ -69,7 +89,7 @@ const SignUpScreen = ({ navigation }) => {
           autoCompleteType="password"
           textContentType="password"
           placeholder="Confirm your password"
-          secureTextEntry
+          secureTextEntry={confirmSecurePassword}
           onChangeText={setConfirmPassword}
         />
 

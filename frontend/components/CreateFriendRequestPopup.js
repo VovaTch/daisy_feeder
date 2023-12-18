@@ -29,11 +29,15 @@ export const SendFriendRequestPopup = ({
     if (selectedUser === null) {
       setOkButtonVisible(true);
     } else {
-      const data = { to_user: selectedUser.id, from_user: activeUser.id };
+      const data = {
+        to_user: selectedUser.id,
+        from_user: activeUser.id,
+        approved: false,
+        pending: true,
+      };
       console.log(`Sending friend request to ${selectedUser}`);
       sendFriendRequest(data, domain);
       setOkButtonVisible(true);
-      onClose();
     }
   };
 

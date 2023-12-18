@@ -77,6 +77,7 @@ export default function SettingsScreen() {
             onSubmit={() => {}}
             minUsers={minUsers}
             activeUser={activeUser}
+            domain={domain}
           />
           <FriendListView
             activeUser={activeUser}
