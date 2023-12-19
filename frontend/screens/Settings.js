@@ -15,7 +15,11 @@ import { FriendRequestView } from "../components/OpenFriendRequestWindow";
 import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
 import { fetchFriendRequests } from "../api/fetch/fetchFriendRequests";
 import { getUserFilteredFoodItems } from "../utils/Others";
-import { updateFriendStatus } from "../api/send/updateFriendRequestStatus";
+import {
+  updateFriendStatus,
+  updateRequestAndAddFriend,
+  updateRequestStatus,
+} from "../api/send/updateFriendRequestStatus";
 import { FriendListView } from "../components/FriendsList";
 import { SendFriendRequestPopup } from "../components/CreateFriendRequestPopup";
 
@@ -58,6 +62,29 @@ export default function SettingsScreen() {
     fetchFriendRequests(setFriendRequests, setIsLoading, domain);
   }, []);
 
+  const onFriendRequestAccept = (friendRequestId) => {
+    updateRequestAndAddFriend(
+      friendRequestId,
+      friendRequests,
+      setFriendRequests,
+      activeUser,
+      setActiveUser,
+      true,
+      domain
+    );
+  };
+  const onFriendRequestReject = (friendRequestId) => {
+    updateRequestAndAddFriend(
+      friendRequestId,
+      friendRequests,
+      setFriendRequests,
+      activeUser,
+      setActiveUser,
+      false,
+      domain
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {isLoading ? (
@@ -88,6 +115,8 @@ export default function SettingsScreen() {
             activeUser={activeUser}
             minUsers={minUsers}
             friendRequests={friendRequests}
+            onAccept={onFriendRequestAccept}
+            onReject={onFriendRequestReject}
           />
         </View>
       )}

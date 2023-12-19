@@ -13,7 +13,13 @@ import {
 } from "../api/send/updateFriendRequestStatus";
 import { context } from "../context/global";
 
-export const FriendRequestView = ({ activeUser, friendRequests, minUsers }) => {
+export const FriendRequestView = ({
+  activeUser,
+  friendRequests,
+  minUsers,
+  onAccept,
+  onReject,
+}) => {
   const userFriendRequests = friendRequests.filter(
     (friendRequest) =>
       friendRequest.to_user === activeUser.id && friendRequest.pending
@@ -28,52 +34,19 @@ export const FriendRequestView = ({ activeUser, friendRequests, minUsers }) => {
       </Text>
       {userFriendRequests.map((friendRequest, idx) => (
         <FriendRequestCard
-          friendRequestId={friendRequest.id}
           senderInfo={minUsers.find(
             (item) => friendRequest.from_user === item.id
           )}
           key={`fr-card-${idx}`}
+          onAccept={() => onAccept(friendRequest.id)}
+          onReject={() => onReject(friendRequest.id)}
         />
       ))}
     </ScrollView>
   );
 };
 
-const FriendRequestCard = ({ friendRequestId, senderInfo }) => {
-  // get context
-  const globalContext = useContext(context);
-  const {
-    domain,
-    friendRequests,
-    setFriendRequests,
-    setActiveUser,
-    activeUser,
-  } = globalContext;
-
-  const onAccept = () => {
-    handlerRequestAnswer(
-      friendRequestId,
-      friendRequests,
-      setFriendRequests,
-      activeUser,
-      setActiveUser,
-      true,
-      domain
-    );
-  };
-
-  const onReject = () => {
-    handlerRequestAnswer(
-      friendRequestId,
-      friendRequests,
-      setFriendRequests,
-      activeUser,
-      setActiveUser,
-      false,
-      domain
-    );
-  };
-
+const FriendRequestCard = ({ senderInfo, onAccept, onReject }) => {
   return (
     <View style={styles.container}>
       <View>
@@ -94,7 +67,7 @@ const FriendRequestCard = ({ friendRequestId, senderInfo }) => {
   );
 };
 
-const handlerRequestAnswer = (
+const handlerRequestAnswer = async (
   friendRequestId,
   friendRequests,
   setFriendRequests,
@@ -103,17 +76,26 @@ const handlerRequestAnswer = (
   answer,
   domain
 ) => {
-  updateRequestStatus(
-    friendRequestId,
-    friendRequests,
-    setFriendRequests,
-    answer,
-    domain
-  );
-  updateFriendStatus(activeUser, setActiveUser, friendRequests, domain);
-  console.log(
-    `${answer ? `Accepting` : `Rejecting`} friend request ${friendRequestId}`
-  );
+  try {
+    await updateRequestStatus(
+      friendRequestId,
+      friendRequests,
+      setFriendRequests,
+      answer,
+      domain
+    );
+
+    // Now that updateRequestStatus has completed, the state should be updated
+    console.log(friendRequests);
+
+    await updateFriendStatus(activeUser, setActiveUser, friendRequests, domain);
+
+    console.log(
+      `${answer ? `Accepting` : `Rejecting`} friend request ${friendRequestId}`
+    );
+  } catch (error) {
+    console.error("Error updating friend status:", error);
+  }
 };
 
 const styles = StyleSheet.create({
