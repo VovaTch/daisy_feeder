@@ -11,7 +11,7 @@ Content-Type: application/json
 POST http://0.0.0.0:8000/api/login/
 Content-Type: application/json
 
-{"username": "fakevova1", "password": "12341234"}
+{"username": "fakeshaked1", "password": "12341234"}
 
 ### ---------------------- USER-AUTHENTICATION-REQUEST
 
@@ -49,4 +49,13 @@ Authorization: token 231977513fb46554489432160ee289df7d5a6fdc
 
 ### ---------------------- GET-USER-BY-ID
 
-GET http://0.0.0.0:8000/api/minimal-user/2/
+# GET http://0.0.0.0:8000/api/minimal-user/2/
+
+
+### ---------------------- APPROVE FRIEND REQUESTS
+
+POST http://0.0.0.0:8000/api/friend-request-response/30/
+Content-Type: application/json
+Authorization: token d1a8714c864a2ec4d19d9932c6951fa19eb92790
+
+{"approved": false}

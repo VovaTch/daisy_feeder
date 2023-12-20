@@ -119,3 +119,46 @@ def get_user(request: HttpRequest) -> Response:
 class FeedItemViewSet(viewsets.ModelViewSet):
     queryset = FeedItem.objects.all()
     serializer_class = FeedItemSerializer
+
+
+@api_view(["post"])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def handle_friend_request_response(
+    request: HttpRequest, friend_request_id: int
+) -> Response:
+    """
+    Handles a friend request response, either approving or denying it. If approved, the user is added to the friends
+    list of the user that sent the request.
+
+    Args:
+        request (HttpRequest): Http Request
+        friend_request_id (int): Friend request ID number
+
+    Returns:
+        Response: Response object
+    """
+
+    friend_request = get_object_or_404(FriendRequest, id=friend_request_id)
+    print(f"request.user: {request.user}")
+    print(f"friend_request.to_user: {friend_request.to_user}")
+    if request.user != friend_request.to_user:
+        print(1111)
+        return Response({"error": "Unauthorized"}, status=status.HTTP_403_FORBIDDEN)
+
+    if request.method == "POST":
+        friend_request.pending = False
+        friend_request.approved = request.data.get("approve", False)  # type: ignore
+
+        friend_request.save()
+
+        if friend_request.approved:
+            user_profile = Profile.objects.get(user=request.user)
+            user_profile.friends.add(friend_request.from_user)
+            user_profile.save()
+
+        return Response({"message": "Friend request handled successfully"})
+
+    return Response(
+        {"error": "Method not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED
+    )

@@ -9,6 +9,7 @@ from .views import (
     login,
     signup,
     test_token,
+    handle_friend_request_response,
 )
 
 router = DefaultRouter()
@@ -23,5 +24,9 @@ urlpatterns = [
     re_path("signup", signup),
     re_path("test-token", test_token),
     re_path("get-user", get_user),
+    re_path(
+        "friend-request-response/(?P<friend_request_id>\d+)/$",
+        handle_friend_request_response,
+    ),
 ]
 urlpatterns += router.urls
