@@ -25,7 +25,7 @@ Authorization: token 231977513fb46554489432160ee289df7d5a6fdc
 POST http://0.0.0.0:8000/api/friend-requests/
 Content-Type: application/json
 
-{"to_user": "3", "from_user": "1"}
+{"to_user": "5", "from_user": "2"}
 
 
 ### ---------------------- GET-FRIEND-REQUESTS
@@ -54,8 +54,8 @@ Authorization: token 231977513fb46554489432160ee289df7d5a6fdc
 
 ### ---------------------- APPROVE FRIEND REQUESTS
 
-POST http://0.0.0.0:8000/api/friend-request-response/30/
+POST http://0.0.0.0:8000/api/friend-request-response/39/
 Content-Type: application/json
-Authorization: token d1a8714c864a2ec4d19d9932c6951fa19eb92790
+Authorization: token 4fc85d8aedcf19cee2382c362257c1fc942e0223
 
-{"approved": false}
+{"approved": true}

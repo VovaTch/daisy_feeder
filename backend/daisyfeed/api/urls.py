@@ -25,7 +25,7 @@ urlpatterns = [
     re_path("test-token", test_token),
     re_path("get-user", get_user),
     re_path(
-        "friend-request-response/(?P<friend_request_id>\d+)/$",
+        "friend-request-response/(?P<friend_request_id>\d+)/$",  # type: ignore
         handle_friend_request_response,
     ),
 ]

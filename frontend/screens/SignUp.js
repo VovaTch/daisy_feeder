@@ -9,6 +9,7 @@ import {
 
 import { context } from "../context/global";
 import { createUser } from "../api/send/createUser";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const SignUpScreen = ({ navigation }) => {
   // context
@@ -22,6 +23,16 @@ const SignUpScreen = ({ navigation }) => {
 
   const [securePassword, setSecurePassword] = useState(true);
   const [confirmSecurePassword, setConfirmSecurePassword] = useState(true);
+
+  // Show password eye handler
+  const toggleShowPassword = () => {
+    setSecurePassword(!securePassword);
+  };
+
+  // Show password eye handler
+  const toggleShowConfirmPassword = () => {
+    setConfirmSecurePassword(!confirmSecurePassword);
+  };
 
   const handleSignUp = () => {
     if (password !== confirmPassword) {
@@ -72,26 +83,47 @@ const SignUpScreen = ({ navigation }) => {
         />
 
         <Text style={styles.label}>Password</Text>
-        <TextInput
-          value={password}
-          style={styles.input}
-          autoCompleteType="password"
-          textContentType="password"
-          placeholder="Enter your password"
-          secureTextEntry={securePassword}
-          onChangeText={setPassword}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            value={password}
+            style={styles.input}
+            autoCompleteType="password"
+            textContentType="password"
+            placeholder="Enter your password"
+            secureTextEntry={securePassword}
+            onChangeText={setPassword}
+          />
+          <TouchableOpacity style={styles.eyeIcon} onPress={toggleShowPassword}>
+            <MaterialCommunityIcons
+              name={securePassword ? "eye-outline" : "eye-off-outline"}
+              size={24}
+              color="gray"
+            />
+          </TouchableOpacity>
+        </View>
 
         <Text style={styles.label}>Confirm Password</Text>
-        <TextInput
-          value={confirmPassword}
-          style={styles.input}
-          autoCompleteType="password"
-          textContentType="password"
-          placeholder="Confirm your password"
-          secureTextEntry={confirmSecurePassword}
-          onChangeText={setConfirmPassword}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            value={confirmPassword}
+            style={styles.input}
+            autoCompleteType="password"
+            textContentType="password"
+            placeholder="Confirm your password"
+            secureTextEntry={confirmSecurePassword}
+            onChangeText={setConfirmPassword}
+          />
+          <TouchableOpacity
+            style={styles.eyeIcon}
+            onPress={toggleShowConfirmPassword}
+          >
+            <MaterialCommunityIcons
+              name={confirmSecurePassword ? "eye-outline" : "eye-off-outline"}
+              size={24}
+              color="gray"
+            />
+          </TouchableOpacity>
+        </View>
 
         <TouchableOpacity style={styles.signupButton} onPress={handleSignUp}>
           <Text style={styles.buttonText}>Sign Up</Text>
@@ -128,6 +160,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: "black",
     backgroundColor: "white",
+    width: "100%",
   },
   signupButton: {
     backgroundColor: "#884400",
@@ -147,6 +180,21 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontWeight: "bold",
+  },
+  eyeIcon: {
+    position: "absolute",
+    right: 14,
+    top: 8,
+    borderLeftWidth: 1,
+    paddingLeft: 10,
+    borderColor: "#cecece",
+  },
+  inputContainer: {
+    width: "100%",
+    borderRadius: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 0,
   },
 });
 

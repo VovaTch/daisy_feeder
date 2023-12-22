@@ -1,7 +1,7 @@
 from django.http import HttpRequest
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, status, views
+from rest_framework import viewsets, status
 from ..models import MinimalUser, Profile, FriendRequest, FeedItem
 from .serializers import (
     MinimalUserSerializer,
@@ -121,7 +121,7 @@ class FeedItemViewSet(viewsets.ModelViewSet):
     serializer_class = FeedItemSerializer
 
 
-@api_view(["post"])
+@api_view(["POST"])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def handle_friend_request_response(
@@ -140,24 +140,31 @@ def handle_friend_request_response(
     """
 
     friend_request = get_object_or_404(FriendRequest, id=friend_request_id)
-    print(f"request.user: {request.user}")
-    print(f"friend_request.to_user: {friend_request.to_user}")
-    if request.user != friend_request.to_user:
-        print(1111)
+    if str(request.user) != str(friend_request.to_user):
         return Response({"error": "Unauthorized"}, status=status.HTTP_403_FORBIDDEN)
 
     if request.method == "POST":
         friend_request.pending = False
-        friend_request.approved = request.data.get("approve", False)  # type: ignore
+        friend_request.approved = request.data.get("approved", False)  # type: ignore
 
         friend_request.save()
 
+        user_profile = Profile.objects.get(user=request.user)
+
         if friend_request.approved:
-            user_profile = Profile.objects.get(user=request.user)
             user_profile.friends.add(friend_request.from_user)
             user_profile.save()
 
-        return Response({"message": "Friend request handled successfully"})
+        profile_serializer = ProfileSerializer(user_profile)
+        friend_request_serializer = FriendRequestSerializer(friend_request)
+
+        return Response(
+            {
+                "message": "Friend request handled successfully",
+                "profile": profile_serializer.data,
+                "friend_request": friend_request_serializer.data,
+            }
+        )
 
     return Response(
         {"error": "Method not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED

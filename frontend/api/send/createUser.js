@@ -1,5 +1,11 @@
 import axios from "axios";
 
+/**
+ * Creates a user in the database for Daisy the magnificent
+ * @param {*} data Data to send to the API
+ * @param {*} setMinUsers Function to set the minimal users
+ * @param {*} basePath Base path for the API
+ */
 export const createUser = async (
   data,
   setMinUsers,

@@ -10,6 +10,7 @@ export const removeFriend = async (
     console.log(
       `Attempting to remove user ID ${userId} from ${activeUser.username}'s friends list...`
     );
+    console.log(activeUser.profile.friends);
     const updateFriendsList = activeUser.profile.friends.filter(
       (item) => item !== userId
     );

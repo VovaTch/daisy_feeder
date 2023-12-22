@@ -1,5 +1,13 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
+/**
+ * Updates the friend list of the active user.
+ * @param {*} activeUser Active user
+ * @param {*} setActiveUser Active user setter
+ * @param {*} friendRequests All friend requests
+ * @param {*} basePath Base path for the API
+ */
 export const updateFriendStatus = async (
   activeUser,
   setActiveUser,
@@ -8,43 +16,35 @@ export const updateFriendStatus = async (
 ) => {
   try {
     console.log(`Updating friends list...`);
-    console.log(friendRequests[activeUser.id]);
     const activeUserFriends = activeUser.profile.friends;
-    const filteredFriendRequestsToActive = friendRequests.filter(
-      (item) =>
+
+    const potentialFriends = friendRequests
+      .filter((item) => !item.pending)
+      .flatMap((item) =>
         item.to_user === activeUser.id &&
-        !item.pending &&
         !activeUserFriends.includes(item.from_user)
+          ? [item.from_user]
+          : item.from_user === activeUser.id &&
+            !activeUserFriends.includes(item.to_user)
+          ? [item.to_user]
+          : []
+      );
+    console.log(`potentialFriends: ${potentialFriends}`);
+
+    const combinedFriendsArray = Array.from(
+      new Set([...potentialFriends, ...activeUserFriends])
     );
 
-    const potentialFriendsToActive = filteredFriendRequestsToActive.map(
-      (item) => item.from_user
-    );
-    const filteredFriendRequestsFromActive = friendRequests.filter(
-      (item) =>
-        item.from_user === activeUser.id &&
-        !item.pending &&
-        !activeUserFriends.includes(item.to_user)
-    );
-
-    const potentialFriendsFromActive = filteredFriendRequestsFromActive.map(
-      (item) => item.to_user
-    );
-    const combinedFriendsSet = new Set([
-      ...potentialFriendsToActive,
-      ...potentialFriendsFromActive,
-      ...activeUserFriends,
-    ]);
-    const combinedFriendsArray = Array.from(combinedFriendsSet);
-    console.log(combinedFriendsArray);
     await axios.patch(basePath + `api/profile/${activeUser.profile.id}/`, {
       friends: combinedFriendsArray,
     });
+
     const updatedActiveUser = {
       ...activeUser,
       profile: { id: activeUser.profile.id, friends: combinedFriendsArray },
     };
     setActiveUser(updatedActiveUser);
+
     console.log(
       `Updated the friend list of ${activeUser.username} to include ${activeUser.profile.friends.length} friends`
     );
@@ -56,103 +56,67 @@ export const updateFriendStatus = async (
   }
 };
 
-export const updateRequestStatus = async (
-  friendRequestId,
-  friendRequests,
-  setFriendRequests,
-  approvedReq,
-  basePath = "http://192.168.1.79:8000/"
-) => {
-  try {
-    console.log(
-      `Updating friend request status with ${
-        approvedReq ? "approved" : "denied"
-      }`
-    );
-    await axios.patch(`${basePath}api/friend-requests/${friendRequestId}/`, {
-      approved: approvedReq,
-      pending: false,
-    });
-    console.log(
-      `Updated the friend request with ${approvedReq ? "approved" : "denied"}`
-    );
-
-    // Update the friend request state
-    const updatedFriendRequests = friendRequests.map((item) =>
-      item.id === friendRequestId
-        ? { ...item, approved: approvedReq, pending: false }
-        : item
-    );
-    setFriendRequests(updatedFriendRequests);
-  } catch (error) {
-    console.log(`Could not update friend request.`);
-    throw error;
-  }
-};
-
-export const updateRequestAndAddFriend = async (
-  friendRequestId,
+/**
+ * Updates the friend request status to approved or denied.
+ * @param {*} requestId Friend request ID number
+ * @param {*} friendRequests All friend requests
+ * @param {*} setFriendRequests Friend request setter
+ * @param {*} activeUser All active users
+ * @param {*} setActiveUser Active user setter
+ * @param {*} approved Boolean value for approved or denied
+ * @param {*} basePath Base path for the API
+ */
+export const updateFriendRequestStatus = async (
+  requestId,
   friendRequests,
   setFriendRequests,
   activeUser,
   setActiveUser,
-  approvedReq,
+  approved,
   basePath = "http://192.168.1.79:8000/"
 ) => {
   try {
-    // Update friend request status
-    await axios.patch(`${basePath}api/friend-requests/${friendRequestId}/`, {
-      approved: approvedReq,
-      pending: false,
-    });
+    console.log(
+      `Updating friend request ID ${requestId} to status ${
+        approved ? `approved` : `denied`
+      }...`
+    );
+    const token = await AsyncStorage.getItem("token");
+    await axios.post(
+      `${basePath}api/friend-request-response/${requestId}/`,
+      {
+        approved: approved,
+      },
+      {
+        headers: { Authorization: `Token ${token}` },
+      }
+    );
 
-    // Update friend request state
     const updatedFriendRequests = friendRequests.map((item) =>
-      item.id === friendRequestId
-        ? { ...item, approved: approvedReq, pending: false }
+      item.id === requestId
+        ? { ...item, approved: approved, pending: false }
         : item
     );
     setFriendRequests(updatedFriendRequests);
 
-    // Update active user's friends list
-    const activeUserFriends = activeUser.profile.friends;
-    const filteredRequestsToActive = friendRequests.filter(
-      (item) =>
-        item.to_user === activeUser.id &&
-        !item.pending &&
-        !activeUserFriends.includes(item.from_user)
+    const updatedFriendRequest = updatedFriendRequests.find(
+      (item) => item.id === requestId
     );
-    const filteredRequestsFromActive = friendRequests.filter(
-      (item) =>
-        item.from_user === activeUser.id &&
-        !item.pending &&
-        !activeUserFriends.includes(item.to_user)
-    );
-
-    const combinedFriendsSet = new Set([
-      ...filteredRequestsToActive.map((item) => item.from_user),
-      ...filteredRequestsFromActive.map((item) => item.to_user),
-      ...activeUserFriends,
-    ]);
-
-    const combinedFriendsArray = Array.from(combinedFriendsSet);
-
-    // Update active user's profile
-    await axios.patch(`${basePath}api/profile/${activeUser.profile.id}/`, {
-      friends: combinedFriendsArray,
-    });
-
     const updatedActiveUser = {
       ...activeUser,
-      profile: { ...activeUser.profile, friends: combinedFriendsArray },
+      profile: {
+        ...activeUser.profile,
+        friends: approved
+          ? [...activeUser.profile.friends, updatedFriendRequest.from_user]
+          : activeUser.profile.friends,
+      },
     };
     setActiveUser(updatedActiveUser);
-
     console.log(
-      `Updated friend request and friend list for ${activeUser.username}. Total friends: ${combinedFriendsArray.length}`
+      `Updated friend request ID ${requestId} to status ${approved}, updated active user's ${activeUser.username} friends list...`
     );
   } catch (error) {
-    console.log(`Could not update friend request. Error: ${error.message}`);
+    console.log(`Failed to update friend request ID ${requestId}: ${error}`);
     throw error;
   }
 };

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -6,12 +6,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
-import {
-  updateFriendStatus,
-  updateRequestStatus,
-} from "../api/send/updateFriendRequestStatus";
-import { context } from "../context/global";
 
 export const FriendRequestView = ({
   activeUser,
@@ -65,37 +59,6 @@ const FriendRequestCard = ({ senderInfo, onAccept, onReject }) => {
       </View>
     </View>
   );
-};
-
-const handlerRequestAnswer = async (
-  friendRequestId,
-  friendRequests,
-  setFriendRequests,
-  activeUser,
-  setActiveUser,
-  answer,
-  domain
-) => {
-  try {
-    await updateRequestStatus(
-      friendRequestId,
-      friendRequests,
-      setFriendRequests,
-      answer,
-      domain
-    );
-
-    // Now that updateRequestStatus has completed, the state should be updated
-    console.log(friendRequests);
-
-    await updateFriendStatus(activeUser, setActiveUser, friendRequests, domain);
-
-    console.log(
-      `${answer ? `Accepting` : `Rejecting`} friend request ${friendRequestId}`
-    );
-  } catch (error) {
-    console.error("Error updating friend status:", error);
-  }
 };
 
 const styles = StyleSheet.create({

@@ -16,12 +16,12 @@ import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
 import { fetchFriendRequests } from "../api/fetch/fetchFriendRequests";
 import { getUserFilteredFoodItems } from "../utils/Others";
 import {
+  updateFriendRequestStatus,
   updateFriendStatus,
-  updateRequestAndAddFriend,
-  updateRequestStatus,
 } from "../api/send/updateFriendRequestStatus";
 import { FriendListView } from "../components/FriendsList";
 import { SendFriendRequestPopup } from "../components/CreateFriendRequestPopup";
+import { retrieveData } from "../api/fetch/fetchFromAsyncStorage";
 
 export default function SettingsScreen() {
   const [createRequestVisible, setCreateRequestVisible] = useState(false);
@@ -63,7 +63,7 @@ export default function SettingsScreen() {
   }, []);
 
   const onFriendRequestAccept = (friendRequestId) => {
-    updateRequestAndAddFriend(
+    updateFriendRequestStatus(
       friendRequestId,
       friendRequests,
       setFriendRequests,
@@ -74,7 +74,7 @@ export default function SettingsScreen() {
     );
   };
   const onFriendRequestReject = (friendRequestId) => {
-    updateRequestAndAddFriend(
+    updateFriendRequestStatus(
       friendRequestId,
       friendRequests,
       setFriendRequests,
@@ -94,6 +94,7 @@ export default function SettingsScreen() {
           <SettingsClearComponent
             foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
             setFoodItems={setFeedItems}
+            style={styles.button}
           />
           <TouchableOpacity onPress={handleOpenPopup} style={styles.button}>
             <Text style={styles.buttonText}>Create Friend Request</Text>
@@ -130,6 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: "orange",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
   },
   buttonText: {
     color: "#fff",
@@ -143,6 +145,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     paddingHorizontal: "15%",
     marginVertical: "1.5%",
-    width: "90%",
+    width: "100%",
   },
 });

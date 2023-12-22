@@ -11,6 +11,7 @@ import CheckBox from "expo-checkbox";
 import { context } from "../context/global";
 import { fetchLoginUser } from "../api/fetch/fetchLoginUser";
 import { validateToken } from "../api/fetch/validateToken";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const LandingScreen = ({ navigation }) => {
   // context
@@ -44,6 +45,11 @@ const LandingScreen = ({ navigation }) => {
     }
   };
 
+  // Show password eye handler
+  const toggleShowPassword = () => {
+    setSecurePassword(!securePassword);
+  };
+
   const handleSignUp = () => {
     // Implement your sign-up logic here
     console.log("Signing up...");
@@ -64,16 +70,27 @@ const LandingScreen = ({ navigation }) => {
           onChangeText={setUsername}
         />
 
+        {/* Password input with an eye */}
+
         <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          autoCompleteType="password"
-          textContentType="password"
-          placeholder="Enter your password"
-          secureTextEntry={securePassword}
-          value={password}
-          onChangeText={setPassword}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            autoCompleteType="password"
+            textContentType="password"
+            placeholder="Enter your password"
+            secureTextEntry={securePassword}
+            value={password}
+            onChangeText={setPassword}
+          />
+          <TouchableOpacity style={styles.eyeIcon} onPress={toggleShowPassword}>
+            <MaterialCommunityIcons
+              name={securePassword ? "eye-outline" : "eye-off-outline"}
+              size={24}
+              color="gray"
+            />
+          </TouchableOpacity>
+        </View>
 
         <View style={styles.checkboxContainer}>
           <CheckBox
@@ -119,6 +136,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: "black",
     backgroundColor: "white",
+    width: "100%",
   },
   checkboxContainer: {
     flexDirection: "row",
@@ -150,6 +168,21 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     fontWeight: "bold",
+  },
+  eyeIcon: {
+    position: "absolute",
+    right: 14,
+    top: 8,
+    borderLeftWidth: 1,
+    paddingLeft: 10,
+    borderColor: "#cecece",
+  },
+  inputContainer: {
+    width: "100%",
+    borderRadius: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 0,
   },
 });
 

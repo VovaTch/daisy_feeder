@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Modal, TouchableOpacity } from "react-native";
 import { clearHistory } from "../api/send/deleteFeedItem";
 import { context } from "../context/global";
 
-export const SettingsClearComponent = ({ foodItems, setFoodItems }) => {
+export const SettingsClearComponent = ({ foodItems, setFoodItems, style }) => {
   // context
   const globalContext = useContext(context);
   const { domain } = globalContext;
@@ -16,7 +16,7 @@ export const SettingsClearComponent = ({ foodItems, setFoodItems }) => {
       {/* Clear History Button */}
       <View>
         <TouchableOpacity
-          style={styles.button}
+          style={style}
           onPress={() => handleClearHistory(setIsModalVisible)}
         >
           <Text style={styles.buttonText}>Clear History</Text>
