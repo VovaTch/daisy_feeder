@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 import axios from "axios";
 
 /**
@@ -81,7 +81,7 @@ export const updateFriendRequestStatus = async (
         approved ? `approved` : `denied`
       }...`
     );
-    const token = await AsyncStorage.getItem("token");
+    const token = await SecureStore.getItemAsync("token");
     await axios.post(
       `${basePath}api/friend-request-response/${requestId}/`,
       {

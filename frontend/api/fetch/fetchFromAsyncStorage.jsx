@@ -1,16 +1,16 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
 /**
- * Retrieves data from AsyncStorage
+ * Retrieves data from SecureStorage
  * @param {*} key String key for retrieval
  */
 export const retrieveData = async (key) => {
   try {
-    const storedAuthToken = await AsyncStorage.getItem(key);
+    const storedAuthToken = await SecureStore.getItemAsync(key);
     if (storedAuthToken !== null) {
       console.log(`Retrieved key: ${key}`);
     } else {
-      console.log("Key not found in AsyncStorage");
+      console.log("Key not found in SecureStorage");
     }
   } catch (error) {
     console.error("Error retrieving key:", error);
@@ -18,26 +18,14 @@ export const retrieveData = async (key) => {
 };
 
 /**
- * Removes data from AsyncStorage based on key
+ * Removes data from SecureStorage based on key
  * @param {*} key String key for removal
  */
 export const removeData = async (key) => {
   try {
-    await AsyncStorage.removeItem(key);
+    await SecureStore.deleteItemAsync(key);
     console.log(`Data from key ${key} removed successfully`);
   } catch (error) {
     console.error("Error removing from key:", error);
-  }
-};
-
-/**
- * Removes all data from AsyncStorage
- */
-export const clearAllData = async () => {
-  try {
-    await AsyncStorage.clear();
-    console.log("AsyncStorage cleared successfully");
-  } catch (error) {
-    console.error("Error clearing AsyncStorage:", error);
   }
 };

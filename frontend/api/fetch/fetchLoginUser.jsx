@@ -1,5 +1,5 @@
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
 export const fetchLoginUser = async (
   usernameQuery,
@@ -15,7 +15,7 @@ export const fetchLoginUser = async (
     });
 
     // Storing the token in async storage
-    await AsyncStorage.setItem(`token`, response.data.token);
+    await SecureStore.setItemAsync(`token`, response.data.token);
     console.log(`User ${usernameQuery} has a token`);
     return response.data; // Explicitly return the response data
   } catch (error) {

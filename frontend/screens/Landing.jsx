@@ -12,6 +12,7 @@ import { context } from "../context/global";
 import { fetchLoginUser } from "../api/fetch/fetchLoginUser";
 import { validateToken } from "../api/fetch/validateToken";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as SecureStore from "expo-secure-store";
 
 const LandingScreen = ({ navigation }) => {
   // context
@@ -38,6 +39,11 @@ const LandingScreen = ({ navigation }) => {
       );
       const user = await validateToken(response.token, setLoginError, domain);
       setActiveUser(user);
+      if (rememberMe) {
+        await SecureStore.setItemAsync("username", username);
+        await SecureStore.setItemAsync("password", password);
+        console.log(`Stored username ${username} and password in SecureStore`);
+      }
       navigation.navigate("Home");
     } catch (error) {
       console.log(error);
