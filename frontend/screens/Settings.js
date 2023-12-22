@@ -21,7 +21,6 @@ import {
 } from "../api/send/updateFriendRequestStatus";
 import { FriendListView } from "../components/FriendsList";
 import { SendFriendRequestPopup } from "../components/CreateFriendRequestPopup";
-import { retrieveData } from "../api/fetch/fetchFromAsyncStorage";
 
 export default function SettingsScreen() {
   const [createRequestVisible, setCreateRequestVisible] = useState(false);
