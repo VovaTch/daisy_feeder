@@ -12,7 +12,7 @@ import { ActivityIndicator } from "react-native";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { FriendRequestView } from "../components/OpenFriendRequestWindow";
-import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
+import { fetchMinUsers } from "../api/fetch/fetchMinimalUser.jsx";
 import { fetchFriendRequests } from "../api/fetch/fetchFriendRequests";
 import { getUserFilteredFoodItems } from "../utils/Others";
 import {

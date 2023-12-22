@@ -20,7 +20,7 @@ import { StatusBar } from "expo-status-bar";
 import { Table } from "../components/Table";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
-import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
+import { fetchMinUsers } from "../api/fetch/fetchMinimalUser.jsx";
 
 export default function HistoryScreen() {
   // context

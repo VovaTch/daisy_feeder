@@ -17,7 +17,7 @@ import {
 import { FloatingButton } from "../components/FloatingButton";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
-import { fetchMinUsers } from "../api/fetch/fetchMinimalUser";
+import { fetchMinUsers } from "../api/fetch/fetchMinimalUser.jsx";
 import { updateFriendStatus } from "../api/send/updateFriendRequestStatus";
 import { deleteAnsweredFriendRequests } from "../api/send/deleteFriendRequest";
 

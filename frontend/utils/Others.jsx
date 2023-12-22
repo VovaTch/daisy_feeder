@@ -3,6 +3,7 @@
  * @param {number} length Length of the string.
  * @returns A random string of characters with a length `length`.
  */
+
 export function makeId(length) {
   let result = "";
   const characters =
