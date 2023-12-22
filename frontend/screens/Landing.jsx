@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -26,7 +26,20 @@ const LandingScreen = ({ navigation }) => {
 
   const [securePassword, setSecurePassword] = useState(true);
 
-  // If we are at the logging screen, we aren't logged in.
+  // Logging in automatically if the user has selected to do so
+  useEffect(() => {
+    const autoLoggin = async () => {
+      const token = await SecureStore.getItemAsync("token");
+      if (token) {
+        const user = await validateToken(token, setLoginError, domain);
+        setActiveUser(user);
+        console.log(user);
+        navigation.navigate("Home");
+      }
+    };
+    autoLoggin();
+    return () => {};
+  }, []);
 
   const handleLogin = async () => {
     // Implement your login logic here
@@ -39,12 +52,14 @@ const LandingScreen = ({ navigation }) => {
       );
       const user = await validateToken(response.token, setLoginError, domain);
       setActiveUser(user);
-      if (rememberMe) {
-        await SecureStore.setItemAsync("username", username);
-        await SecureStore.setItemAsync("password", password);
-        console.log(`Stored username ${username} and password in SecureStore`);
-      }
       navigation.navigate("Home");
+      if (rememberMe) {
+        await SecureStore.setItemAsync("token", response.token);
+        console.log(`Stored token of ${username} in SecureStore`);
+      } else {
+        await SecureStore.deleteItemAsync("token");
+        console.log(`Removed token of ${username} from SecureStore`);
+      }
     } catch (error) {
       console.log(error);
       throw error;
@@ -72,7 +87,7 @@ const LandingScreen = ({ navigation }) => {
           autoCompleteType="name"
           textContentType="username"
           placeholder="Enter your username"
-          value={username}
+          value={username ? username : ""}
           onChangeText={setUsername}
         />
 
@@ -86,7 +101,7 @@ const LandingScreen = ({ navigation }) => {
             textContentType="password"
             placeholder="Enter your password"
             secureTextEntry={securePassword}
-            value={password}
+            value={password ? password : ""}
             onChangeText={setPassword}
           />
           <TouchableOpacity style={styles.eyeIcon} onPress={toggleShowPassword}>

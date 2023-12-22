@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { CustomDrawerContent } from "../components/CustomDrawer";
 import { StyleSheet } from "react-native";
+import * as SecureStore from "expo-secure-store";
 
 import HomeScreen from "../screens/Home";
 import HistoryScreen from "../screens/History";
@@ -15,10 +16,21 @@ import { context } from "../context/global";
 const Drawer = createDrawerNavigator();
 const stack = createStackNavigator();
 
-export function DrawerNavigator() {
+export function DrawerNavigator({ navigation }) {
   // load context
   const globalContext = useContext(context);
   const { activeUser } = globalContext;
+
+  // Asynchronous function to remove token from SecureStorage after logging out
+  const handleLogout = async () => {
+    try {
+      console.log("Logging out");
+      await SecureStore.deleteItemAsync("token");
+    } catch (error) {
+      console.log(`Cannot remove token from SecureStorage: ${error}`);
+    }
+    navigation.navigate("Landing");
+  };
 
   return (
     <Drawer.Navigator
@@ -39,7 +51,13 @@ export function DrawerNavigator() {
             name="Log Out"
             component={StackNavigator}
             options={{ headerShown: false }}
-          />
+            listeners={{
+              drawerItemPress: (e) => {
+                e.preventDefault();
+                handleLogout();
+              },
+            }}
+          ></Drawer.Screen>
         </>
       ) : (
         <>
