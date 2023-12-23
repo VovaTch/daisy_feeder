@@ -140,10 +140,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#884400",
     padding: 15,
     borderRadius: 5,
+    width: 280,
+    height: 50,
     alignItems: "center",
     alignSelf: "center",
     paddingHorizontal: "15%",
     marginVertical: "1.5%",
-    width: "100%",
   },
 });

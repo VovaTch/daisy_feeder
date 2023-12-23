@@ -44,7 +44,7 @@ export const FriendCard = ({
     console.log(`Deleting friend username: ${minUser.username}`);
   };
   return (
-    <View style={styles.container}>
+    <View style={styles.friendCardContainer}>
       <View>
         <Text>Name: {minUser.username}</Text>
         <Text>Email: {minUser.email}</Text>
@@ -57,7 +57,7 @@ export const FriendCard = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
+  friendCardContainer: {
     flexDirection: "row", // Row layout to create two columns
     justifyContent: "space-between", // Space evenly between columns
     paddingHorizontal: 10,
@@ -68,5 +68,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     margin: 5,
     backgroundColor: "rgba(255, 255, 255, 0.3)",
+    width: 300,
   },
 });

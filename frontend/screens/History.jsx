@@ -95,8 +95,11 @@ const styles = StyleSheet.create({
   },
   table: {
     flex: 1,
-    marginTop: "15%",
-    marginBottom: "25%",
+    marginTop: 15,
+    marginBottom: 100,
+    marginLeft: 10,
+    marginRight: 10,
+    width: 350,
     borderColor: "#eee",
     borderWidth: 0,
     borderRadius: 10,

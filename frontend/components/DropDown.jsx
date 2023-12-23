@@ -5,6 +5,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 const DropdownComponent = ({ dateData, setDateSelected }) => {
   const [value, setValue] = useState(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   const renderItem = (item) => {
     return (
@@ -34,16 +35,24 @@ const DropdownComponent = ({ dateData, setDateSelected }) => {
       maxHeight={300}
       labelField="label"
       valueField="value"
-      placeholder="Select date..."
+      placeholder={!isFocused ? "Select a date..." : "..."}
       searchPlaceholder="Search..."
       value={value}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
       onChange={(item) => {
         setValue(item.value);
+        setIsFocused(false);
         setDateSelected(item.value);
+        console.log(item.value);
       }}
       renderLeftIcon={() => (
-        // <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
-        <Text style={{ fontSize: 16, color: "#aaa" }}>Select a date...</Text>
+        <AntDesign
+          style={styles.icon}
+          color={isFocused ? "blue" : "black"}
+          name="Safety"
+          size={20}
+        />
       )}
       renderItem={renderItem}
     />
@@ -83,7 +92,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   placeholderStyle: {
-    fontSize: 16,
+    fontSize: 14,
+    color: "#aaa",
   },
   selectedTextStyle: {
     fontSize: 16,

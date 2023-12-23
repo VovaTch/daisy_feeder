@@ -16,6 +16,16 @@ import { context } from "../context/global";
 const Drawer = createDrawerNavigator();
 const stack = createStackNavigator();
 
+/**
+ * DrawerNavigator is the side drawer navigation component.
+ * It provides access to various screens like Today's Feeding, History, Plots, and Settings.
+ * Users can also log out gracefully, leaving Daisy the cat in charge for a while. 🐱
+ *
+ * @component
+ * @param {object} props - The component props.
+ * @param {object} props.navigation - The navigation object to facilitate screen transitions.
+ * @returns {React.Component} The Drawer Navigator component.
+ */
 export function DrawerNavigator({ navigation }) {
   // load context
   const globalContext = useContext(context);
@@ -79,6 +89,14 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * StackNavigator is the stack-based navigation component.
+ * It handles the transition between the Landing screen, Sign Up screen, and the Drawer Navigator.
+ * Daisy the cat might secretly navigate through these screens when nobody's watching. 🕵️‍♀️
+ *
+ * @component
+ * @returns {React.Component} The Stack Navigator component.
+ */
 export function StackNavigator() {
   return (
     <stack.Navigator initialRouteName="Landing">
