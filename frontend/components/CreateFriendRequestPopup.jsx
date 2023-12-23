@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, Modal, TouchableOpacity, StyleSheet } from "react-native";
-import SearchableDropdown from "react-native-searchable-dropdown";
 import { sendFriendRequest } from "../api/send/sendFriendRequest";
+import { Dropdown } from "react-native-element-dropdown";
+import { AntDesign } from "@expo/vector-icons";
 
 export const SendFriendRequestPopup = ({
   isVisible,
@@ -14,6 +15,10 @@ export const SendFriendRequestPopup = ({
   const [selectedUser, setSelectedUser] = useState(null);
   const [okButtonVisible, setOkButtonVisible] = useState(false);
 
+  // Additional
+  const [value, setValue] = useState(null);
+  const [isFocused, setIsFocused] = useState(false);
+
   const allAvailableUsernames = minUsers.map((item) => {
     return {
       id: item.id,
@@ -24,6 +29,12 @@ export const SendFriendRequestPopup = ({
     (item) =>
       item.id !== activeUser.id && !activeUser.profile.friends.includes(item.id)
   );
+  const dropdownAvailableUsernames = availableUsernames.map((item) => {
+    return {
+      label: item.name,
+      value: item.name,
+    };
+  });
 
   const handleSendRequest = () => {
     if (selectedUser === null) {
@@ -41,8 +52,26 @@ export const SendFriendRequestPopup = ({
     }
   };
 
+  const renderItem = (item) => {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.textItem}>{item.label}</Text>
+        {item.value === value && (
+          <AntDesign
+            style={styles.icon}
+            color="black"
+            name="Safety"
+            size={20}
+          />
+        )}
+      </View>
+    );
+  };
+
   const handleSelectUser = (item) => {
-    const selectedMinUser = minUsers.find((user) => user.id === item.id);
+    const selectedMinUser = minUsers.find(
+      (user) => user.username === item.value
+    );
     setSelectedUser(selectedMinUser);
     console.log(`Selected user: ${selectedMinUser.username}`);
   };
@@ -51,43 +80,37 @@ export const SendFriendRequestPopup = ({
     <Modal transparent={true} visible={isVisible} style={styles.modalContainer}>
       <View style={styles.modalContent}>
         <Text style={styles.title}>Send Friend Request</Text>
-        {/*  */}
-        <SearchableDropdown
-          onTextChange={(text) => console.log(text)}
-          // Listner on the searchable input
-          onItemSelect={(item) => handleSelectUser(item)}
-          // Called after the selection
-          containerStyle={{ padding: 5 }}
-          // Suggestion container style
-          textInputStyle={{
-            padding: 12,
-            borderWidth: 0,
-            borderRadius: 7,
-            borderColor: "#ccc",
-            backgroundColor: "#d4c5b9",
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={dropdownAvailableUsernames}
+          search
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder={!isFocused ? "Select a friend..." : "..."}
+          searchPlaceholder="Search for a friend"
+          value={value}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          onChange={(item) => {
+            setValue(item.value);
+            setIsFocused(false);
+            handleSelectUser(item);
+            console.log(item.value);
           }}
-          itemStyle={{
-            padding: 10,
-            marginTop: 2,
-            backgroundColor: "#f5decb",
-            borderColor: "#bbb",
-            borderWidth: 0,
-            borderRadius: 7,
-          }}
-          itemTextStyle={{
-            color: "#222",
-          }}
-          itemsContainerStyle={{
-            maxHeight: "60%",
-          }}
-          items={availableUsernames}
-          // Mapping of item array
-          placeholder={selectedUser ? selectedUser.username : "Search User..."}
-          // place holder for the search input
-          resPtValue={false}
-          // Reset textInput Value with true and false state
-          underlineColorAndroid="transparent"
-          // To remove the underline from the android input
+          renderLeftIcon={() => (
+            <AntDesign
+              style={styles.icon}
+              color={isFocused ? "blue" : "black"}
+              name="Safety"
+              size={20}
+            />
+          )}
+          renderItem={renderItem}
         />
         <TouchableOpacity
           style={styles.button}
@@ -210,5 +233,43 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "lightblue",
     borderRadius: 5,
+  },
+  dropdown: {
+    margin: 16,
+    height: 50,
+    backgroundColor: "white",
+    borderRadius: 12,
+    padding: 12,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    width: 300,
+    elevation: 2,
+  },
+  placeholderStyle: {
+    fontSize: 14,
+    color: "#aaa",
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    marginLeft: 150,
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+  },
+  item: {
+    padding: 17,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });
