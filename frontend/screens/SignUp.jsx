@@ -10,6 +10,7 @@ import {
 import { context } from "../context/global";
 import { createUser } from "../api/send/createUser";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { emailIsValidated } from "../utils/Others";
 
 const SignUpScreen = ({ navigation }) => {
   // context
@@ -37,6 +38,12 @@ const SignUpScreen = ({ navigation }) => {
   const handleSignUp = () => {
     if (password !== confirmPassword) {
       alert("Passwords do not match");
+      return;
+    } else if (username === "" || email === "" || password === "") {
+      alert("Please fill in all fields");
+      return;
+    } else if (!emailIsValidated(email)) {
+      alert("Please enter a valid email address");
       return;
     } else {
       const newUser = {

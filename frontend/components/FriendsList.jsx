@@ -47,7 +47,6 @@ export const FriendCard = ({
     <View style={styles.friendCardContainer}>
       <View>
         <Text>Name: {minUser.username}</Text>
-        <Text>Email: {minUser.email}</Text>
       </View>
       <TouchableOpacity onPress={onDelete}>
         <Feather name="delete" color={"black"} size={40} />
