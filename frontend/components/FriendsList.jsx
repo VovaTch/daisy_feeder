@@ -49,7 +49,7 @@ export const FriendCard = ({
         <Text>Name: {minUser.username}</Text>
       </View>
       <TouchableOpacity onPress={onDelete}>
-        <Feather name="delete" color={"black"} size={40} />
+        <Feather name="delete" color={"black"} size={30} />
       </TouchableOpacity>
     </View>
   );

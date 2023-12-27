@@ -36,26 +36,35 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   const handleSignUp = () => {
+    if (
+      username === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === ""
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    if (!emailIsValidated(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
-    } else if (username === "" || email === "" || password === "") {
-      alert("Please fill in all fields");
-      return;
-    } else if (!emailIsValidated(email)) {
-      alert("Please enter a valid email address");
-      return;
-    } else {
-      const newUser = {
-        username: username,
-        email: email,
-        password: password,
-        profile: { friends: [] },
-      };
-      createUser(newUser, setMinUsers, domain);
-      alert(`Username ${username} was created!`);
-      navigation.navigate("Landing");
     }
+
+    const newUser = {
+      username: username,
+      email: email,
+      password: password,
+      profile: { friends: [] },
+    };
+    createUser(newUser, setMinUsers, domain);
+    alert(`Username ${username} was created!`);
+    navigation.navigate("Landing");
   };
 
   const handleBackToLogin = () => {

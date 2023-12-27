@@ -45,7 +45,6 @@ const FriendRequestCard = ({ senderInfo, onAccept, onReject }) => {
     <View style={styles.container}>
       <View>
         <Text>{senderInfo.username}</Text>
-        <Text>{senderInfo.email}</Text>
       </View>
       <View>
         <TouchableOpacity onPress={onAccept}>

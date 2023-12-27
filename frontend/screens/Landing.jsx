@@ -22,13 +22,13 @@ const LandingScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [loginError, setLoginError] = useState();
+  const [loginError, setLoginError] = useState("");
 
   const [securePassword, setSecurePassword] = useState(true);
 
   // Logging in automatically if the user has selected to do so
   useEffect(() => {
-    const autoLoggin = async () => {
+    const autoLogging = async () => {
       const token = await SecureStore.getItemAsync("token");
       if (token) {
         const user = await validateToken(token, setLoginError, domain);
@@ -37,7 +37,7 @@ const LandingScreen = ({ navigation }) => {
         navigation.navigate("Home");
       }
     };
-    autoLoggin();
+    autoLogging();
     return () => {};
   }, []);
 

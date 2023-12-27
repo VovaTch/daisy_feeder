@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const sendFriendRequest = async (
   data,
-  basePath = "http://192.168.1.79/"
+  basePath = "http://192.168.1.79:8000/"
 ) => {
   try {
     console.log(
