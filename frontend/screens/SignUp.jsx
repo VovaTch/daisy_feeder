@@ -1,16 +1,13 @@
 import React, { useContext, useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 
 import { context } from "../context/global";
 import { createUser } from "../api/send/createUser";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { emailIsValidated } from "../utils/Others";
+import { containerStyles } from "../styles/containers";
+import { textInputStyles } from "../styles/inputs";
+import { buttonStyles } from "../styles/buttons";
 
 const SignUpScreen = ({ navigation }) => {
   // context
@@ -73,12 +70,12 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.formContainer}>
-        <Text style={styles.label}>Username</Text>
+    <View style={containerStyles.highLevelContainers}>
+      <View style={containerStyles.formContainer}>
+        <Text style={textInputStyles.label}>Username</Text>
         <TextInput
           value={username}
-          style={styles.input}
+          style={textInputStyles.textInputLarge}
           autoCompleteType="username"
           textContentType="username"
           placeholder="Choose a username"
@@ -86,10 +83,10 @@ const SignUpScreen = ({ navigation }) => {
           onChangeText={setUsername}
         />
 
-        <Text style={styles.label}>Email</Text>
+        <Text style={textInputStyles.label}>Email</Text>
         <TextInput
           value={email}
-          style={styles.input}
+          style={textInputStyles.textInputLarge}
           autoCompleteType="email"
           textContentType="emailAddress"
           placeholder="Enter your email"
@@ -98,18 +95,21 @@ const SignUpScreen = ({ navigation }) => {
           onChangeText={setEmail}
         />
 
-        <Text style={styles.label}>Password</Text>
-        <View style={styles.inputContainer}>
+        <Text style={textInputStyles.label}>Password</Text>
+        <View style={containerStyles.inputContainer}>
           <TextInput
             value={password}
-            style={styles.input}
+            style={textInputStyles.textInputLarge}
             autoCompleteType="password"
             textContentType="password"
             placeholder="Enter your password"
             secureTextEntry={securePassword}
             onChangeText={setPassword}
           />
-          <TouchableOpacity style={styles.eyeIcon} onPress={toggleShowPassword}>
+          <TouchableOpacity
+            style={textInputStyles.eyeIcon}
+            onPress={toggleShowPassword}
+          >
             <MaterialCommunityIcons
               name={securePassword ? "eye-outline" : "eye-off-outline"}
               size={24}
@@ -118,11 +118,11 @@ const SignUpScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.label}>Confirm Password</Text>
-        <View style={styles.inputContainer}>
+        <Text style={textInputStyles.label}>Confirm Password</Text>
+        <View style={textInputStyles.inputContainer}>
           <TextInput
             value={confirmPassword}
-            style={styles.input}
+            style={textInputStyles.textInputLarge}
             autoCompleteType="password"
             textContentType="password"
             placeholder="Confirm your password"
@@ -130,7 +130,7 @@ const SignUpScreen = ({ navigation }) => {
             onChangeText={setConfirmPassword}
           />
           <TouchableOpacity
-            style={styles.eyeIcon}
+            style={textInputStyles.eyeIcon}
             onPress={toggleShowConfirmPassword}
           >
             <MaterialCommunityIcons
@@ -141,77 +141,22 @@ const SignUpScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.signupButton} onPress={handleSignUp}>
-          <Text style={styles.buttonText}>Sign Up</Text>
+        <TouchableOpacity
+          style={buttonStyles.standardButton}
+          onPress={handleSignUp}
+        >
+          <Text style={buttonStyles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.backButton} onPress={handleBackToLogin}>
-          <Text style={styles.buttonText}>Back</Text>
+        <TouchableOpacity
+          style={buttonStyles.backButton}
+          onPress={handleBackToLogin}
+        >
+          <Text style={buttonStyles.buttonText}>Back</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "orange",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  formContainer: {
-    width: "80%",
-  },
-  label: {
-    color: "white",
-    marginTop: 10,
-  },
-  input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 15,
-    paddingLeft: 10,
-    color: "black",
-    backgroundColor: "white",
-    width: "100%",
-  },
-  signupButton: {
-    backgroundColor: "#884400",
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  backButton: {
-    backgroundColor: "transparent",
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "white",
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-  },
-  eyeIcon: {
-    position: "absolute",
-    right: 14,
-    top: 8,
-    borderLeftWidth: 1,
-    paddingLeft: 10,
-    borderColor: "#cecece",
-  },
-  inputContainer: {
-    width: "100%",
-    borderRadius: 8,
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 0,
-  },
-});
 
 export default SignUpScreen;

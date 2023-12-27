@@ -1,11 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
 
 import { SettingsClearComponent } from "../components/SettingsClear";
 import { ActivityIndicator } from "react-native";
@@ -21,6 +15,8 @@ import {
 } from "../api/send/updateFriendRequestStatus";
 import { FriendListView } from "../components/FriendsList";
 import { SendFriendRequestPopup } from "../components/CreateFriendRequestPopup";
+import { containerStyles } from "../styles/containers.jsx";
+import { buttonStyles } from "../styles/buttons.jsx";
 
 export default function SettingsScreen() {
   const [createRequestVisible, setCreateRequestVisible] = useState(false);
@@ -85,7 +81,7 @@ export default function SettingsScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={containerStyles.highLevelContainers}>
       {isLoading ? (
         <ActivityIndicator size="large" color="#884400" />
       ) : (
@@ -93,10 +89,13 @@ export default function SettingsScreen() {
           <SettingsClearComponent
             foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
             setFoodItems={setFeedItems}
-            style={styles.button}
+            style={buttonStyles.standardButton}
           />
-          <TouchableOpacity onPress={handleOpenPopup} style={styles.button}>
-            <Text style={styles.buttonText}>Create Friend Request</Text>
+          <TouchableOpacity
+            onPress={handleOpenPopup}
+            style={buttonStyles.standardButton}
+          >
+            <Text style={buttonStyles.buttonText}>Create Friend Request</Text>
           </TouchableOpacity>
           <SendFriendRequestPopup
             isVisible={createRequestVisible}
@@ -123,28 +122,3 @@ export default function SettingsScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "orange",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  button: {
-    backgroundColor: "#884400",
-    padding: 15,
-    borderRadius: 5,
-    width: 280,
-    height: 50,
-    alignItems: "center",
-    alignSelf: "center",
-    paddingHorizontal: "15%",
-    marginVertical: "1.5%",
-  },
-});

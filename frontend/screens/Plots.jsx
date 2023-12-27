@@ -1,16 +1,12 @@
 import React, { useEffect, useContext } from "react";
-import {
-  ScrollView,
-  ActivityIndicator,
-  View,
-  Text,
-  StyleSheet,
-} from "react-native";
+import { ScrollView, ActivityIndicator, View, Text } from "react-native";
 
 import { TimeLinePlot } from "../components/Plot";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { getUserFilteredFoodItems } from "../utils/Others";
+import { highLevelStyle } from "../styles/highLevel";
+import { plotStyles } from "../styles/plots";
 
 export default function PlotScreen() {
   // context
@@ -32,7 +28,7 @@ export default function PlotScreen() {
   }, []);
 
   return (
-    <ScrollView style={styles.totalView}>
+    <ScrollView contentContainerStyle={plotStyles.container}>
       {isLoading ? (
         <ActivityIndicator size="large" color="#884400" />
       ) : (
@@ -60,28 +56,9 @@ export default function PlotScreen() {
 
 const PlotCard = ({ data, foodType, titleText }) => {
   return (
-    <View style={styles.plotCard}>
-      <Text style={styles.title}>{titleText}</Text>
+    <View style={plotStyles.plotCard}>
+      <Text style={highLevelStyle.title}>{titleText}</Text>
       <TimeLinePlot data={data} foodType={foodType} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  totalView: {
-    backgroundColor: "orange",
-  },
-  plotCard: {
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
-    borderColor: "#eee",
-    borderWidth: 0,
-    borderRadius: 10,
-    margin: 15,
-  },
-  title: {
-    fontSize: 18,
-    padding: 10,
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-});

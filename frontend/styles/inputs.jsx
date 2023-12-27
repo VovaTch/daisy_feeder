@@ -17,4 +17,21 @@ export const textInputStyles = StyleSheet.create({
     paddingLeft: 10,
     borderColor: "#cecece",
   },
+
+  label: {
+    color: "white",
+    marginTop: 10,
+  },
+
+  textInputLarge: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 15,
+    paddingLeft: 10,
+    color: "black",
+    backgroundColor: "white",
+    width: "100%",
+  },
 });

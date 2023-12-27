@@ -4,6 +4,7 @@ export const buttonStyles = StyleSheet.create({
   standardButton: {
     backgroundColor: "#884400",
     padding: 15,
+    margin: 5,
     borderRadius: 5,
     alignItems: "center",
   },
@@ -26,5 +27,14 @@ export const buttonStyles = StyleSheet.create({
     flex: 1,
     marginLeft: 5,
     alignItems: "center",
+  },
+  backButton: {
+    backgroundColor: "transparent",
+    padding: 15,
+    borderRadius: 5,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "white",
+    margin: 5,
   },
 });

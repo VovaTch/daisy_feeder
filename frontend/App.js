@@ -1,10 +1,10 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { Provider } from "./context/global";
 import { StackNavigator } from "./navigation/navigators";
+import { highLevelStyle } from "./styles/highLevel";
 
 // const Drawer = createDrawerNavigator();
 
@@ -30,33 +30,9 @@ import { StackNavigator } from "./navigation/navigators";
 export default function App() {
   return (
     <Provider>
-      <NavigationContainer style={styles.container}>
+      <NavigationContainer style={highLevelStyle.container}>
         <StackNavigator />
       </NavigationContainer>
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  drawerHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-  },
-  drawerHeaderText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  drawerScreen: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});

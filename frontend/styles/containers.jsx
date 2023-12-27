@@ -16,4 +16,7 @@ export const containerStyles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 0,
   },
+  formContainer: {
+    width: "80%",
+  },
 });
