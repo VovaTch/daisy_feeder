@@ -1,15 +1,11 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import { deleteFeedItem } from "../api/send/deleteFeedItem";
 import { getUsernameById } from "../utils/Others";
+import { tableStyles } from "../styles/table";
+import { containerStyles } from "../styles/containers";
 
 export const Table = ({ foodItems, setFoodItems, minUsers, requiredDate }) => {
   const filteredFoodItems = foodItems.filter((item) => {
@@ -18,34 +14,37 @@ export const Table = ({ foodItems, setFoodItems, minUsers, requiredDate }) => {
   });
 
   return (
-    <ScrollView style={styles.table}>
+    <ScrollView>
       {/* Fields, loop with map */}
       {filteredFoodItems.map((foodItem, idx) => (
-        <View key={`box-container-${idx}`} style={styles.container}>
-          <View key={`left-side-${idx}`} style={styles.leftColumn}>
-            <Text key={`time-${idx}`} style={styles.innerText}>
+        <View
+          key={`box-container-${idx}`}
+          style={containerStyles.tableContainer}
+        >
+          <View key={`left-side-${idx}`} style={tableStyles.leftColumn}>
+            <Text key={`time-${idx}`} style={tableStyles.innerText}>
               Time: {new Date(foodItem.datetime).toLocaleTimeString()}
             </Text>
-            <Text key={`feeder-${idx}`} style={styles.innerText}>
+            <Text key={`feeder-${idx}`} style={tableStyles.innerText}>
               Feeder: {getUsernameById(minUsers, foodItem.feeder)}
             </Text>
-            <Text key={`type-${idx}`} style={styles.innerText}>
+            <Text key={`type-${idx}`} style={tableStyles.innerText}>
               Type: {foodItem.food_choice}
             </Text>
           </View>
-          <View key={`middle-${idx}`} style={styles.rightColumn}>
+          <View key={`middle-${idx}`} style={tableStyles.rightColumn}>
             <Text
               key={`amount-${idx}`}
               style={
                 foodItem.food_choice === "wet"
-                  ? styles.amount_wet
-                  : styles.amount_dry
+                  ? tableStyles.amount_wet
+                  : tableStyles.amount_dry
               }
             >
               {foodItem.amount}
             </Text>
           </View>
-          <View key={`right-${idx}`} style={styles.rightColumn}>
+          <View key={`right-${idx}`} style={tableStyles.rightColumn}>
             <TouchableOpacity
               style={{ alignContent: "center", padding: 10 }}
               key={`delete-${idx}`}
@@ -61,41 +60,3 @@ export const Table = ({ foodItems, setFoodItems, minUsers, requiredDate }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row", // Row layout to create two columns
-    justifyContent: "space-between", // Space evenly between columns
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderColor: "#ccc",
-    borderWidth: 0,
-    borderRadius: 10,
-    marginTop: 5,
-    margin: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-  },
-  innerText: {
-    textAlign: "center",
-    fontSize: 18,
-  },
-  leftColumn: {
-    color: "red",
-    padding: 10,
-    alignItems: "flex-start",
-  },
-  rightColumn: {
-    padding: 10,
-    alignItems: "center", // Align the text to the right
-  },
-  amount_wet: {
-    fontSize: 50,
-    color: "blue",
-    fontWeight: "bold",
-  },
-  amount_dry: {
-    fontSize: 50,
-    color: "red",
-    fontWeight: "bold",
-  },
-});

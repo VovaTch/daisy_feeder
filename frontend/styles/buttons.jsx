@@ -37,4 +37,32 @@ export const buttonStyles = StyleSheet.create({
     borderColor: "white",
     margin: 5,
   },
+  floatingAddButton: {
+    backgroundColor: "#682100", // Adjust the color as needed
+    borderRadius: 30,
+    width: 60,
+    height: 60,
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    elevation: 3, // Android-only: Add a subtle shadow
+  },
+  addButtonText: {
+    color: "#fff",
+    fontSize: 40,
+    fontWeight: "bold",
+  },
+  timeButton: {
+    backgroundColor: "white",
+    borderColor: "#dddddd",
+    borderRadius: 10,
+    borderWidth: 1,
+    margin: 5,
+    marginBottom: 25,
+    paddingTop: 30,
+    paddingBottom: 30,
+    padding: 10,
+  },
 });

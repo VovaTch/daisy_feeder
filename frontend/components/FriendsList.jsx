@@ -1,13 +1,8 @@
 import { Feather } from "@expo/vector-icons";
 import React from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { removeFriend } from "../api/send/removeFriend";
+import { containerStyles } from "../styles/containers";
 
 export const FriendListView = ({ activeUser, setActiveUser, minUsers }) => {
   const minUsersFriends = minUsers.filter((item) =>
@@ -44,7 +39,7 @@ export const FriendCard = ({
     console.log(`Deleting friend username: ${minUser.username}`);
   };
   return (
-    <View style={styles.friendCardContainer}>
+    <View style={{ ...containerStyles.tableContainer, width: 300 }}>
       <View>
         <Text>Name: {minUser.username}</Text>
       </View>
@@ -54,19 +49,3 @@ export const FriendCard = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  friendCardContainer: {
-    flexDirection: "row", // Row layout to create two columns
-    justifyContent: "space-between", // Space evenly between columns
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderColor: "#ccc",
-    borderWidth: 0,
-    borderRadius: 10,
-    marginTop: 5,
-    margin: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-    width: 300,
-  },
-});

@@ -1,10 +1,12 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View } from "react-native";
+
+import { summationStyles } from "../styles/summation";
 
 export const FloatingSumView = ({ data }) => {
   return (
-    <View style={styles.floatingView}>
-      <Text style={styles.auxText}>
+    <View style={summationStyles.floatingView}>
+      <Text style={summationStyles.auxText}>
         Total wet: <WetSum data={data} /> dry: <DrySum data={data} />
       </Text>
     </View>
@@ -13,13 +15,17 @@ export const FloatingSumView = ({ data }) => {
 
 const WetSum = ({ data }) => {
   return (
-    <Text style={styles.wetText}>{extractAmountIntoArray(data, "wet")}</Text>
+    <Text style={summationStyles.wetText}>
+      {extractAmountIntoArray(data, "wet")}
+    </Text>
   );
 };
 
 const DrySum = ({ data }) => {
   return (
-    <Text style={styles.dryText}>{extractAmountIntoArray(data, "dry")}</Text>
+    <Text style={summationStyles.dryText}>
+      {extractAmountIntoArray(data, "dry")}
+    </Text>
   );
 };
 
@@ -33,28 +39,3 @@ function extractAmountIntoArray(data, foodType) {
   }
   return summedAmount;
 }
-
-const styles = StyleSheet.create({
-  floatingView: {
-    position: "absolute",
-    bottom: "5%",
-    left: "10%",
-    right: "15%",
-    borderColor: "#ccc",
-    // borderWidth: 1,
-    // borderRadius: 5,
-  },
-  auxText: {
-    fontSize: 18,
-  },
-  wetText: {
-    fontSize: 30,
-    color: "blue",
-    fontWeight: "bold",
-  },
-  dryText: {
-    fontSize: 30,
-    color: "red",
-    fontWeight: "bold",
-  },
-});

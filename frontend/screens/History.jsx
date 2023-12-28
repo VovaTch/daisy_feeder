@@ -1,11 +1,6 @@
 import "react-native-gesture-handler";
 import React, { useState, useEffect, useContext } from "react";
-import {
-  View,
-  StyleSheet,
-  ActivityIndicator,
-  SafeAreaView,
-} from "react-native";
+import { View, ActivityIndicator, SafeAreaView } from "react-native";
 
 import {
   getDateArray,
@@ -21,6 +16,8 @@ import { Table } from "../components/Table";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { fetchMinUsers } from "../api/fetch/fetchMinimalUser.jsx";
+import { containerStyles } from "../styles/containers.jsx";
+import { tableStyles } from "../styles/table.jsx";
 
 export default function HistoryScreen() {
   // context
@@ -52,7 +49,7 @@ export default function HistoryScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={containerStyles.highLevelContainers}>
       {isLoading ? (
         // Display a spinner while data is loading
         <ActivityIndicator size="large" color="#884400" />
@@ -65,7 +62,7 @@ export default function HistoryScreen() {
             )}
             setDateSelected={setDateSelected}
           />
-          <View style={styles.table}>
+          <View style={tableStyles.table}>
             <Table
               foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
               setFoodItems={setFeedItems}
@@ -85,24 +82,3 @@ export default function HistoryScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "orange",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  table: {
-    flex: 1,
-    marginTop: 15,
-    marginBottom: 100,
-    marginLeft: 10,
-    marginRight: 10,
-    width: 350,
-    borderColor: "#eee",
-    borderWidth: 0,
-    borderRadius: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-  },
-});

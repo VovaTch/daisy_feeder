@@ -1,12 +1,13 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-
+import { View } from "react-native";
 import {
   VictoryChart,
   VictoryAxis,
   VictoryLine,
   VictoryLabel,
 } from "victory-native";
+
+import { plotStyles } from "../styles/plots";
 
 export const TimeLinePlot = ({ data, foodType = "none" }) => {
   return (
@@ -15,7 +16,7 @@ export const TimeLinePlot = ({ data, foodType = "none" }) => {
         <VictoryAxis
           dependentAxis
           tickFormat={(tick) => `${tick}`}
-          style={styles.victoryAxisStyle}
+          style={plotStyles.victoryAxisStyle}
           label="Amount (grams)"
         />
         <VictoryAxis
@@ -26,7 +27,7 @@ export const TimeLinePlot = ({ data, foodType = "none" }) => {
             "-" +
             String(Number(new Date(x).getMonth()) + 1)
           }
-          style={styles.victoryAxisStyle}
+          style={plotStyles.victoryAxisStyle}
           label="Date"
         />
         <VictoryLine
@@ -88,31 +89,10 @@ const accumulatePerDate = (data, foodType) => {
 const getLineStyle = (foodType) => {
   switch (foodType) {
     case "none":
-      return styles.victoryTotalLine;
+      return plotStyles.victoryTotalLine;
     case "dry":
-      return styles.victoryDryLine;
+      return plotStyles.victoryDryLine;
     case "wet":
-      return styles.victoryWetLine;
+      return plotStyles.victoryWetLine;
   }
 };
-
-const styles = StyleSheet.create({
-  victoryAxisStyle: {
-    axis: { stroke: "#756f6a" },
-    ticks: { stroke: "grey", size: 5 },
-    tickLabels: { fontSize: 10, padding: 5 },
-    axisLabel: { padding: 30 },
-  },
-  victoryTotalLine: {
-    data: { stroke: "#0d6623" },
-    parent: { border: "1px solid #ccc" },
-  },
-  victoryDryLine: {
-    data: { stroke: "#660d0d" },
-    parent: { border: "1px solid #ccc" },
-  },
-  victoryWetLine: {
-    data: { stroke: "#031ca7" },
-    parent: { border: "1px solid #ccc" },
-  },
-});

@@ -3,7 +3,6 @@ import {
   View,
   Modal,
   TextInput,
-  StyleSheet,
   Text,
   Platform,
   TouchableOpacity,
@@ -13,6 +12,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { sendFeedItem } from "../api/send/sendFeedItem";
 import { context } from "../context/global";
+import { modalStyles } from "../styles/modal";
+import { textInputStyles } from "../styles/inputs";
+import { buttonStyles } from "../styles/buttons";
 
 export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
   // context
@@ -54,14 +56,14 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
 
   return (
     <Modal transparent={true} visible={isVisible} onRequestClose={onClose}>
-      <View style={styles.modalContainer}>
-        <View style={styles.formContainer}>
+      <View style={modalStyles.modalContainer}>
+        <View style={modalStyles.modalContent}>
           {/* Food amount */}
           <Text>Food amount:</Text>
           <TextInput
             placeholder="Enter amount"
             keyboardType="numeric"
-            style={styles.input}
+            style={textInputStyles.textInputLarge}
             value={amount}
             onChangeText={(text) => setAmount(text)}
           />
@@ -81,14 +83,14 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
           {/* Time of feeding */}
           <Text>Feeding Time:</Text>
           <TouchableOpacity
-            style={styles.buttonTime}
+            style={buttonStyles.timeButton}
             onPress={() => setShowDatePicker(true)}
           >
             <Text>{`Pick ${feedingTime.toLocaleTimeString()}`}</Text>
           </TouchableOpacity>
           {showDatePicker && (
             <DateTimePicker
-              style={styles.button}
+              style={buttonStyles.timeButton}
               value={feedingTime}
               mode="time"
               is24Hour={true}
@@ -99,16 +101,19 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
 
           {/* Submit and cancel buttons */}
           <TouchableOpacity
-            style={styles.buttonSubmit}
+            style={buttonStyles.standardButton}
             onPress={() => {
               onSubmit();
               handleSubmit();
             }}
           >
-            <Text style={styles.textSubmit}>Submit</Text>
+            <Text style={buttonStyles.buttonText}>Submit</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonCancel} onPress={onClose}>
-            <Text style={styles.textCancel}>Cancel</Text>
+          <TouchableOpacity
+            style={buttonStyles.standardButton}
+            onPress={onClose}
+          >
+            <Text style={buttonStyles.buttonText}>Cancel</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -116,72 +121,72 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // semi-transparent background
-  },
-  formContainer: {
-    width: 300,
-    padding: 20,
-    backgroundColor: "white",
-    borderRadius: 10,
-    elevation: 5, // for Android shadow
-  },
-  input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-  button: {
-    backgroundColor: "white",
-    borderColor: "#dddddd",
-    borderRadius: 10,
-    borderWidth: 1,
-    margin: 5,
-    padding: 10,
-  },
-  buttonSubmit: {
-    backgroundColor: "rgba(191,255,191,0.2)",
-    borderColor: "#dddddd",
-    borderRadius: 10,
-    borderWidth: 1,
-    margin: 5,
-    padding: 10,
-  },
-  textSubmit: {
-    fontSize: 24,
-    color: "rgb(0, 70, 0)",
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-  textCancel: {
-    fontSize: 24,
-    color: "rgb(70, 0, 0)",
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-  buttonCancel: {
-    backgroundColor: "rgba(255,191,191,0.2)",
-    borderColor: "#dddddd",
-    borderRadius: 10,
-    borderWidth: 1,
-    margin: 5,
-    padding: 10,
-  },
-  buttonTime: {
-    backgroundColor: "white",
-    borderColor: "#dddddd",
-    borderRadius: 10,
-    borderWidth: 1,
-    margin: 5,
-    marginBottom: 25,
-    paddingTop: 30,
-    paddingBottom: 30,
-    padding: 10,
-  },
-});
+// const styles = StyleSheet.create({
+//   modalContainer: {
+//     flex: 1,
+//     justifyContent: "center",
+//     alignItems: "center",
+//     backgroundColor: "rgba(0, 0, 0, 0.5)", // semi-transparent background
+//   },
+//   formContainer: {
+//     width: 300,
+//     padding: 20,
+//     backgroundColor: "white",
+//     borderRadius: 10,
+//     elevation: 5, // for Android shadow
+//   },
+//   input: {
+//     height: 40,
+//     borderColor: "gray",
+//     borderWidth: 1,
+//     marginBottom: 10,
+//     paddingHorizontal: 10,
+//   },
+//   button: {
+//     backgroundColor: "white",
+//     borderColor: "#dddddd",
+//     borderRadius: 10,
+//     borderWidth: 1,
+//     margin: 5,
+//     padding: 10,
+//   },
+//   buttonSubmit: {
+//     backgroundColor: "rgba(191,255,191,0.2)",
+//     borderColor: "#dddddd",
+//     borderRadius: 10,
+//     borderWidth: 1,
+//     margin: 5,
+//     padding: 10,
+//   },
+//   textSubmit: {
+//     fontSize: 24,
+//     color: "rgb(0, 70, 0)",
+//     textAlign: "center",
+//     fontWeight: "bold",
+//   },
+//   textCancel: {
+//     fontSize: 24,
+//     color: "rgb(70, 0, 0)",
+//     textAlign: "center",
+//     fontWeight: "bold",
+//   },
+//   buttonCancel: {
+//     backgroundColor: "rgba(255,191,191,0.2)",
+//     borderColor: "#dddddd",
+//     borderRadius: 10,
+//     borderWidth: 1,
+//     margin: 5,
+//     padding: 10,
+//   },
+//   buttonTime: {
+//     backgroundColor: "white",
+//     borderColor: "#dddddd",
+//     borderRadius: 10,
+//     borderWidth: 1,
+//     margin: 5,
+//     marginBottom: 25,
+//     paddingTop: 30,
+//     paddingBottom: 30,
+//     padding: 10,
+//   },
+// });

@@ -1,18 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import CheckBox from "expo-checkbox";
+import * as SecureStore from "expo-secure-store";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { context } from "../context/global";
 import { fetchLoginUser } from "../api/fetch/fetchLoginUser";
 import { validateToken } from "../api/fetch/validateToken";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import * as SecureStore from "expo-secure-store";
+import { containerStyles } from "../styles/containers";
+import { textInputStyles } from "../styles/inputs";
+import { checkboxStyles } from "../styles/checkbox";
+import { buttonStyles } from "../styles/buttons";
 
 const LandingScreen = ({ navigation }) => {
   // context
@@ -78,12 +76,12 @@ const LandingScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.formContainer}>
-        <Text style={styles.label}>Username</Text>
+    <View style={containerStyles.highLevelContainers}>
+      <View style={containerStyles.formContainer}>
+        <Text style={textInputStyles.label}>Username</Text>
         {loginError ? <Text>{loginError}</Text> : <></>}
         <TextInput
-          style={styles.input}
+          style={textInputStyles.textInputLarge}
           autoCompleteType="name"
           textContentType="username"
           placeholder="Enter your username"
@@ -93,10 +91,10 @@ const LandingScreen = ({ navigation }) => {
 
         {/* Password input with an eye */}
 
-        <Text style={styles.label}>Password</Text>
-        <View style={styles.inputContainer}>
+        <Text style={textInputStyles.label}>Password</Text>
+        <View style={containerStyles.inputContainer}>
           <TextInput
-            style={styles.input}
+            style={textInputStyles.textInputLarge}
             autoCompleteType="password"
             textContentType="password"
             placeholder="Enter your password"
@@ -104,7 +102,10 @@ const LandingScreen = ({ navigation }) => {
             value={password ? password : ""}
             onChangeText={setPassword}
           />
-          <TouchableOpacity style={styles.eyeIcon} onPress={toggleShowPassword}>
+          <TouchableOpacity
+            style={textInputStyles.eyeIcon}
+            onPress={toggleShowPassword}
+          >
             <MaterialCommunityIcons
               name={securePassword ? "eye-outline" : "eye-off-outline"}
               size={24}
@@ -113,98 +114,31 @@ const LandingScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.checkboxContainer}>
+        <View style={checkboxStyles.checkboxContainer}>
           <CheckBox
             value={rememberMe}
             onValueChange={setRememberMe}
-            style={styles.checkbox}
+            style={checkboxStyles.checkbox}
           />
-          <Text style={styles.checkboxLabel}>Remember me</Text>
+          <Text style={checkboxStyles.checkboxLabel}>Remember me</Text>
         </View>
 
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Log In</Text>
+        <TouchableOpacity
+          style={buttonStyles.standardButton}
+          onPress={handleLogin}
+        >
+          <Text style={buttonStyles.buttonText}>Log In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-          <Text style={styles.buttonText}>Sign Up</Text>
+        <TouchableOpacity
+          style={buttonStyles.backButton}
+          onPress={handleSignUp}
+        >
+          <Text style={buttonStyles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "orange",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  formContainer: {
-    width: "80%",
-  },
-  label: {
-    color: "white",
-    marginTop: 10,
-  },
-  input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 15,
-    paddingLeft: 10,
-    color: "black",
-    backgroundColor: "white",
-    width: "100%",
-  },
-  checkboxContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 15,
-  },
-  checkbox: {
-    alignSelf: "center",
-  },
-  checkboxLabel: {
-    color: "white",
-    marginLeft: 8,
-  },
-  loginButton: {
-    backgroundColor: "#884400",
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  signUpButton: {
-    backgroundColor: "transparent",
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "white",
-    marginTop: 10,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-  },
-  eyeIcon: {
-    position: "absolute",
-    right: 14,
-    top: 8,
-    borderLeftWidth: 1,
-    paddingLeft: 10,
-    borderColor: "#cecece",
-  },
-  inputContainer: {
-    width: "100%",
-    borderRadius: 8,
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 0,
-  },
-});
 
 export default LandingScreen;

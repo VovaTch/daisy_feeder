@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const highLevelStyle = StyleSheet.create({
+export const highLevelStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",

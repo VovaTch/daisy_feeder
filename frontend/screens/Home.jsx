@@ -1,10 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  ActivityIndicator,
-  SafeAreaView,
-} from "react-native";
+import { View, ActivityIndicator, SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { Table } from "../components/Table";
@@ -20,6 +15,8 @@ import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { fetchMinUsers } from "../api/fetch/fetchMinimalUser.jsx";
 import { updateFriendStatus } from "../api/send/updateFriendRequestStatus";
 import { deleteAnsweredFriendRequests } from "../api/send/deleteFriendRequest";
+import { containerStyles } from "../styles/containers";
+import { tableStyles } from "../styles/table.jsx";
 
 export default function HomeScreen() {
   // context
@@ -57,12 +54,12 @@ export default function HomeScreen() {
   }, [submissionVisible]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={containerStyles.highLevelContainers}>
       {/* Show loading screen */}
       {isLoading ? (
         <ActivityIndicator size="large" color="#884400" />
       ) : (
-        <View style={styles.table}>
+        <View style={tableStyles.table}>
           <Table
             foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
             setFoodItems={setFeedItems}
@@ -99,24 +96,3 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "orange",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  table: {
-    flex: 1,
-    marginTop: 15,
-    marginBottom: 100,
-    marginLeft: 10,
-    marginRight: 10,
-    width: 350,
-    borderColor: "#eee",
-    borderWidth: 0,
-    borderRadius: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-  },
-});

@@ -5,7 +5,7 @@ import { TimeLinePlot } from "../components/Plot";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { getUserFilteredFoodItems } from "../utils/Others";
-import { highLevelStyle } from "../styles/highLevel";
+import { highLevelStyles } from "../styles/highLevel";
 import { plotStyles } from "../styles/plots";
 
 export default function PlotScreen() {
@@ -57,7 +57,7 @@ export default function PlotScreen() {
 const PlotCard = ({ data, foodType, titleText }) => {
   return (
     <View style={plotStyles.plotCard}>
-      <Text style={highLevelStyle.title}>{titleText}</Text>
+      <Text style={highLevelStyles.title}>{titleText}</Text>
       <TimeLinePlot data={data} foodType={foodType} />
     </View>
   );

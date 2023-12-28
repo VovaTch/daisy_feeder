@@ -9,4 +9,22 @@ export const plotStyles = StyleSheet.create({
     borderRadius: 10,
     margin: 15,
   },
+  victoryAxisStyle: {
+    axis: { stroke: "#756f6a" },
+    ticks: { stroke: "grey", size: 5 },
+    tickLabels: { fontSize: 10, padding: 5 },
+    axisLabel: { padding: 30 },
+  },
+  victoryTotalLine: {
+    data: { stroke: "#0d6623" },
+    parent: { border: "1px solid #ccc" },
+  },
+  victoryDryLine: {
+    data: { stroke: "#660d0d" },
+    parent: { border: "1px solid #ccc" },
+  },
+  victoryWetLine: {
+    data: { stroke: "#031ca7" },
+    parent: { border: "1px solid #ccc" },
+  },
 });

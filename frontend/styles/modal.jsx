@@ -8,6 +8,7 @@ export const modalStyles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
+    width: 300,
     backgroundColor: "white",
     padding: 20,
     borderRadius: 10,

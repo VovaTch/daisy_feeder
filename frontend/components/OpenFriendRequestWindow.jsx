@@ -1,11 +1,8 @@
 import React from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+
+import { containerStyles } from "../styles/containers";
+import { buttonStyles } from "../styles/buttons";
 
 export const FriendRequestView = ({
   activeUser,
@@ -42,35 +39,18 @@ export const FriendRequestView = ({
 
 const FriendRequestCard = ({ senderInfo, onAccept, onReject }) => {
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.tableContainer}>
       <View>
         <Text>{senderInfo.username}</Text>
       </View>
-      <View>
-        <TouchableOpacity onPress={onAccept}>
+      <View style={containerStyles.rowButtonContainer}>
+        <TouchableOpacity onPress={onAccept} style={buttonStyles.okButton}>
           <Text>Accept</Text>
         </TouchableOpacity>
-      </View>
-      <View>
-        <TouchableOpacity onPress={onReject}>
+        <TouchableOpacity onPress={onReject} style={buttonStyles.cancelButton}>
           <Text>Reject</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row", // Row layout to create two columns
-    justifyContent: "space-between", // Space evenly between columns
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderColor: "#ccc",
-    borderWidth: 0,
-    borderRadius: 10,
-    marginTop: 5,
-    margin: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
-  },
-});

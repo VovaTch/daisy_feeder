@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { Provider } from "./context/global";
 import { StackNavigator } from "./navigation/navigators";
-import { highLevelStyle } from "./styles/highLevel";
+import { highLevelStyles } from "./styles/highLevel";
 
 // const Drawer = createDrawerNavigator();
 
@@ -30,7 +30,7 @@ import { highLevelStyle } from "./styles/highLevel";
 export default function App() {
   return (
     <Provider>
-      <NavigationContainer style={highLevelStyle.container}>
+      <NavigationContainer style={highLevelStyles.container}>
         <StackNavigator />
       </NavigationContainer>
     </Provider>
