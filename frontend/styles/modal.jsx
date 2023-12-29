@@ -22,4 +22,16 @@ export const modalStyles = StyleSheet.create({
   modalText: {
     marginBottom: 20,
   },
+  modalContainerInner: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContentInner: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
 });

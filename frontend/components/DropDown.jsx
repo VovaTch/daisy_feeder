@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { View, Text } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
+
+import { dropdownStyles } from "../styles/dropdown";
 
 const DropdownComponent = ({ dateData, setDateSelected }) => {
   const [value, setValue] = useState(null);
@@ -9,11 +11,11 @@ const DropdownComponent = ({ dateData, setDateSelected }) => {
 
   const renderItem = (item) => {
     return (
-      <View style={styles.item}>
-        <Text style={styles.textItem}>{item.label}</Text>
+      <View style={dropdownStyles.item}>
+        <Text style={dropdownStyles.textItem}>{item.label}</Text>
         {item.value === value && (
           <AntDesign
-            style={styles.icon}
+            style={dropdownStyles.icon}
             color="black"
             name="Safety"
             size={20}
@@ -25,11 +27,11 @@ const DropdownComponent = ({ dateData, setDateSelected }) => {
 
   return (
     <Dropdown
-      style={styles.dropdown}
-      placeholderStyle={styles.placeholderStyle}
-      selectedTextStyle={styles.selectedTextStyle}
-      inputSearchStyle={styles.inputSearchStyle}
-      iconStyle={styles.iconStyle}
+      style={dropdownStyles.dropdownMain}
+      placeholderStyle={dropdownStyles.placeholderStyle}
+      selectedTextStyle={dropdownStyles.selectedTextStyle}
+      inputSearchStyle={dropdownStyles.inputSearchStyle}
+      iconStyle={dropdownStyles.iconStyle}
       data={dateData}
       search
       maxHeight={300}
@@ -48,7 +50,7 @@ const DropdownComponent = ({ dateData, setDateSelected }) => {
       }}
       renderLeftIcon={() => (
         <AntDesign
-          style={styles.icon}
+          style={dropdownStyles.icon}
           color={isFocused ? "blue" : "black"}
           name="Safety"
           size={20}
@@ -60,51 +62,3 @@ const DropdownComponent = ({ dateData, setDateSelected }) => {
 };
 
 export default DropdownComponent;
-
-const styles = StyleSheet.create({
-  dropdown: {
-    margin: 16,
-    height: 50,
-    backgroundColor: "white",
-    borderRadius: 12,
-    padding: 12,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
-  },
-  icon: {
-    marginRight: 5,
-  },
-  item: {
-    padding: 17,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  textItem: {
-    flex: 1,
-    fontSize: 16,
-  },
-  placeholderStyle: {
-    fontSize: 14,
-    color: "#aaa",
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-  },
-  iconStyle: {
-    marginLeft: 150,
-    width: 20,
-    height: 20,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
-  },
-});

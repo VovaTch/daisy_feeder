@@ -2,6 +2,13 @@ import axios from "axios";
 
 import { getReverseFilteredFoodItems } from "../../utils/Others";
 
+/**
+ * Sends a request to delete a feeding item from the database. Daisy is sad :(.
+ * @param {number} id Item ID number to delete
+ * @param {*} data Data container to delete from
+ * @param {*} setData Data setter
+ * @param {*} basePath Base path for the API
+ */
 export const deleteFeedItem = async (
   id,
   data,
@@ -23,6 +30,13 @@ export const deleteFeedItem = async (
   }
 };
 
+/**
+ * Deletes all feeding history up to today for the user and for all friends. Daisy is REALLLLLLY
+ * sad :(.
+ * @param {*} data2delete Data container to delete from
+ * @param {*} setData2delete Data setter
+ * @param {*} basePath Base path for the API
+ */
 export const clearHistory = async (
   data2delete,
   setData2delete,
