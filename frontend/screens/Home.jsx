@@ -1,5 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, ActivityIndicator, SafeAreaView } from "react-native";
+import {
+  View,
+  ActivityIndicator,
+  SafeAreaView,
+  ImageBackground,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { Table } from "../components/Table";
@@ -17,6 +22,7 @@ import { updateFriendStatus } from "../api/send/updateFriendRequestStatus";
 import { deleteAnsweredFriendRequests } from "../api/send/deleteFriendRequest";
 import { containerStyles } from "../styles/containers";
 import { tableStyles } from "../styles/table.jsx";
+import { imageStyles } from "../styles/image.jsx";
 
 /**
  * Welcome to the Home Screen component, where the magic happens!
@@ -55,6 +61,7 @@ export default function HomeScreen() {
     setMinUsers,
     activeUser,
     setActiveUser,
+    screenBackgroundImage,
   } = globalContext;
 
   // Submission form related flag whether is visible
@@ -77,44 +84,49 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={containerStyles.highLevelContainers}>
-      {/* Show loading screen */}
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#884400" />
-      ) : (
-        <View style={tableStyles.table}>
-          <Table
-            foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
-            setFoodItems={setFeedItems}
-            minUsers={minUsers}
-            requiredDate={todayDate}
-          />
-        </View>
-      )}
-
-      {/* Invisible feed item form */}
-      <FeedItemForm
-        isVisible={submissionVisible}
-        onClose={() => {
-          setSubmissionVisible(false);
-        }}
-        onSubmit={() => {
-          setSubmissionVisible(false);
-        }}
-      />
-
-      {/* Add item floating button */}
-      <FloatingButton
-        onPress={() => {
-          setSubmissionVisible(true);
-        }}
-      />
-      <FloatingSumView
-        data={getDateFilteredFoodItems(
-          getUserFilteredFoodItems(feedItems, activeUser),
-          todayDate
+      <ImageBackground
+        source={screenBackgroundImage}
+        style={imageStyles.backgroundImage}
+      >
+        {/* Show loading screen */}
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#884400" />
+        ) : (
+          <View style={tableStyles.table}>
+            <Table
+              foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
+              setFoodItems={setFeedItems}
+              minUsers={minUsers}
+              requiredDate={todayDate}
+            />
+          </View>
         )}
-      />
-      <StatusBar style="auto" />
+
+        {/* Invisible feed item form */}
+        <FeedItemForm
+          isVisible={submissionVisible}
+          onClose={() => {
+            setSubmissionVisible(false);
+          }}
+          onSubmit={() => {
+            setSubmissionVisible(false);
+          }}
+        />
+
+        {/* Add item floating button */}
+        <FloatingButton
+          onPress={() => {
+            setSubmissionVisible(true);
+          }}
+        />
+        <FloatingSumView
+          data={getDateFilteredFoodItems(
+            getUserFilteredFoodItems(feedItems, activeUser),
+            todayDate
+          )}
+        />
+        <StatusBar style="auto" />
+      </ImageBackground>
     </SafeAreaView>
   );
 }

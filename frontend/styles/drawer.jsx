@@ -14,7 +14,7 @@ export const drawerStyles = StyleSheet.create({
   drawerContentContainer: {
     flex: 1,
     paddingTop: 16,
-    backgroundColor: "#d1c2a3",
+    // backgroundColor: "#d1c2a3",
   },
   logo: {
     width: 120,

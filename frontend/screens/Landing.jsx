@@ -1,5 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import CheckBox from "expo-checkbox";
 import * as SecureStore from "expo-secure-store";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -11,6 +17,7 @@ import { containerStyles } from "../styles/containers";
 import { textInputStyles } from "../styles/inputs";
 import { checkboxStyles } from "../styles/checkbox";
 import { buttonStyles } from "../styles/buttons";
+import { imageStyles } from "../styles/image";
 
 /**
  * Welcome to the Landing Screen – the gateway to foodie wonders and culinary adventures!
@@ -36,7 +43,7 @@ import { buttonStyles } from "../styles/buttons";
 const LandingScreen = ({ navigation }) => {
   // context
   const globalContext = useContext(context);
-  const { domain, setActiveUser } = globalContext;
+  const { domain, setActiveUser, landingBackgroundImage } = globalContext;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -97,68 +104,73 @@ const LandingScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={containerStyles.highLevelContainers}>
-      <View style={containerStyles.formContainer}>
-        <Text style={textInputStyles.label}>Username</Text>
-        {loginError ? <Text>{loginError}</Text> : <></>}
-        <TextInput
-          style={textInputStyles.textInputLarge}
-          autoCompleteType="name"
-          textContentType="username"
-          placeholder="Enter your username"
-          value={username ? username : ""}
-          onChangeText={setUsername}
-        />
-
-        {/* Password input with an eye */}
-
-        <Text style={textInputStyles.label}>Password</Text>
-        <View style={containerStyles.inputContainer}>
+    <ImageBackground
+      source={landingBackgroundImage}
+      style={imageStyles.backgroundImage}
+    >
+      <View style={containerStyles.highLevelContainers}>
+        <View style={containerStyles.formContainer}>
+          <Text style={textInputStyles.label}>Username</Text>
+          {loginError ? <Text>{loginError}</Text> : <></>}
           <TextInput
             style={textInputStyles.textInputLarge}
-            autoCompleteType="password"
-            textContentType="password"
-            placeholder="Enter your password"
-            secureTextEntry={securePassword}
-            value={password ? password : ""}
-            onChangeText={setPassword}
+            autoCompleteType="name"
+            textContentType="username"
+            placeholder="Enter your username"
+            value={username ? username : ""}
+            onChangeText={setUsername}
           />
-          <TouchableOpacity
-            style={textInputStyles.eyeIcon}
-            onPress={toggleShowPassword}
-          >
-            <MaterialCommunityIcons
-              name={securePassword ? "eye-outline" : "eye-off-outline"}
-              size={24}
-              color="gray"
+
+          {/* Password input with an eye */}
+
+          <Text style={textInputStyles.label}>Password</Text>
+          <View style={containerStyles.inputContainer}>
+            <TextInput
+              style={textInputStyles.textInputLarge}
+              autoCompleteType="password"
+              textContentType="password"
+              placeholder="Enter your password"
+              secureTextEntry={securePassword}
+              value={password ? password : ""}
+              onChangeText={setPassword}
             />
+            <TouchableOpacity
+              style={textInputStyles.eyeIcon}
+              onPress={toggleShowPassword}
+            >
+              <MaterialCommunityIcons
+                name={securePassword ? "eye-outline" : "eye-off-outline"}
+                size={24}
+                color="gray"
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={checkboxStyles.checkboxContainer}>
+            <CheckBox
+              value={rememberMe}
+              onValueChange={setRememberMe}
+              style={checkboxStyles.checkbox}
+            />
+            <Text style={checkboxStyles.checkboxLabel}>Remember me</Text>
+          </View>
+
+          <TouchableOpacity
+            style={buttonStyles.standardButton}
+            onPress={handleLogin}
+          >
+            <Text style={buttonStyles.buttonText}>Log In</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={buttonStyles.backButton}
+            onPress={handleSignUp}
+          >
+            <Text style={buttonStyles.buttonText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
-
-        <View style={checkboxStyles.checkboxContainer}>
-          <CheckBox
-            value={rememberMe}
-            onValueChange={setRememberMe}
-            style={checkboxStyles.checkbox}
-          />
-          <Text style={checkboxStyles.checkboxLabel}>Remember me</Text>
-        </View>
-
-        <TouchableOpacity
-          style={buttonStyles.standardButton}
-          onPress={handleLogin}
-        >
-          <Text style={buttonStyles.buttonText}>Log In</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={buttonStyles.backButton}
-          onPress={handleSignUp}
-        >
-          <Text style={buttonStyles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 

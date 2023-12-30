@@ -4,7 +4,7 @@ export const containerStyles = StyleSheet.create({
   // Container for the page view
   highLevelContainers: {
     flex: 1,
-    backgroundColor: "orange",
+    // backgroundColor: "orange",
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
@@ -30,7 +30,7 @@ export const containerStyles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 5,
     margin: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
   },
   settingsContainer: {
     justifyContent: "space-between", // Space evenly between columns
@@ -41,7 +41,7 @@ export const containerStyles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 5,
     margin: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
   },
   rowButtonContainer: {
     flexDirection: "row",

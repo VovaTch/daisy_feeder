@@ -1,5 +1,11 @@
 import React, { useEffect, useContext } from "react";
-import { ScrollView, ActivityIndicator, View, Text } from "react-native";
+import {
+  ScrollView,
+  ActivityIndicator,
+  View,
+  Text,
+  ImageBackground,
+} from "react-native";
 
 import { TimeLinePlot } from "../components/Plot";
 import { context } from "../context/global";
@@ -7,6 +13,7 @@ import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { getUserFilteredFoodItems } from "../utils/Others";
 import { highLevelStyles } from "../styles/highLevel";
 import { plotStyles } from "../styles/plots";
+import { imageStyles } from "../styles/image";
 
 export default function PlotScreen() {
   // context
@@ -18,6 +25,7 @@ export default function PlotScreen() {
     setIsLoading,
     isLoading,
     activeUser,
+    screenBackgroundImage,
   } = globalContext;
 
   // const [feedItems, setFeedItems] = useState([]);
@@ -28,29 +36,34 @@ export default function PlotScreen() {
   }, []);
 
   return (
-    <ScrollView contentContainerStyle={plotStyles.container}>
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#884400" />
-      ) : (
-        <View>
-          <PlotCard
-            data={getUserFilteredFoodItems(feedItems, activeUser)}
-            foodType="none"
-            titleText="Accumulated Feeding Amount"
-          />
-          <PlotCard
-            data={getUserFilteredFoodItems(feedItems, activeUser)}
-            foodType="dry"
-            titleText="Accumulated Dry Food Amount"
-          />
-          <PlotCard
-            data={getUserFilteredFoodItems(feedItems, activeUser)}
-            foodType="wet"
-            titleText="Accumulated Wet Food Amount"
-          />
-        </View>
-      )}
-    </ScrollView>
+    <ImageBackground
+      source={screenBackgroundImage}
+      style={imageStyles.backgroundImage}
+    >
+      <ScrollView contentContainerStyle={plotStyles.container}>
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#884400" />
+        ) : (
+          <View>
+            <PlotCard
+              data={getUserFilteredFoodItems(feedItems, activeUser)}
+              foodType="none"
+              titleText="Accumulated Feeding Amount"
+            />
+            <PlotCard
+              data={getUserFilteredFoodItems(feedItems, activeUser)}
+              foodType="dry"
+              titleText="Accumulated Dry Food Amount"
+            />
+            <PlotCard
+              data={getUserFilteredFoodItems(feedItems, activeUser)}
+              foodType="wet"
+              titleText="Accumulated Wet Food Amount"
+            />
+          </View>
+        )}
+      </ScrollView>
+    </ImageBackground>
   );
 }
 

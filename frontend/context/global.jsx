@@ -5,6 +5,11 @@ const context = createContext();
 const Provider = ({ children }) => {
   // TODO: to be filled
 
+  // Background images
+  const landingBackgroundImage = require("../assets/Landing-Background.jpg");
+  const screenBackgroundImage = require("../assets/Screen-Background.jpg");
+  const drawerBackgroundImage = require("../assets/Drawer.jpg");
+
   // User state
   const [token, setToken] = useState();
   const [errorMsg, setErrorMsg] = useState();
@@ -28,6 +33,9 @@ const Provider = ({ children }) => {
     activeUser,
     minUsers,
     friendRequests,
+    landingBackgroundImage,
+    screenBackgroundImage,
+    drawerBackgroundImage,
     setFeedItems,
     setIsLoading,
     setToken,

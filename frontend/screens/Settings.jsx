@@ -1,5 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 
 import { SettingsClearComponent } from "../components/SettingsClear";
 import { ActivityIndicator } from "react-native";
@@ -18,6 +24,7 @@ import { SendFriendRequestPopup } from "../components/CreateFriendRequestPopup";
 import { containerStyles } from "../styles/containers.jsx";
 import { buttonStyles } from "../styles/buttons.jsx";
 import { Ionicons } from "@expo/vector-icons";
+import { imageStyles } from "../styles/image.jsx";
 
 export default function SettingsScreen() {
   const [createRequestVisible, setCreateRequestVisible] = useState(false);
@@ -36,6 +43,7 @@ export default function SettingsScreen() {
     setActiveUser,
     friendRequests,
     setFriendRequests,
+    screenBackgroundImage,
   } = globalContext;
 
   // Handle friend request window
@@ -82,47 +90,54 @@ export default function SettingsScreen() {
   };
 
   return (
-    <SafeAreaView style={containerStyles.highLevelContainers}>
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#884400" />
-      ) : (
-        <View>
-          <SettingsClearComponent
-            foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
-            setFoodItems={setFeedItems}
-            style={buttonStyles.standardButton}
-          />
-          <TouchableOpacity
-            onPress={handleOpenPopup}
-            style={buttonStyles.standardButton}
-          >
-            <View style={buttonStyles.buttonRowContainer}>
-              <Ionicons name="add-person" style={buttonStyles.buttonIcon} />
-              <Text style={buttonStyles.buttonText}>Create Friend Request</Text>
-            </View>
-          </TouchableOpacity>
-          <SendFriendRequestPopup
-            isVisible={createRequestVisible}
-            onClose={handleClosePopup}
-            onSubmit={() => {}}
-            minUsers={minUsers}
-            activeUser={activeUser}
-            domain={domain}
-          />
-          <FriendListView
-            activeUser={activeUser}
-            setActiveUser={setActiveUser}
-            minUsers={minUsers}
-          />
-          <FriendRequestView
-            activeUser={activeUser}
-            minUsers={minUsers}
-            friendRequests={friendRequests}
-            onAccept={onFriendRequestAccept}
-            onReject={onFriendRequestReject}
-          />
-        </View>
-      )}
-    </SafeAreaView>
+    <ImageBackground
+      source={screenBackgroundImage}
+      style={imageStyles.backgroundImage}
+    >
+      <SafeAreaView style={containerStyles.highLevelContainers}>
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#884400" />
+        ) : (
+          <View>
+            <SettingsClearComponent
+              foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
+              setFoodItems={setFeedItems}
+              style={buttonStyles.standardButton}
+            />
+            <TouchableOpacity
+              onPress={handleOpenPopup}
+              style={buttonStyles.standardButton}
+            >
+              <View style={buttonStyles.buttonRowContainer}>
+                <Ionicons name="person-add" style={buttonStyles.buttonIcon} />
+                <Text style={buttonStyles.buttonText}>
+                  Create Friend Request
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <SendFriendRequestPopup
+              isVisible={createRequestVisible}
+              onClose={handleClosePopup}
+              onSubmit={() => {}}
+              minUsers={minUsers}
+              activeUser={activeUser}
+              domain={domain}
+            />
+            <FriendListView
+              activeUser={activeUser}
+              setActiveUser={setActiveUser}
+              minUsers={minUsers}
+            />
+            <FriendRequestView
+              activeUser={activeUser}
+              minUsers={minUsers}
+              friendRequests={friendRequests}
+              onAccept={onFriendRequestAccept}
+              onReject={onFriendRequestReject}
+            />
+          </View>
+        )}
+      </SafeAreaView>
+    </ImageBackground>
   );
 }

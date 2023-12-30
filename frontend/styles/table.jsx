@@ -11,7 +11,7 @@ export const tableStyles = StyleSheet.create({
     borderColor: "#eee",
     borderWidth: 0,
     borderRadius: 10,
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
   },
   innerText: {
     textAlign: "center",

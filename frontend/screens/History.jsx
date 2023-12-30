@@ -1,6 +1,11 @@
 import "react-native-gesture-handler";
 import React, { useState, useEffect, useContext } from "react";
-import { View, ActivityIndicator, SafeAreaView } from "react-native";
+import {
+  View,
+  ActivityIndicator,
+  SafeAreaView,
+  ImageBackground,
+} from "react-native";
 
 import {
   getDateArray,
@@ -18,6 +23,7 @@ import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
 import { fetchMinUsers } from "../api/fetch/fetchMinimalUser.jsx";
 import { containerStyles } from "../styles/containers.jsx";
 import { tableStyles } from "../styles/table.jsx";
+import { imageStyles } from "../styles/image.jsx";
 
 export default function HistoryScreen() {
   // context
@@ -31,6 +37,7 @@ export default function HistoryScreen() {
     minUsers,
     setMinUsers,
     activeUser,
+    screenBackgroundImage,
   } = globalContext;
 
   // const [feedItems, setFeedItems] = useState([]);
@@ -50,35 +57,40 @@ export default function HistoryScreen() {
 
   return (
     <SafeAreaView style={containerStyles.highLevelContainers}>
-      {isLoading ? (
-        // Display a spinner while data is loading
-        <ActivityIndicator size="large" color="#884400" />
-      ) : (
-        // Render content based on the fetched data
-        <View>
-          <DropdownComponent
-            dateData={getDropdownUniqueDates(
-              getUserFilteredFoodItems(feedItems, activeUser)
-            )}
-            setDateSelected={setDateSelected}
-          />
-          <View style={tableStyles.table}>
-            <Table
-              foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
-              setFoodItems={setFeedItems}
-              minUsers={minUsers}
-              requiredDate={dateSelected}
+      <ImageBackground
+        source={screenBackgroundImage}
+        style={imageStyles.backgroundImage}
+      >
+        {isLoading ? (
+          // Display a spinner while data is loading
+          <ActivityIndicator size="large" color="#884400" />
+        ) : (
+          // Render content based on the fetched data
+          <View>
+            <DropdownComponent
+              dateData={getDropdownUniqueDates(
+                getUserFilteredFoodItems(feedItems, activeUser)
+              )}
+              setDateSelected={setDateSelected}
             />
+            <View style={tableStyles.table}>
+              <Table
+                foodItems={getUserFilteredFoodItems(feedItems, activeUser)}
+                setFoodItems={setFeedItems}
+                minUsers={minUsers}
+                requiredDate={dateSelected}
+              />
+            </View>
+            <FloatingSumView
+              data={getDateFilteredFoodItems(
+                getUserFilteredFoodItems(feedItems, activeUser),
+                dateSelected
+              )}
+            />
+            <StatusBar style="auto" />
           </View>
-          <FloatingSumView
-            data={getDateFilteredFoodItems(
-              getUserFilteredFoodItems(feedItems, activeUser),
-              dateSelected
-            )}
-          />
-          <StatusBar style="auto" />
-        </View>
-      )}
+        )}
+      </ImageBackground>
     </SafeAreaView>
   );
 }

@@ -1,7 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const plotStyles = StyleSheet.create({
-  container: { backgroundColor: "orange" },
+  container: {
+    // backgroundColor: "orange"
+  },
   plotCard: {
     backgroundColor: "rgba(255, 255, 255, 0.5)",
     borderColor: "#eee",

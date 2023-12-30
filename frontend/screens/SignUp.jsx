@@ -1,5 +1,11 @@
 import React, { useContext, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 
 import { context } from "../context/global";
 import { createUser } from "../api/send/createUser";
@@ -8,11 +14,12 @@ import { emailIsValidated } from "../utils/Others";
 import { containerStyles } from "../styles/containers";
 import { textInputStyles } from "../styles/inputs";
 import { buttonStyles } from "../styles/buttons";
+import { imageStyles } from "../styles/image";
 
 const SignUpScreen = ({ navigation }) => {
   // context
   const globalContext = useContext(context);
-  const { domain, setMinUsers } = globalContext;
+  const { domain, setMinUsers, landingBackgroundImage } = globalContext;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -70,92 +77,97 @@ const SignUpScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={containerStyles.highLevelContainers}>
-      <View style={containerStyles.formContainer}>
-        <Text style={textInputStyles.label}>Username</Text>
-        <TextInput
-          value={username}
-          style={textInputStyles.textInputLarge}
-          autoCompleteType="username"
-          textContentType="username"
-          placeholder="Choose a username"
-          autoCapitalize="none"
-          onChangeText={setUsername}
-        />
-
-        <Text style={textInputStyles.label}>Email</Text>
-        <TextInput
-          value={email}
-          style={textInputStyles.textInputLarge}
-          autoCompleteType="email"
-          textContentType="emailAddress"
-          placeholder="Enter your email"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          onChangeText={setEmail}
-        />
-
-        <Text style={textInputStyles.label}>Password</Text>
-        <View style={containerStyles.inputContainer}>
+    <ImageBackground
+      source={landingBackgroundImage}
+      style={imageStyles.backgroundImage}
+    >
+      <View style={containerStyles.highLevelContainers}>
+        <View style={containerStyles.formContainer}>
+          <Text style={textInputStyles.label}>Username</Text>
           <TextInput
-            value={password}
+            value={username}
             style={textInputStyles.textInputLarge}
-            autoCompleteType="password"
-            textContentType="password"
-            placeholder="Enter your password"
-            secureTextEntry={securePassword}
-            onChangeText={setPassword}
+            autoCompleteType="username"
+            textContentType="username"
+            placeholder="Choose a username"
+            autoCapitalize="none"
+            onChangeText={setUsername}
           />
-          <TouchableOpacity
-            style={textInputStyles.eyeIcon}
-            onPress={toggleShowPassword}
-          >
-            <MaterialCommunityIcons
-              name={securePassword ? "eye-outline" : "eye-off-outline"}
-              size={24}
-              color="gray"
+
+          <Text style={textInputStyles.label}>Email</Text>
+          <TextInput
+            value={email}
+            style={textInputStyles.textInputLarge}
+            autoCompleteType="email"
+            textContentType="emailAddress"
+            placeholder="Enter your email"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            onChangeText={setEmail}
+          />
+
+          <Text style={textInputStyles.label}>Password</Text>
+          <View style={containerStyles.inputContainer}>
+            <TextInput
+              value={password}
+              style={textInputStyles.textInputLarge}
+              autoCompleteType="password"
+              textContentType="password"
+              placeholder="Enter your password"
+              secureTextEntry={securePassword}
+              onChangeText={setPassword}
             />
+            <TouchableOpacity
+              style={textInputStyles.eyeIcon}
+              onPress={toggleShowPassword}
+            >
+              <MaterialCommunityIcons
+                name={securePassword ? "eye-outline" : "eye-off-outline"}
+                size={24}
+                color="gray"
+              />
+            </TouchableOpacity>
+          </View>
+
+          <Text style={textInputStyles.label}>Confirm Password</Text>
+          <View style={textInputStyles.inputContainer}>
+            <TextInput
+              value={confirmPassword}
+              style={textInputStyles.textInputLarge}
+              autoCompleteType="password"
+              textContentType="password"
+              placeholder="Confirm your password"
+              secureTextEntry={confirmSecurePassword}
+              onChangeText={setConfirmPassword}
+            />
+            <TouchableOpacity
+              style={textInputStyles.eyeIcon}
+              onPress={toggleShowConfirmPassword}
+            >
+              <MaterialCommunityIcons
+                name={confirmSecurePassword ? "eye-outline" : "eye-off-outline"}
+                size={24}
+                color="gray"
+              />
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity
+            style={buttonStyles.standardButton}
+            onPress={handleSignUp}
+          >
+            <Text style={buttonStyles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={buttonStyles.backButton}
+            onPress={handleBackToLogin}
+          >
+            <Text style={buttonStyles.buttonText}>Back</Text>
           </TouchableOpacity>
         </View>
-
-        <Text style={textInputStyles.label}>Confirm Password</Text>
-        <View style={textInputStyles.inputContainer}>
-          <TextInput
-            value={confirmPassword}
-            style={textInputStyles.textInputLarge}
-            autoCompleteType="password"
-            textContentType="password"
-            placeholder="Confirm your password"
-            secureTextEntry={confirmSecurePassword}
-            onChangeText={setConfirmPassword}
-          />
-          <TouchableOpacity
-            style={textInputStyles.eyeIcon}
-            onPress={toggleShowConfirmPassword}
-          >
-            <MaterialCommunityIcons
-              name={confirmSecurePassword ? "eye-outline" : "eye-off-outline"}
-              size={24}
-              color="gray"
-            />
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity
-          style={buttonStyles.standardButton}
-          onPress={handleSignUp}
-        >
-          <Text style={buttonStyles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={buttonStyles.backButton}
-          onPress={handleBackToLogin}
-        >
-          <Text style={buttonStyles.buttonText}>Back</Text>
-        </TouchableOpacity>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 

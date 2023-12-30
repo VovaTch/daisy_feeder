@@ -1,11 +1,13 @@
-import React from "react";
-import { View, Image, Text } from "react-native";
+import React, { useContext } from "react";
+import { View, Image, Text, ImageBackground } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
 
 import { drawerStyles } from "../styles/drawer";
+import { imageStyles } from "../styles/image";
+import { context } from "../context/global";
 
 export const CustomDrawerHeader = () => {
   return (
@@ -21,12 +23,22 @@ export const CustomDrawerHeader = () => {
 };
 
 export const CustomDrawerContent = (props) => {
+  // get context
+  const globalContext = useContext(context);
+  const { drawerBackgroundImage } = globalContext;
+
   return (
+    //
     <View style={drawerStyles.drawerContentContainer}>
-      <DrawerContentScrollView {...props}>
-        <CustomDrawerHeader />
-        <DrawerItemList {...props} />
-      </DrawerContentScrollView>
+      <ImageBackground
+        source={drawerBackgroundImage}
+        style={imageStyles.backgroundImage}
+      >
+        <DrawerContentScrollView {...props}>
+          <CustomDrawerHeader />
+          <DrawerItemList {...props} />
+        </DrawerContentScrollView>
+      </ImageBackground>
     </View>
   );
 };
