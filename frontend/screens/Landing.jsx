@@ -12,6 +12,27 @@ import { textInputStyles } from "../styles/inputs";
 import { checkboxStyles } from "../styles/checkbox";
 import { buttonStyles } from "../styles/buttons";
 
+/**
+ * Welcome to the Landing Screen – the gateway to foodie wonders and culinary adventures!
+ *
+ * This screen offers a cozy login experience, complete with a password eye and a chance to remember your foodie identity.
+ * It's like a secret door to a realm of delicious delights, guarded by a password and a checkbox, Daisy-approved!
+ *
+ * @component
+ * @example
+ * // Just include this in your navigation stack, and start your foodie journey!
+ * <LandingScreen navigation={navigation} />
+ *
+ * @param {Object} props - The Landing Screen props (because even screens have props, right?).
+ * @param {Object} props.navigation - Navigation prop to help you navigate the culinary universe.
+ *
+ * @returns {JSX.Element} - A tasteful rendering of the login and sign-up experience.
+ * @throws {CulinaryConfusionError} - In case the user can't decide between logging in or signing up.
+ *
+ * @version 1.0.0
+ * @since Foodie-Odyssey Update
+ * @author Dvovivov
+ */
 const LandingScreen = ({ navigation }) => {
   // context
   const globalContext = useContext(context);

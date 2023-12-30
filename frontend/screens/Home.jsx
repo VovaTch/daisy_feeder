@@ -18,6 +18,28 @@ import { deleteAnsweredFriendRequests } from "../api/send/deleteFriendRequest";
 import { containerStyles } from "../styles/containers";
 import { tableStyles } from "../styles/table.jsx";
 
+/**
+ * Welcome to the Home Screen component, where the magic happens!
+ *
+ * This screen showcases your food items, manages friend requests, and lets you add items with a sprinkle of fun.
+ * It's like a feast for your eyes, or as Daisy the cat would say, a purr-fect experience!
+ *
+ * @component
+ * @example
+ * // Just include this in your navigation stack, and voila!
+ * <HomeScreen />
+ *
+ * @returns {JSX.Element} - A delightful rendering of your daily food adventures.
+ * @throws {CatAttackError} - In case Daisy decides to playfully interrupt the rendering.
+ *
+ * @param {Object} props - The Home Screen props (not as exciting as Daisy, but necessary).
+ * @param {boolean} props.submissionVisible - Flag indicating the visibility of the invisible feed item form.
+ * @param {Function} props.setSubmissionVisible - Function to toggle the visibility of the invisible feed item form.
+ *
+ * @version 1.0.0
+ * @since Daisy-licious Update
+ * @author Dvovivov
+ */
 export default function HomeScreen() {
   // context
   const globalContext = useContext(context);
