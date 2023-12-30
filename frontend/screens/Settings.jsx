@@ -17,6 +17,7 @@ import { FriendListView } from "../components/FriendsList";
 import { SendFriendRequestPopup } from "../components/CreateFriendRequestPopup";
 import { containerStyles } from "../styles/containers.jsx";
 import { buttonStyles } from "../styles/buttons.jsx";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function SettingsScreen() {
   const [createRequestVisible, setCreateRequestVisible] = useState(false);
@@ -95,7 +96,10 @@ export default function SettingsScreen() {
             onPress={handleOpenPopup}
             style={buttonStyles.standardButton}
           >
-            <Text style={buttonStyles.buttonText}>Create Friend Request</Text>
+            <View style={buttonStyles.buttonRowContainer}>
+              <Ionicons name="add-person" style={buttonStyles.buttonIcon} />
+              <Text style={buttonStyles.buttonText}>Create Friend Request</Text>
+            </View>
           </TouchableOpacity>
           <SendFriendRequestPopup
             isVisible={createRequestVisible}

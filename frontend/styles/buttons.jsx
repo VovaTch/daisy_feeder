@@ -3,14 +3,18 @@ import { StyleSheet } from "react-native";
 export const buttonStyles = StyleSheet.create({
   standardButton: {
     backgroundColor: "#884400",
-    padding: 15,
+    padding: 12,
     margin: 5,
     borderRadius: 5,
     alignItems: "center",
+    verticalAlign: "center",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
   },
   buttonText: {
     color: "white",
     fontWeight: "bold",
+    fontSize: 18,
   },
   okButton: {
     backgroundColor: "green",
@@ -64,5 +68,19 @@ export const buttonStyles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 30,
     padding: 10,
+  },
+  buttonRowContainer: {
+    flexDirection: "row", // Align children in a row
+    justifyContent: "center", // Center content horizontally
+    alignItems: "center", // Center content vertically
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    left: -15,
+  },
+  buttonIcon: {
+    marginRight: 10,
+    fontSize: 24,
+    color: "white",
   },
 });

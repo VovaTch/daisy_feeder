@@ -1,8 +1,9 @@
-import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { removeFriend } from "../api/send/removeFriend";
 import { containerStyles } from "../styles/containers";
+import { tableStyles } from "../styles/table";
 
 export const FriendListView = ({ activeUser, setActiveUser, minUsers }) => {
   const minUsersFriends = minUsers.filter((item) =>
@@ -11,19 +12,21 @@ export const FriendListView = ({ activeUser, setActiveUser, minUsers }) => {
   return (
     <ScrollView>
       {minUsersFriends.length === 0 ? (
-        <Text>No friends to display</Text>
+        <Text style={tableStyles.settingsTitle}>No friends to display</Text>
       ) : (
-        <Text>Friend List:</Text>
+        <Text style={tableStyles.settingsTitle}>Friend List:</Text>
       )}
-      {minUsersFriends.map((minUserFriend, idx) => (
-        <FriendCard
-          key={`f-card-${idx}`}
-          friendId={minUserFriend.id}
-          activeUser={activeUser}
-          setActiveUser={setActiveUser}
-          minUser={minUserFriend}
-        />
-      ))}
+      <View style={containerStyles.settingsContainer}>
+        {minUsersFriends.map((minUserFriend, idx) => (
+          <FriendCard
+            key={`f-card-${idx}`}
+            friendId={minUserFriend.id}
+            activeUser={activeUser}
+            setActiveUser={setActiveUser}
+            minUser={minUserFriend}
+          />
+        ))}
+      </View>
     </ScrollView>
   );
 };
@@ -41,10 +44,10 @@ export const FriendCard = ({
   return (
     <View style={{ ...containerStyles.tableContainer, width: 300 }}>
       <View>
-        <Text>Name: {minUser.username}</Text>
+        <Text style={tableStyles.innerText}>{minUser.username}</Text>
       </View>
       <TouchableOpacity onPress={onDelete}>
-        <Feather name="delete" color={"black"} size={30} />
+        <Ionicons name="trash" color={"black"} size={30} />
       </TouchableOpacity>
     </View>
   );

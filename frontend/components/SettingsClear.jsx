@@ -6,6 +6,7 @@ import { context } from "../context/global";
 import { containerStyles } from "../styles/containers";
 import { buttonStyles } from "../styles/buttons";
 import { modalStyles } from "../styles/modal";
+import { Ionicons } from "@expo/vector-icons";
 
 export const SettingsClearComponent = ({ foodItems, setFoodItems, style }) => {
   // context
@@ -22,7 +23,10 @@ export const SettingsClearComponent = ({ foodItems, setFoodItems, style }) => {
           style={style}
           onPress={() => handleClearHistory(setIsModalVisible)}
         >
-          <Text style={buttonStyles.buttonText}>Clear History</Text>
+          <View style={buttonStyles.buttonRowContainer}>
+            <Ionicons name="trash-bin" style={buttonStyles.buttonIcon} />
+            <Text style={buttonStyles.buttonText}>Clear History</Text>
+          </View>
         </TouchableOpacity>
       </View>
 

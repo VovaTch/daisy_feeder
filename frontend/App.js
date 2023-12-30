@@ -5,6 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "./context/global";
 import { StackNavigator } from "./navigation/navigators";
 import { highLevelStyles } from "./styles/highLevel";
+import { statusBarStyles } from "./styles/statusBar";
+import { StatusBar } from "react-native";
 
 // const Drawer = createDrawerNavigator();
 
@@ -30,6 +32,10 @@ import { highLevelStyles } from "./styles/highLevel";
 export default function App() {
   return (
     <Provider>
+      <StatusBar
+        backgroundColor={statusBarStyles.backgroundColor}
+        barStyle={statusBarStyles.barStyle}
+      />
       <NavigationContainer style={highLevelStyles.container}>
         <StackNavigator />
       </NavigationContainer>

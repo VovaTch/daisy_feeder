@@ -22,6 +22,18 @@ export const containerStyles = StyleSheet.create({
   tableContainer: {
     flexDirection: "row", // Row layout to create two columns
     justifyContent: "space-between", // Space evenly between columns
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderColor: "#ccc",
+    borderWidth: 0,
+    borderRadius: 10,
+    marginTop: 5,
+    margin: 5,
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+  },
+  settingsContainer: {
+    justifyContent: "space-between", // Space evenly between columns
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderColor: "#ccc",

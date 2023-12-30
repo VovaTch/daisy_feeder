@@ -22,9 +22,11 @@ export const CustomDrawerHeader = () => {
 
 export const CustomDrawerContent = (props) => {
   return (
-    <DrawerContentScrollView {...props}>
-      <CustomDrawerHeader />
-      <DrawerItemList {...props} />
-    </DrawerContentScrollView>
+    <View style={drawerStyles.drawerContentContainer}>
+      <DrawerContentScrollView {...props}>
+        <CustomDrawerHeader />
+        <DrawerItemList {...props} />
+      </DrawerContentScrollView>
+    </View>
   );
 };

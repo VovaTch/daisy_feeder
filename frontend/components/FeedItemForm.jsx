@@ -15,6 +15,7 @@ import { context } from "../context/global";
 import { modalStyles } from "../styles/modal";
 import { textInputStyles } from "../styles/inputs";
 import { buttonStyles } from "../styles/buttons";
+import { Ionicons } from "@expo/vector-icons";
 
 export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
   // context
@@ -107,13 +108,19 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
               handleSubmit();
             }}
           >
-            <Text style={buttonStyles.buttonText}>Submit</Text>
+            <View style={buttonStyles.buttonRowContainer}>
+              <Ionicons name="checkmark" style={buttonStyles.buttonIcon} />
+              <Text style={buttonStyles.buttonText}>Submit</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={buttonStyles.standardButton}
             onPress={onClose}
           >
-            <Text style={buttonStyles.buttonText}>Cancel</Text>
+            <View style={buttonStyles.buttonRowContainer}>
+              <Ionicons name="close" style={buttonStyles.buttonIcon} />
+              <Text style={buttonStyles.buttonText}>Cancel</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>

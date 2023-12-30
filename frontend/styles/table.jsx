@@ -16,11 +16,13 @@ export const tableStyles = StyleSheet.create({
   innerText: {
     textAlign: "center",
     fontSize: 18,
+    // fontFamily: "notoserif",
   },
   amount_wet: {
     fontSize: 50,
     color: "blue",
     fontWeight: "bold",
+    // fontFamily: "notoserif",
   },
   amount_dry: {
     fontSize: 50,
@@ -35,5 +37,10 @@ export const tableStyles = StyleSheet.create({
   rightColumn: {
     padding: 10,
     alignItems: "center", // Align the text to the right
+  },
+  settingsTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
 });

@@ -3,6 +3,8 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { containerStyles } from "../styles/containers";
 import { buttonStyles } from "../styles/buttons";
+import { tableStyles } from "../styles/table";
+import { Ionicons } from "@expo/vector-icons";
 
 export const FriendRequestView = ({
   activeUser,
@@ -18,21 +20,23 @@ export const FriendRequestView = ({
 
   return (
     <ScrollView>
-      <Text>
+      <Text style={tableStyles.settingsTitle}>
         {userFriendRequests.length === 0
           ? `No pending friend requests`
           : `Pending friend requests:`}
       </Text>
-      {userFriendRequests.map((friendRequest, idx) => (
-        <FriendRequestCard
-          senderInfo={minUsers.find(
-            (item) => friendRequest.from_user === item.id
-          )}
-          key={`fr-card-${idx}`}
-          onAccept={() => onAccept(friendRequest.id)}
-          onReject={() => onReject(friendRequest.id)}
-        />
-      ))}
+      <View style={containerStyles.settingsContainer}>
+        {userFriendRequests.map((friendRequest, idx) => (
+          <FriendRequestCard
+            senderInfo={minUsers.find(
+              (item) => friendRequest.from_user === item.id
+            )}
+            key={`fr-card-${idx}`}
+            onAccept={() => onAccept(friendRequest.id)}
+            onReject={() => onReject(friendRequest.id)}
+          />
+        ))}
+      </View>
     </ScrollView>
   );
 };
@@ -41,14 +45,20 @@ const FriendRequestCard = ({ senderInfo, onAccept, onReject }) => {
   return (
     <View style={containerStyles.tableContainer}>
       <View>
-        <Text>{senderInfo.username}</Text>
+        <Text style={tableStyles.innerText}>{senderInfo.username}</Text>
       </View>
-      <View style={containerStyles.rowButtonContainer}>
+      <View style={{ ...containerStyles.rowButtonContainer, width: "50%" }}>
         <TouchableOpacity onPress={onAccept} style={buttonStyles.okButton}>
-          <Text>Accept</Text>
+          <View style={buttonStyles.buttonRowContainer}>
+            <Ionicons name="checkmark" style={buttonStyles.buttonIcon} />
+            <Text style={buttonStyles.buttonText}>Accept</Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={onReject} style={buttonStyles.cancelButton}>
-          <Text>Reject</Text>
+          <View style={buttonStyles.buttonRowContainer}>
+            <Ionicons name="close" style={buttonStyles.buttonIcon} />
+            <Text style={buttonStyles.buttonText}>Reject</Text>
+          </View>
         </TouchableOpacity>
       </View>
     </View>

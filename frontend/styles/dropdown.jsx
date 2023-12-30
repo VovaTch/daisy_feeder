@@ -32,12 +32,13 @@ export const dropdownStyles = StyleSheet.create({
   placeholderStyle: {
     fontSize: 14,
     color: "#aaa",
+    alignSelf: "center",
   },
   selectedTextStyle: {
     fontSize: 16,
   },
   iconStyle: {
-    marginLeft: 150,
+    marginLeft: 40,
     width: 20,
     height: 20,
   },

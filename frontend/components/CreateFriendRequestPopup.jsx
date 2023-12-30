@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Modal, TouchableOpacity } from "react-native";
 import { sendFriendRequest } from "../api/send/sendFriendRequest";
 import { Dropdown } from "react-native-element-dropdown";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 
 import { dropdownStyles } from "../styles/dropdown";
 import { modalStyles } from "../styles/modal";
@@ -129,7 +129,10 @@ export const SendFriendRequestPopup = ({
               handleSendRequest();
             }}
           >
-            <Text style={buttonStyles.buttonText}>Send Request</Text>
+            <View style={buttonStyles.buttonRowContainer}>
+              <Ionicons name="checkmark" style={buttonStyles.buttonIcon} />
+              <Text style={buttonStyles.buttonText}>Send Request</Text>
+            </View>
           </TouchableOpacity>
           <SubmitResponseButton
             isVisible={okButtonVisible}
@@ -140,7 +143,10 @@ export const SendFriendRequestPopup = ({
             style={buttonStyles.standardButton}
             onPress={onClose}
           >
-            <Text style={buttonStyles.buttonText}>Close</Text>
+            <View style={buttonStyles.buttonRowContainer}>
+              <Ionicons name="close" style={buttonStyles.buttonIcon} />
+              <Text style={buttonStyles.buttonText}>Close</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>

@@ -1,20 +1,32 @@
 import React, { useContext } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { CustomDrawerContent } from "../components/CustomDrawer";
-import { StyleSheet } from "react-native";
 import * as SecureStore from "expo-secure-store";
+import { Ionicons } from "@expo/vector-icons";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "../screens/Home";
 import HistoryScreen from "../screens/History";
 import PlotScreen from "../screens/Plots";
 import SettingsScreen from "../screens/Settings";
-import { createStackNavigator } from "@react-navigation/stack";
 import LandingScreen from "../screens/Landing";
 import SignUpScreen from "../screens/SignUp";
 import { context } from "../context/global";
+import { drawerStyles } from "../styles/drawer";
 
 const Drawer = createDrawerNavigator();
 const stack = createStackNavigator();
+
+const drawerProps = {
+  drawerActiveBackgroundColor: drawerStyles.itemFocused.backgroundColor,
+  drawerActiveTintColor: drawerStyles.itemFocused.color,
+  drawerInactiveTintColor: drawerStyles.itemNotFocused.color,
+};
+const headerStyle = {
+  headerStyle: { backgroundColor: drawerStyles.itemFocused.backgroundColor },
+  headerTitleStyle: { color: drawerStyles.itemFocused.color },
+  headerTintColor: drawerStyles.itemFocused.color,
+};
 
 /**
  * DrawerNavigator is the side drawer navigation component.
@@ -45,22 +57,67 @@ export function DrawerNavigator({ navigation }) {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
+      screenOptions={headerStyle}
       drawerContent={(props) => {
         return (
-          <CustomDrawerContent {...props} style={styles.drawerHeaderText} />
+          <CustomDrawerContent
+            {...props}
+            style={drawerStyles.drawerHeaderText}
+          />
         );
       }}
     >
       {activeUser ? (
         <>
-          <Drawer.Screen name="Today's Feeding" component={HomeScreen} />
-          <Drawer.Screen name="History" component={HistoryScreen} />
-          <Drawer.Screen name="Plots" component={PlotScreen} />
-          <Drawer.Screen name="Settings" component={SettingsScreen} />
+          <Drawer.Screen
+            name="Today's Feeding"
+            component={HomeScreen}
+            options={{
+              drawerIcon: () => (
+                <Ionicons name="home" style={drawerStyles.iconFocused} />
+              ),
+              ...drawerProps,
+            }}
+          />
+          <Drawer.Screen
+            name="History"
+            component={HistoryScreen}
+            options={{
+              drawerIcon: () => (
+                <Ionicons name="book" style={drawerStyles.iconFocused} />
+              ),
+              ...drawerProps,
+            }}
+          />
+          <Drawer.Screen
+            name="Plots"
+            component={PlotScreen}
+            options={{
+              drawerIcon: () => (
+                <Ionicons name="stats-chart" style={drawerStyles.iconFocused} />
+              ),
+              ...drawerProps,
+            }}
+          />
+          <Drawer.Screen
+            name="Settings"
+            component={SettingsScreen}
+            options={{
+              drawerIcon: () => (
+                <Ionicons name="settings" style={drawerStyles.iconFocused} />
+              ),
+              ...drawerProps,
+            }}
+          />
           <Drawer.Screen
             name="Log Out"
             component={StackNavigator}
-            options={{ headerShown: false }}
+            options={{
+              drawerIcon: () => (
+                <Ionicons name="log-out" style={drawerStyles.iconFocused} />
+              ),
+              ...drawerProps,
+            }}
             listeners={{
               drawerItemPress: (e) => {
                 e.preventDefault();
@@ -81,13 +138,6 @@ export function DrawerNavigator({ navigation }) {
     </Drawer.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  drawerHeaderText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-});
 
 /**
  * StackNavigator is the stack-based navigation component.

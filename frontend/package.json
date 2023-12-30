@@ -11,6 +11,7 @@
   "proxy": "http://127.0.0.1:8000/",
   "dependencies": {
     "@ant-design/react-native": "^5.0.5",
+    "@expo-google-fonts/quicksand": "^0.2.3",
     "@expo/vector-icons": "^13.0.0",
     "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-native-community/checkbox": "^0.5.16",
@@ -23,6 +24,7 @@
     "axios": "^1.6.2",
     "expo": "^48.0.21",
     "expo-checkbox": "^2.5.0",
+    "expo-font": "~11.1.1",
     "expo-secure-store": "~12.1.1",
     "expo-status-bar": "~1.4.4",
     "picker": "^0.1.4",
