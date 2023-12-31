@@ -47,17 +47,23 @@ const FriendRequestCard = ({ senderInfo, onAccept, onReject }) => {
       <View>
         <Text style={tableStyles.innerText}>{senderInfo.username}</Text>
       </View>
-      <View style={{ ...containerStyles.rowButtonContainer, width: "50%" }}>
+      <View style={{ ...containerStyles.rowButtonContainer, width: "60%" }}>
         <TouchableOpacity onPress={onAccept} style={buttonStyles.okButton}>
-          <View style={buttonStyles.buttonRowContainer}>
-            <Ionicons name="checkmark" style={buttonStyles.buttonIcon} />
-            <Text style={buttonStyles.buttonText}>Accept</Text>
+          <View style={{ ...buttonStyles.buttonRowContainer, left: 0 }}>
+            <Ionicons
+              name="checkmark"
+              style={{ ...buttonStyles.buttonIcon, marginRight: 0 }}
+            />
+            {/* <Text style={buttonStyles.buttonText}>Accept</Text> */}
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={onReject} style={buttonStyles.cancelButton}>
-          <View style={buttonStyles.buttonRowContainer}>
-            <Ionicons name="close" style={buttonStyles.buttonIcon} />
-            <Text style={buttonStyles.buttonText}>Reject</Text>
+          <View style={{ ...buttonStyles.buttonRowContainer, left: 0 }}>
+            <Ionicons
+              name="close"
+              style={{ ...buttonStyles.buttonIcon, marginRight: 0 }}
+            />
+            {/* <Text style={buttonStyles.buttonText}>Reject</Text> */}
           </View>
         </TouchableOpacity>
       </View>

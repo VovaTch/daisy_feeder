@@ -17,7 +17,6 @@ export const SendFriendRequestPopup = ({
   domain,
 }) => {
   const [selectedUser, setSelectedUser] = useState(null);
-  const [okButtonVisible, setOkButtonVisible] = useState(false);
 
   // Additional
   const [value, setValue] = useState(null);
@@ -42,7 +41,7 @@ export const SendFriendRequestPopup = ({
 
   const handleSendRequest = () => {
     if (selectedUser === null) {
-      setOkButtonVisible(true);
+      alert("Please select a user to send a friend request to");
     } else {
       try {
         const data = {
@@ -53,7 +52,8 @@ export const SendFriendRequestPopup = ({
         };
         console.log(`Sending friend request to ${selectedUser.username}`);
         sendFriendRequest(data, domain);
-        setOkButtonVisible(true);
+        // setOkButtonVisible(true);
+        alert(`Sent friend request to ${selectedUser.username}`);
       } catch (error) {
         alert("Error sending friend request");
         console.log(error);
@@ -134,11 +134,6 @@ export const SendFriendRequestPopup = ({
               <Text style={buttonStyles.buttonText}>Send Request</Text>
             </View>
           </TouchableOpacity>
-          <SubmitResponseButton
-            isVisible={okButtonVisible}
-            onRequestClose={() => setOkButtonVisible(false)}
-            selectedUser={selectedUser}
-          />
           <TouchableOpacity
             style={buttonStyles.standardButton}
             onPress={onClose}
@@ -147,46 +142,6 @@ export const SendFriendRequestPopup = ({
               <Ionicons name="close" style={buttonStyles.buttonIcon} />
               <Text style={buttonStyles.buttonText}>Close</Text>
             </View>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </Modal>
-  );
-};
-
-const SubmitResponseButton = ({ isVisible, onRequestClose, selectedUser }) => {
-  const handleOkPress = () => {
-    onRequestClose(); // Close the modal
-  };
-
-  const renderModalContent = () => {
-    if (!selectedUser) {
-      return (
-        <Text>
-          No user was selected, please select a user to send a friend request
-          to.
-        </Text>
-      );
-    }
-
-    return <Text>{`Sent a friend request to ${selectedUser.username}`}</Text>;
-  };
-
-  return (
-    <Modal
-      visible={isVisible}
-      transparent={true}
-      animationType="slide"
-      onRequestClose={onRequestClose}
-    >
-      <View style={modalStyles.modalContainerInner}>
-        <View style={modalStyles.modalContentInner}>
-          {renderModalContent()}
-          <TouchableOpacity
-            onPress={handleOkPress}
-            style={buttonStyles.okButton}
-          >
-            <Text>OK</Text>
           </TouchableOpacity>
         </View>
       </View>

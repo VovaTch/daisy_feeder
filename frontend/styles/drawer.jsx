@@ -8,7 +8,7 @@ export const drawerStyles = StyleSheet.create({
   },
   drawerHeaderText: {
     fontSize: 24,
-    color: "rgb(100, 60, 0)",
+    color: "white",
     fontWeight: "bold",
   },
   drawerContentContainer: {
@@ -19,8 +19,9 @@ export const drawerStyles = StyleSheet.create({
   logo: {
     width: 120,
     height: 120,
-    borderRadius: 20,
+    borderRadius: 60,
     marginRight: 12,
+    marginLeft: 12,
   },
   imageHex: {},
   iconFocused: {
@@ -28,16 +29,16 @@ export const drawerStyles = StyleSheet.create({
     fontSize: 24,
   },
   iconNotFocused: {
-    color: "#383838",
+    color: "white",
     fontSize: 24,
   },
   itemFocused: {
-    backgroundColor: "#383838",
+    backgroundColor: "#1b1b1b",
     color: "white",
     fontSize: 24,
   },
   itemNotFocused: {
-    color: "#383838",
+    color: "white",
     fontSize: 24,
   },
 });
