@@ -22,6 +22,6 @@ export const fetchLoginUser = async (
     setError(
       `User ${usernameQuery} failed to log in, either the user doesn't exist or the password is incorrect`
     );
-    throw error;
+    return error;
   }
 };

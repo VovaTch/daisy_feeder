@@ -4,8 +4,8 @@ import {
   ActivityIndicator,
   SafeAreaView,
   ImageBackground,
+  StatusBar,
 } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 import { Table } from "../components/Table";
 import { FeedItemForm } from "../components/FeedItemForm";
@@ -23,6 +23,7 @@ import { deleteAnsweredFriendRequests } from "../api/send/deleteFriendRequest";
 import { containerStyles } from "../styles/containers";
 import { tableStyles } from "../styles/table.jsx";
 import { imageStyles } from "../styles/image.jsx";
+import { statusBarStyles } from "../styles/statusBar.jsx";
 
 /**
  * Welcome to the Home Screen component, where the magic happens!
@@ -88,6 +89,10 @@ export default function HomeScreen() {
         source={screenBackgroundImage}
         style={imageStyles.backgroundImage}
       >
+        <StatusBar
+          backgroundColor={statusBarStyles.backgroundColor}
+          barStyle={statusBarStyles.barStyle}
+        />
         {/* Show loading screen */}
         {isLoading ? (
           <ActivityIndicator size="large" color="#884400" />

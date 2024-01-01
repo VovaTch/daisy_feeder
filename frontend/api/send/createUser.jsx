@@ -21,7 +21,7 @@ export const createUser = async (
     setMinUsers(minUsers.data);
     console.log(`Created user ${data.username}, fetched minimal users.`);
   } catch (error) {
-    console.log(`Error in creating user: ${error}`);
-    throw error;
+    console.error(`Error in creating user: ${error}`);
+    return error;
   }
 };

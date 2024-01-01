@@ -10,7 +10,7 @@ export const fetchUserById = async (
     return response.data;
   } catch (error) {
     console.error("Error fetching user:", error);
-    throw error;
+    return error;
   }
 };
 
@@ -27,7 +27,7 @@ export const fetchMinUsers = async (
       `All minimum ${response.data.length} user representation were fetched successfully`
     );
   } catch (error) {
-    console.log("Error fetching min user list:", error);
-    throw error;
+    console.error("Error fetching min user list:", error);
+    return error;
   }
 };

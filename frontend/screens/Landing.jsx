@@ -18,6 +18,8 @@ import { textInputStyles } from "../styles/inputs";
 import { checkboxStyles } from "../styles/checkbox";
 import { buttonStyles } from "../styles/buttons";
 import { imageStyles } from "../styles/image";
+import { StatusBar } from "react-native";
+import { statusBarStyles } from "../styles/statusBar";
 
 /**
  * Welcome to the Landing Screen – the gateway to foodie wonders and culinary adventures!
@@ -87,8 +89,8 @@ const LandingScreen = ({ navigation }) => {
         console.log(`Removed token of ${username} from SecureStore`);
       }
     } catch (error) {
-      console.log(error);
-      throw error;
+      console.error(error);
+      return error;
     }
   };
 
@@ -108,10 +110,18 @@ const LandingScreen = ({ navigation }) => {
       source={landingBackgroundImage}
       style={imageStyles.backgroundImage}
     >
+      <StatusBar
+        backgroundColor={statusBarStyles.backgroundColor}
+        barStyle={statusBarStyles.barStyle}
+      />
       <View style={containerStyles.highLevelContainers}>
         <View style={containerStyles.formContainer}>
           <Text style={textInputStyles.label}>Username</Text>
-          {loginError ? <Text>{loginError}</Text> : <></>}
+          {loginError ? (
+            <Text style={textInputStyles.loginErrorText}>{loginError}</Text>
+          ) : (
+            <></>
+          )}
           <TextInput
             style={textInputStyles.textInputLarge}
             autoCompleteType="name"

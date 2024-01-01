@@ -14,7 +14,7 @@ export const fetchPendingFriendRequests = async (
     console.log(`Fetched ${pendingFriendRequests.length} friend requests`);
   } catch (error) {
     console.log("Error fetching pending friend requests.");
-    throw error;
+    return error;
   }
 };
 
@@ -31,7 +31,7 @@ export const fetchFriendRequests = async (
     setFriendRequests(allFriendRequests);
     console.log(`Fetched ${allFriendRequests.length} friend requests`);
   } catch (error) {
-    console.log("Error fetching friend requests.");
+    console.error("Error fetching friend requests.");
     throw error;
   }
 };

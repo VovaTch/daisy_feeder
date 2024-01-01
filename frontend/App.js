@@ -32,11 +32,11 @@ import { StatusBar } from "react-native";
 export default function App() {
   return (
     <Provider>
-      <StatusBar
-        backgroundColor={statusBarStyles.backgroundColor}
-        barStyle={statusBarStyles.barStyle}
-      />
       <NavigationContainer style={highLevelStyles.container}>
+        <StatusBar
+          backgroundColor={statusBarStyles.backgroundColor}
+          barStyle={statusBarStyles.barStyle}
+        />
         <StackNavigator />
       </NavigationContainer>
     </Provider>

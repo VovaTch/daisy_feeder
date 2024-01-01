@@ -26,7 +26,8 @@ export const deleteFeedItem = async (
     setData(newData);
     console.log(`Removed item id ${id}`);
   } catch (error) {
-    console.log(error);
+    console.error(`Error in deleting item id ${id}: ${error}`);
+    return error;
   }
 };
 

@@ -27,5 +27,6 @@ export const removeData = async (key) => {
     console.log(`Data from key ${key} removed successfully`);
   } catch (error) {
     console.error("Error removing from key:", error);
+    return error;
   }
 };

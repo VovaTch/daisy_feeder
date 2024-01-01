@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   SafeAreaView,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 
 import {
@@ -16,7 +17,6 @@ import {
 } from "../utils/Others";
 import DropdownComponent from "../components/DropDown";
 import { FloatingSumView } from "../components/FloatingSummation";
-import { StatusBar } from "expo-status-bar";
 import { Table } from "../components/Table";
 import { context } from "../context/global";
 import { fetchFeedItem } from "../api/fetch/fetchFeedItem";
@@ -24,6 +24,7 @@ import { fetchMinUsers } from "../api/fetch/fetchMinimalUser.jsx";
 import { containerStyles } from "../styles/containers.jsx";
 import { tableStyles } from "../styles/table.jsx";
 import { imageStyles } from "../styles/image.jsx";
+import { statusBarStyles } from "../styles/statusBar.jsx";
 
 export default function HistoryScreen() {
   // context
@@ -61,6 +62,10 @@ export default function HistoryScreen() {
         source={screenBackgroundImage}
         style={imageStyles.backgroundImage}
       >
+        <StatusBar
+          backgroundColor={statusBarStyles.backgroundColor}
+          barStyle={statusBarStyles.barStyle}
+        />
         {isLoading ? (
           // Display a spinner while data is loading
           <ActivityIndicator size="large" color="#884400" />
@@ -87,7 +92,6 @@ export default function HistoryScreen() {
                 dateSelected
               )}
             />
-            <StatusBar style="auto" />
           </View>
         )}
       </ImageBackground>

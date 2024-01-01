@@ -14,6 +14,6 @@ export const validateToken = async (
     return response.data;
   } catch (error) {
     setError(`Failed to authenticate the token`);
-    throw error;
+    return error;
   }
 };

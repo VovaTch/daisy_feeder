@@ -15,17 +15,17 @@ export const tableStyles = StyleSheet.create({
   },
   innerText: {
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 16,
     // fontFamily: "notoserif",
   },
   amount_wet: {
-    fontSize: 50,
+    fontSize: 40,
     color: "blue",
     fontWeight: "bold",
     // fontFamily: "notoserif",
   },
   amount_dry: {
-    fontSize: 50,
+    fontSize: 40,
     color: "red",
     fontWeight: "bold",
   },

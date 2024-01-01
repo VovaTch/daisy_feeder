@@ -15,8 +15,8 @@ export const deleteFriendRequest = async (
     setFriendRequests(updatedFriendRequests);
     console.log(`Removed friend request ID ${friendRequestId}`);
   } catch (error) {
-    console.log(`Failed to remove friend request ID ${friendRequestId}.`);
-    throw error;
+    console.error(`Failed to remove friend request ID ${friendRequestId}.`);
+    return error;
   }
 };
 
@@ -46,7 +46,7 @@ export const deleteAnsweredFriendRequests = async (
       `Removed all ${numAnsweredFriendRequests} answered friend requests.`
     );
   } catch (error) {
-    console.log(`Failed to remove answered friend requests.`);
-    throw error;
+    console.error(`Failed to remove answered friend requests.`);
+    return error;
   }
 };

@@ -15,6 +15,8 @@ import { containerStyles } from "../styles/containers";
 import { textInputStyles } from "../styles/inputs";
 import { buttonStyles } from "../styles/buttons";
 import { imageStyles } from "../styles/image";
+import { StatusBar } from "react-native";
+import { statusBarStyles } from "../styles/statusBar";
 
 const SignUpScreen = ({ navigation }) => {
   // context
@@ -81,6 +83,10 @@ const SignUpScreen = ({ navigation }) => {
       source={landingBackgroundImage}
       style={imageStyles.backgroundImage}
     >
+      <StatusBar
+        backgroundColor={statusBarStyles.backgroundColor}
+        barStyle={statusBarStyles.barStyle}
+      />
       <View style={containerStyles.highLevelContainers}>
         <View style={containerStyles.formContainer}>
           <Text style={textInputStyles.label}>Username</Text>

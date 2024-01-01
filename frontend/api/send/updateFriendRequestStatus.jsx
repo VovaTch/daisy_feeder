@@ -116,7 +116,7 @@ export const updateFriendRequestStatus = async (
       `Updated friend request ID ${requestId} to status ${approved}, updated active user's ${activeUser.username} friends list...`
     );
   } catch (error) {
-    console.log(`Failed to update friend request ID ${requestId}: ${error}`);
-    throw error;
+    console.error(`Failed to update friend request ID ${requestId}: ${error}`);
+    return error;
   }
 };

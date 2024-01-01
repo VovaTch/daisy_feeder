@@ -18,15 +18,15 @@ export const plotStyles = StyleSheet.create({
     axisLabel: { padding: 30 },
   },
   victoryTotalLine: {
-    data: { stroke: "#0d6623" },
-    parent: { border: "1px solid #ccc" },
+    data: { stroke: "#0d6623", strokeWidth: 5 },
+    parent: { border: "3px solid #ccc" },
   },
   victoryDryLine: {
-    data: { stroke: "#660d0d" },
-    parent: { border: "1px solid #ccc" },
+    data: { stroke: "#660d0d", strokeWidth: 5 },
+    parent: { border: "3px solid #ccc" },
   },
   victoryWetLine: {
-    data: { stroke: "#031ca7" },
-    parent: { border: "1px solid #ccc" },
+    data: { stroke: "#031ca7", strokeWidth: 5 },
+    parent: { border: "3px solid #ccc" },
   },
 });

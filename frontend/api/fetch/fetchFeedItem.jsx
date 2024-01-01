@@ -26,6 +26,7 @@ export const fetchFeedItem = async (
     setIsLoading(false);
     console.log(`Successfully fetched ${response.data.length} data-points.`);
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return error;
   }
 };

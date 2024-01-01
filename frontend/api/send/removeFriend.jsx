@@ -26,7 +26,7 @@ export const removeFriend = async (
       `Removed user ID ${userId} from ${activeUser.username}'s friends list.`
     );
   } catch (error) {
-    console.log(`Failed to remove ID ${userId} from friends list, ${error}`);
-    throw error;
+    console.error(`Failed to remove ID ${userId} from friends list, ${error}`);
+    return error;
   }
 };

@@ -5,6 +5,7 @@ import {
   View,
   Text,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 
 import { TimeLinePlot } from "../components/Plot";
@@ -14,6 +15,7 @@ import { getUserFilteredFoodItems } from "../utils/Others";
 import { highLevelStyles } from "../styles/highLevel";
 import { plotStyles } from "../styles/plots";
 import { imageStyles } from "../styles/image";
+import { statusBarStyles } from "../styles/statusBar";
 
 export default function PlotScreen() {
   // context
@@ -40,6 +42,10 @@ export default function PlotScreen() {
       source={screenBackgroundImage}
       style={imageStyles.backgroundImage}
     >
+      <StatusBar
+        backgroundColor={statusBarStyles.backgroundColor}
+        barStyle={statusBarStyles.barStyle}
+      />
       <ScrollView contentContainerStyle={plotStyles.container}>
         {isLoading ? (
           <ActivityIndicator size="large" color="#884400" />

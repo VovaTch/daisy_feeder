@@ -8,6 +8,11 @@ import { dropdownStyles } from "../styles/dropdown";
 import { modalStyles } from "../styles/modal";
 import { buttonStyles } from "../styles/buttons";
 
+/**
+ * Send friend request popup, contains a dropdown of all available users, submit and cancel buttons
+ * @param {*} props isVisible, onSubmit, onClose, minUsers, activeUser, domain
+ * @returns SendFriendRequestPopup
+ */
 export const SendFriendRequestPopup = ({
   isVisible,
   onSubmit,
@@ -52,11 +57,10 @@ export const SendFriendRequestPopup = ({
         };
         console.log(`Sending friend request to ${selectedUser.username}`);
         sendFriendRequest(data, domain);
-        // setOkButtonVisible(true);
         alert(`Sent friend request to ${selectedUser.username}`);
       } catch (error) {
         alert("Error sending friend request");
-        console.log(error);
+        console.error(error);
       }
     }
   };

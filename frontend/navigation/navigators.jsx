@@ -49,7 +49,8 @@ export function DrawerNavigator({ navigation }) {
       console.log("Logging out");
       await SecureStore.deleteItemAsync("token");
     } catch (error) {
-      console.log(`Cannot remove token from SecureStorage: ${error}`);
+      console.error(`Cannot remove token from SecureStorage: ${error}`);
+      return error;
     }
     navigation.navigate("Landing");
   };
@@ -149,7 +150,7 @@ export function DrawerNavigator({ navigation }) {
  */
 export function StackNavigator() {
   return (
-    <stack.Navigator initialRouteName="Landing">
+    <stack.Navigator initialRouteName="Landing" screenOptions={headerStyle}>
       <stack.Screen
         name="Landing"
         component={LandingScreen}

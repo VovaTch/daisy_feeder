@@ -34,4 +34,8 @@ export const textInputStyles = StyleSheet.create({
     backgroundColor: "white",
     width: "100%",
   },
+  loginErrorText: {
+    color: "red",
+    marginBottom: 10,
+  },
 });

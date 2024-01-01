@@ -25,6 +25,8 @@ import { containerStyles } from "../styles/containers.jsx";
 import { buttonStyles } from "../styles/buttons.jsx";
 import { Ionicons } from "@expo/vector-icons";
 import { imageStyles } from "../styles/image.jsx";
+import { StatusBar } from "react-native";
+import { statusBarStyles } from "../styles/statusBar.jsx";
 
 export default function SettingsScreen() {
   const [createRequestVisible, setCreateRequestVisible] = useState(false);
@@ -94,6 +96,10 @@ export default function SettingsScreen() {
       source={screenBackgroundImage}
       style={imageStyles.backgroundImage}
     >
+      <StatusBar
+        backgroundColor={statusBarStyles.backgroundColor}
+        barStyle={statusBarStyles.barStyle}
+      />
       <SafeAreaView style={containerStyles.highLevelContainers}>
         {isLoading ? (
           <ActivityIndicator size="large" color="#884400" />

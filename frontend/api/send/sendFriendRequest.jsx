@@ -16,7 +16,7 @@ export const sendFriendRequest = async (
     });
     console.log(`Sent friend request.`);
   } catch (error) {
-    console.log(`Could not send friend request.`);
-    throw error;
+    console.error(`Could not send friend request.`);
+    return error;
   }
 };
