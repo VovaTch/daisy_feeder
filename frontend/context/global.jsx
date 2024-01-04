@@ -1,4 +1,5 @@
 import React, { useState, createContext } from "react";
+import Config from "react-native-config";
 
 const context = createContext();
 
@@ -19,8 +20,7 @@ const Provider = ({ children }) => {
 
   // Set domain
   // const [domain, setDomain] = useState("http://192.168.1.79:8000/");
-  const [domain, setDomain] = useState("https://vovatch.pythonanywhere.com/");
-  // const [domain, setDomain] = useState(Config.DOMAIN_URL);
+  const [domain, setDomain] = useState(Config.DOMAIN_URL);
 
   // Data # TODO: to be updated
   const [feedItems, setFeedItems] = useState([]);

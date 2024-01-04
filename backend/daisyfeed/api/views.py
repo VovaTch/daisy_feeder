@@ -65,6 +65,7 @@ def signup(request: HttpRequest) -> Response:
         # Handle minimal user serializer
         min_user_serializer.save()
         min_user = MinimalUser.objects.get(username=request.data["username"])  # type: ignore
+        min_user.id = user.id  # Set the same ID as the user # type: ignore
         min_user.save()
 
         # Now that the user and profile are created, handle many-to-many relationships
