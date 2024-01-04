@@ -37,8 +37,6 @@ export const FeedItemForm = ({ isVisible, onClose, onSubmit }) => {
       food_choice: foodType,
     };
 
-    console.log(activeUser);
-
     // Send data
     sendFeedItem(feedingData, domain);
 

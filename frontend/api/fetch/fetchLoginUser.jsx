@@ -5,7 +5,7 @@ export const fetchLoginUser = async (
   usernameQuery,
   passwordQuery,
   setError,
-  basePath = "http://192.168.1.79/"
+  basePath
 ) => {
   try {
     console.log(`User ${usernameQuery} is attempting to log in`);
@@ -22,6 +22,6 @@ export const fetchLoginUser = async (
     setError(
       `User ${usernameQuery} failed to log in, either the user doesn't exist or the password is incorrect`
     );
-    return error;
+    console.log(`User ${usernameQuery} failed to log in, ${error}`);
   }
 };

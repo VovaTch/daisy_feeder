@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
 
+/**
+ * Styles for the table component
+ */
 export const tableStyles = StyleSheet.create({
   table: {
     flex: 1,

@@ -35,7 +35,10 @@ export const textInputStyles = StyleSheet.create({
     width: "100%",
   },
   loginErrorText: {
-    color: "red",
+    color: "#8d0000",
     marginBottom: 10,
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });

@@ -4,13 +4,12 @@ export const removeFriend = async (
   userId,
   activeUser,
   setActiveUser,
-  basePath = "http://192.168.1.79:8000/"
+  basePath
 ) => {
   try {
     console.log(
       `Attempting to remove user ID ${userId} from ${activeUser.username}'s friends list...`
     );
-    console.log(activeUser.profile.friends);
     const updateFriendsList = activeUser.profile.friends.filter(
       (item) => item !== userId
     );
@@ -26,7 +25,6 @@ export const removeFriend = async (
       `Removed user ID ${userId} from ${activeUser.username}'s friends list.`
     );
   } catch (error) {
-    console.error(`Failed to remove ID ${userId} from friends list, ${error}`);
-    return error;
+    console.log(`Failed to remove ID ${userId} from friends list, ${error}`);
   }
 };

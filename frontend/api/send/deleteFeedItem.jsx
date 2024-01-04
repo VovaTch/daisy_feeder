@@ -9,12 +9,7 @@ import { getReverseFilteredFoodItems } from "../../utils/Others";
  * @param {*} setData Data setter
  * @param {*} basePath Base path for the API
  */
-export const deleteFeedItem = async (
-  id,
-  data,
-  setData,
-  basePath = "http://192.168.1.79:8000/"
-) => {
+export const deleteFeedItem = async (id, data, setData, basePath) => {
   try {
     console.log(
       `Attempting to delete item ${id} from ${
@@ -26,8 +21,7 @@ export const deleteFeedItem = async (
     setData(newData);
     console.log(`Removed item id ${id}`);
   } catch (error) {
-    console.error(`Error in deleting item id ${id}: ${error}`);
-    return error;
+    console.log(`Error in deleting item id ${id}: ${error}`);
   }
 };
 
@@ -59,6 +53,6 @@ export const clearHistory = async (
     }
     console.log("Cleared feeding history up to today.");
   } catch (error) {
-    console.log(error);
+    console.log(`Failed to clear history: ${error}`);
   }
 };

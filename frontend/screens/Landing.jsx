@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
+  ActivityIndicator,
 } from "react-native";
 import CheckBox from "expo-checkbox";
 import * as SecureStore from "expo-secure-store";
@@ -51,6 +52,7 @@ const LandingScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [securePassword, setSecurePassword] = useState(true);
 
@@ -61,7 +63,6 @@ const LandingScreen = ({ navigation }) => {
       if (token) {
         const user = await validateToken(token, setLoginError, domain);
         setActiveUser(user);
-        console.log(user);
         navigation.navigate("Home");
       }
     };
@@ -72,24 +73,38 @@ const LandingScreen = ({ navigation }) => {
   const handleLogin = async () => {
     // Implement your login logic here
     try {
+      setIsLoading(true);
       const response = await fetchLoginUser(
         username,
         password,
         setLoginError,
         domain
       );
+
+      if (typeof response === "undefined") {
+        setIsLoading(false);
+        return;
+      }
+
       const user = await validateToken(response.token, setLoginError, domain);
       setActiveUser(user);
-      navigation.navigate("Home");
-      if (rememberMe) {
-        await SecureStore.setItemAsync("token", response.token);
-        console.log(`Stored token of ${username} in SecureStore`);
-      } else {
-        await SecureStore.deleteItemAsync("token");
-        console.log(`Removed token of ${username} from SecureStore`);
+
+      if (typeof user !== "undefined") {
+        if (rememberMe) {
+          await SecureStore.setItemAsync("token", response.token);
+          console.log(`Stored token of ${username} in SecureStore`);
+        } else {
+          await SecureStore.deleteItemAsync("token");
+          console.log(`Removed token of ${username} from SecureStore`);
+        }
+        setLoginError("");
+        setIsLoading(false);
+
+        navigation.navigate("Home");
       }
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
       return error;
     }
   };
@@ -116,12 +131,12 @@ const LandingScreen = ({ navigation }) => {
       />
       <View style={containerStyles.highLevelContainers}>
         <View style={containerStyles.formContainer}>
-          <Text style={textInputStyles.label}>Username</Text>
           {loginError ? (
             <Text style={textInputStyles.loginErrorText}>{loginError}</Text>
           ) : (
             <></>
           )}
+          <Text style={textInputStyles.label}>Username</Text>
           <TextInput
             style={textInputStyles.textInputLarge}
             autoCompleteType="name"
@@ -169,7 +184,13 @@ const LandingScreen = ({ navigation }) => {
             style={buttonStyles.standardButton}
             onPress={handleLogin}
           >
-            <Text style={buttonStyles.buttonText}>Log In</Text>
+            <Text style={buttonStyles.buttonText}>
+              {isLoading ? (
+                <ActivityIndicator size="small" color="#ffffff" />
+              ) : (
+                "Log in"
+              )}
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity

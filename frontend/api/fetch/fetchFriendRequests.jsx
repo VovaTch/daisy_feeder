@@ -21,7 +21,7 @@ export const fetchPendingFriendRequests = async (
 export const fetchFriendRequests = async (
   setFriendRequests,
   setIsLoading,
-  basePath = "http://192.168.1.79/"
+  basePath
 ) => {
   try {
     console.log(`Fetching friend requests...`);
@@ -31,7 +31,6 @@ export const fetchFriendRequests = async (
     setFriendRequests(allFriendRequests);
     console.log(`Fetched ${allFriendRequests.length} friend requests`);
   } catch (error) {
-    console.error("Error fetching friend requests.");
-    throw error;
+    console.log(`Error fetching friend requests, ${error}.`);
   }
 };

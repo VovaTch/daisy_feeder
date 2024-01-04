@@ -161,3 +161,7 @@ cython_debug/
 
 # Django migrations
 .backend/daisyfeed/migrations/
+
+# Other stuff
+*.swp
+*.swo

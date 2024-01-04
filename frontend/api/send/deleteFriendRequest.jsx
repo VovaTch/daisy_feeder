@@ -4,7 +4,7 @@ export const deleteFriendRequest = async (
   friendRequestId,
   friendRequests,
   setFriendRequests,
-  basePath = "http://192.168.1.79:8000/"
+  basePath
 ) => {
   try {
     console.log(`Attempting to remove friend request ID ${friendRequestId}...`);
@@ -15,8 +15,7 @@ export const deleteFriendRequest = async (
     setFriendRequests(updatedFriendRequests);
     console.log(`Removed friend request ID ${friendRequestId}`);
   } catch (error) {
-    console.error(`Failed to remove friend request ID ${friendRequestId}.`);
-    return error;
+    console.log(`Failed to remove friend request ID ${friendRequestId}.`);
   }
 };
 
@@ -24,7 +23,7 @@ export const deleteAnsweredFriendRequests = async (
   activeUser,
   friendRequests,
   setFriendRequests,
-  basePath = "http://192.168.1.79:8000/"
+  basePath
 ) => {
   try {
     console.log(
@@ -46,7 +45,6 @@ export const deleteAnsweredFriendRequests = async (
       `Removed all ${numAnsweredFriendRequests} answered friend requests.`
     );
   } catch (error) {
-    console.error(`Failed to remove answered friend requests.`);
-    return error;
+    console.log(`Failed to remove answered friend requests.`);
   }
 };

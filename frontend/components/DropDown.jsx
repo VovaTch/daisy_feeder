@@ -46,7 +46,6 @@ const DropdownComponent = ({ dateData, setDateSelected }) => {
         setValue(item.value);
         setIsFocused(false);
         setDateSelected(item.value);
-        console.log(item.value);
       }}
       renderLeftIcon={() => (
         <AntDesign

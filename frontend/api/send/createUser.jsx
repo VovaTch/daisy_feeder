@@ -6,11 +6,7 @@ import axios from "axios";
  * @param {*} setMinUsers Function to set the minimal users
  * @param {*} basePath Base path for the API
  */
-export const createUser = async (
-  data,
-  setMinUsers,
-  basePath = "http://192.168.1.79/"
-) => {
+export const createUser = async (data, setMinUsers, basePath) => {
   try {
     console.log(
       `Creating user ${data.username} in ${basePath + "api/signup/"}...`
@@ -21,7 +17,6 @@ export const createUser = async (
     setMinUsers(minUsers.data);
     console.log(`Created user ${data.username}, fetched minimal users.`);
   } catch (error) {
-    console.error(`Error in creating user: ${error}`);
-    return error;
+    console.log(`Error in creating user: ${error}`);
   }
 };

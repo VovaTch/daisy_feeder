@@ -12,7 +12,7 @@ export const updateFriendStatus = async (
   activeUser,
   setActiveUser,
   friendRequests,
-  basePath = "http://192.168.1.79:8000/"
+  basePath
 ) => {
   try {
     console.log(`Updating friends list...`);
@@ -52,7 +52,6 @@ export const updateFriendStatus = async (
     console.log(
       `Could not update friend list for ${activeUser.username}: ${error}`
     );
-    throw error;
   }
 };
 
@@ -73,7 +72,7 @@ export const updateFriendRequestStatus = async (
   activeUser,
   setActiveUser,
   approved,
-  basePath = "http://192.168.1.79:8000/"
+  basePath
 ) => {
   try {
     console.log(
@@ -116,7 +115,6 @@ export const updateFriendRequestStatus = async (
       `Updated friend request ID ${requestId} to status ${approved}, updated active user's ${activeUser.username} friends list...`
     );
   } catch (error) {
-    console.error(`Failed to update friend request ID ${requestId}: ${error}`);
-    return error;
+    console.log(`Failed to update friend request ID ${requestId}: ${error}`);
   }
 };

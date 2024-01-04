@@ -60,7 +60,7 @@ export const SendFriendRequestPopup = ({
         alert(`Sent friend request to ${selectedUser.username}`);
       } catch (error) {
         alert("Error sending friend request");
-        console.error(error);
+        console.log(error);
       }
     }
   };

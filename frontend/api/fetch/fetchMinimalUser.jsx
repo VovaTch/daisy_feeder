@@ -1,9 +1,6 @@
 import axios from "axios";
 
-export const fetchUserById = async (
-  userId,
-  basePath = "http://192.168.1.79/"
-) => {
+export const fetchUserById = async (userId, basePath) => {
   try {
     const response = await axios.get(basePath + `api/minimal-user/${userId}/`);
     console.log("User fetched successfully:", response.data);
@@ -14,11 +11,7 @@ export const fetchUserById = async (
   }
 };
 
-export const fetchMinUsers = async (
-  setMinUsers,
-  setIsLoading,
-  basePath = "http://192.168.1.79/"
-) => {
+export const fetchMinUsers = async (setMinUsers, setIsLoading, basePath) => {
   try {
     const response = await axios.get(basePath + `api/minimal-user/`);
     setMinUsers(response.data);
@@ -27,7 +20,6 @@ export const fetchMinUsers = async (
       `All minimum ${response.data.length} user representation were fetched successfully`
     );
   } catch (error) {
-    console.error("Error fetching min user list:", error);
-    return error;
+    console.log("Error fetching min user list:", error);
   }
 };

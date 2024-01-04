@@ -18,7 +18,9 @@ const Provider = ({ children }) => {
   const [friendRequests, setFriendRequests] = useState([]);
 
   // Set domain
-  const [domain, setDomain] = useState("http://192.168.1.79:8000/");
+  // const [domain, setDomain] = useState("http://192.168.1.79:8000/");
+  const [domain, setDomain] = useState("https://vovatch.pythonanywhere.com/");
+  // const [domain, setDomain] = useState(Config.DOMAIN_URL);
 
   // Data # TODO: to be updated
   const [feedItems, setFeedItems] = useState([]);
