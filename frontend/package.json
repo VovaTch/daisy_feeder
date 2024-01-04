@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "babel-plugin-inline-dotenv": "^1.7.0",
     "eslint": "^8.55.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.0",

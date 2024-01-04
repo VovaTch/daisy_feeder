@@ -30,6 +30,7 @@ import { StatusBar } from "react-native";
  * @component
  */
 export default function App() {
+  console.log(process.env.DOMAIN_URL);
   return (
     <Provider>
       <NavigationContainer style={highLevelStyles.container}>
