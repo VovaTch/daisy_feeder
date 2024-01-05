@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -6,8 +6,13 @@ import { deleteFeedItem } from "../api/send/deleteFeedItem";
 import { getUsernameById } from "../utils/Others";
 import { tableStyles } from "../styles/table";
 import { containerStyles } from "../styles/containers";
+import { context } from "../context/global";
 
 export const Table = ({ foodItems, setFoodItems, minUsers, requiredDate }) => {
+  // Get context
+  const globalContext = useContext(context);
+  const { domain } = globalContext;
+
   const filteredFoodItems = foodItems.filter((item) => {
     const itemDate = new Date(item.datetime).toISOString().split("T")[0];
     return itemDate === requiredDate;
@@ -49,7 +54,7 @@ export const Table = ({ foodItems, setFoodItems, minUsers, requiredDate }) => {
               style={{ alignContent: "center", padding: 10 }}
               key={`delete-${idx}`}
               onPress={() => {
-                deleteFeedItem(foodItem.id, foodItems, setFoodItems);
+                deleteFeedItem(foodItem.id, foodItems, setFoodItems, domain);
               }}
             >
               <Ionicons name="trash" color={"black"} size={30} />

@@ -4,14 +4,14 @@
 POST http://0.0.0.0:8000/api/signup/
 Content-Type: application/json
 
-{"username": "fakeshaked1", "email": "fake.shaked1@gmai.com" ,"password": "12341234", "profile": {"friends": []}}
+{"username": "fakeshaked4", "email": "fake.shaked@gmai.com" ,"password": "12341234", "profile": {"friends": []}}
 
 ### ---------------------- LOG-IN-REQUEST
 
 POST http://0.0.0.0:8000/api/login/
 Content-Type: application/json
 
-{"username": "vovatch", "password": "@Slnz250@"}
+{"username": "fakevova50", "password": "12341234"}
 
 ### ---------------------- USER-AUTHENTICATION-REQUEST
 

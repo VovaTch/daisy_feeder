@@ -1,5 +1,4 @@
 import React, { useState, createContext } from "react";
-import Config from "react-native-config";
 
 const context = createContext();
 
@@ -20,7 +19,8 @@ const Provider = ({ children }) => {
 
   // Set domain
   // const [domain, setDomain] = useState("http://192.168.1.79:8000/");
-  const [domain, setDomain] = useState(Config.DOMAIN_URL);
+  // eslint-disable-next-line no-undef
+  const [domain, setDomain] = useState(process.env.EXPO_PUBLIC_API_URL);
 
   // Data # TODO: to be updated
   const [feedItems, setFeedItems] = useState([]);

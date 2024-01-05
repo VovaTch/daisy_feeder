@@ -71,6 +71,7 @@ def signup(request: HttpRequest) -> Response:
         # Now that the user and profile are created, handle many-to-many relationships
         friends_data = request.data.get("profile", {}).get("friends", [])  # type: ignore
         user.profile.friends.set(friends_data)  # type: ignore
+        user.profile.id = user.id  # Set the same ID as the user # type: ignore
 
         token = Token.objects.create(user=user)
         return Response(
