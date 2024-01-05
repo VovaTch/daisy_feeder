@@ -17,6 +17,31 @@ import { plotStyles } from "../styles/plots";
 import { imageStyles } from "../styles/image";
 import { statusBarStyles } from "../styles/statusBar";
 
+/**
+ * Renders the PlotScreen component, which displays various plots related to Daisy the cat's feeding amounts.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered PlotScreen component.
+ *
+ * @example
+ * // Usage
+ * import PlotScreen from './screens/Plots';
+ *
+ * function App() {
+ *   return (
+ *     <PlotScreen />
+ *   );
+ * }
+ *
+ * @description
+ * The PlotScreen component is responsible for rendering plots that show the accumulated feeding amounts of Daisy the cat.
+ * It fetches the feed items from the server and displays loading indicator until the data is loaded.
+ * Once the data is loaded, it renders three PlotCard components, each showing the accumulated feeding amounts for different food types.
+ *
+ * @see {@link PlotCard}
+ * @see {@link getUserFilteredFoodItems}
+ * @see {@link fetchFeedItem}
+ */
 export default function PlotScreen() {
   // context
   const globalContext = useContext(context);
@@ -73,6 +98,16 @@ export default function PlotScreen() {
   );
 }
 
+/**
+ * A component that renders a plot card for Daisy the cat's feeding data.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Array} props.data - The feeding data for the plot.
+ * @param {string} props.foodType - The type of food Daisy is fed.
+ * @param {string} props.titleText - The title text to display on the plot card.
+ * @returns {JSX.Element} The rendered plot card component.
+ */
 const PlotCard = ({ data, foodType, titleText }) => {
   return (
     <View style={plotStyles.plotCard}>

@@ -2,6 +2,18 @@ import React, { useState, createContext } from "react";
 
 const context = createContext();
 
+/**
+ * Daisy's Provider Component.
+ *
+ * This component serves as the provider for the global context in Daisy's Feeder application.
+ * It manages the state and provides the necessary data and functions to its children components.
+ * Daisy, the cat, approves of this provider and guarantees a purr-fect user experience.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {ReactNode} props.children - The child components to be wrapped by the provider.
+ * @returns {ReactNode} The wrapped child components.
+ */
 const Provider = ({ children }) => {
   // TODO: to be filled
 

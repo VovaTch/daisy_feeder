@@ -28,6 +28,27 @@ import { imageStyles } from "../styles/image.jsx";
 import { StatusBar } from "react-native";
 import { statusBarStyles } from "../styles/statusBar.jsx";
 
+/**
+ * Daisy's Settings Screen.
+ * This screen allows users to manage their settings and interact with friends.
+ *
+ * @component
+ * @example
+ * // Usage
+ * import SettingsScreen from './screens/Settings';
+ *
+ * function App() {
+ *   return (
+ *     <SettingsScreen />
+ *   );
+ * }
+ *
+ * @returns {JSX.Element} The rendered Settings screen.
+ *
+ * @fires SettingsScreen#onFriendRequestAccept
+ * @fires SettingsScreen#onFriendRequestReject
+ *
+ */
 export default function SettingsScreen() {
   const [createRequestVisible, setCreateRequestVisible] = useState(false);
 

@@ -70,6 +70,10 @@ const LandingScreen = ({ navigation }) => {
     return () => {};
   }, []);
 
+  /**
+   * Handles the login process.
+   * @returns {Promise} - A promise that resolves to the user object if the login is successful, and undefined otherwise.
+   */
   const handleLogin = async () => {
     // Implement your login logic here
     try {

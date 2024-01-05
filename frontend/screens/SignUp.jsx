@@ -18,6 +18,19 @@ import { imageStyles } from "../styles/image";
 import { StatusBar } from "react-native";
 import { statusBarStyles } from "../styles/statusBar";
 
+/**
+ * Daisy's Sign Up Screen.
+ *
+ * This screen allows users to sign up for Daisy's app. Users can enter their username, email, password, and confirm password.
+ * If all fields are filled, a valid email is entered, and the passwords match, the user is created and a success message is displayed.
+ * Otherwise, appropriate error messages are shown.
+ *
+ * Daisy, the clever and curious cat, welcomes you to her app and hopes you enjoy your experience!
+ *
+ * @component
+ * @param {object} navigation - The navigation object provided by React Navigation.
+ * @returns {JSX.Element} - The Sign Up screen component.
+ */
 const SignUpScreen = ({ navigation }) => {
   // context
   const globalContext = useContext(context);
