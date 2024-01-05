@@ -114,7 +114,6 @@ export const SendFriendRequestPopup = ({
               setValue(item.value);
               setIsFocused(false);
               handleSelectUser(item);
-              console.log(item.value);
             }}
             renderLeftIcon={() => (
               <AntDesign

@@ -3,7 +3,7 @@ import axios from "axios";
 export const sendFriendRequest = async (data, basePath) => {
   try {
     console.log(
-      `Sending friend request from ID ${data.from_user} to ID ${data.to_user} to domain ${basePath}...`
+      `Sending friend request from ID ${data.from_user} to ID ${data.to_user}...`
     );
     await axios.post(basePath + `api/friend-requests/`, data, {
       headers: {

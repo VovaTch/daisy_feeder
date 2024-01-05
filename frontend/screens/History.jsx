@@ -26,6 +26,32 @@ import { tableStyles } from "../styles/table.jsx";
 import { imageStyles } from "../styles/image.jsx";
 import { statusBarStyles } from "../styles/statusBar.jsx";
 
+/**
+ * Renders the History screen component.
+ *
+ * @returns {JSX.Element} The rendered History screen component.
+ *
+ * @description
+ * This component displays the history of feed items for Daisy the cat, the most sophisticated and finicky feline in the neighborhood.
+ * It fetches data from the server and elegantly renders the content based on the fetched data, leaving no room for any "cat"-astrophes.
+ * The component includes a dropdown to select a specific date, a table to display the feed items for the selected date,
+ * and a floating sum view to show the total amount of food consumed on the selected date, because Daisy deserves nothing but the best.
+ *
+ * @example
+ * // Usage
+ * <HistoryScreen />
+ */
+/**
+ * Renders the History screen component.
+ *
+ * @returns {JSX.Element} The rendered History screen component.
+ *
+ * @description
+ * This component displays the history of feed items for Daisy the cat.
+ * It fetches data from the server and renders the content based on the fetched data.
+ * The component includes a dropdown to select a specific date, a table to display the feed items for the selected date,
+ * and a floating sum view to show the total amount of food consumed on the selected date.
+ */
 export default function HistoryScreen() {
   // context
   const globalContext = useContext(context);

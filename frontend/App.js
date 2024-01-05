@@ -17,6 +17,7 @@ import { StatusBar } from "react-native";
  * from tracking her daily feeding routine to providing historical insights into her culinary adventures.
  *
  * Features:
+ * --------
  * - **Today's Feeding:** Keep track of Daisy's daily meals. Is it fish or chicken today? The app knows!
  * - **History:** Dive into the rich history of Daisy's gastronomic experiences. It's a cat's culinary diary!
  * - **Plots:** Discover visually stunning plots that showcase Daisy's eating patterns. Who knew data could be this cute?

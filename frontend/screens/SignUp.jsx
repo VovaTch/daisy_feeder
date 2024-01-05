@@ -62,8 +62,6 @@ const SignUpScreen = ({ navigation }) => {
       return;
     }
 
-    console.log(domain);
-
     const newUser = {
       username: username,
       email: email,
