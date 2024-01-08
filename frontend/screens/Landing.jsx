@@ -78,6 +78,9 @@ const LandingScreen = ({ navigation }) => {
     // Implement your login logic here
     try {
       setIsLoading(true);
+      console.log(domain);
+      console.log(domain);
+      console.log(domain);
       const response = await fetchLoginUser(
         username,
         password,

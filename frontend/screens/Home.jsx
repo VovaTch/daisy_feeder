@@ -84,11 +84,11 @@ export default function HomeScreen() {
   }, [submissionVisible]);
 
   return (
-    <SafeAreaView style={containerStyles.highLevelContainers}>
-      <ImageBackground
-        source={screenBackgroundImage}
-        style={imageStyles.backgroundImage}
-      >
+    <ImageBackground
+      source={screenBackgroundImage}
+      style={imageStyles.backgroundImage}
+    >
+      <SafeAreaView style={containerStyles.highLevelContainers}>
         <StatusBar
           backgroundColor={statusBarStyles.backgroundColor}
           barStyle={statusBarStyles.barStyle}
@@ -131,7 +131,7 @@ export default function HomeScreen() {
           )}
         />
         <StatusBar style="auto" />
-      </ImageBackground>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }

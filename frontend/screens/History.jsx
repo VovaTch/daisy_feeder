@@ -83,11 +83,11 @@ export default function HistoryScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={containerStyles.highLevelContainers}>
-      <ImageBackground
-        source={screenBackgroundImage}
-        style={imageStyles.backgroundImage}
-      >
+    <ImageBackground
+      source={screenBackgroundImage}
+      style={imageStyles.backgroundImage}
+    >
+      <SafeAreaView style={containerStyles.highLevelContainers}>
         <StatusBar
           backgroundColor={statusBarStyles.backgroundColor}
           barStyle={statusBarStyles.barStyle}
@@ -120,7 +120,7 @@ export default function HistoryScreen() {
             />
           </View>
         )}
-      </ImageBackground>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
