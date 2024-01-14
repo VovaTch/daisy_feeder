@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import CheckBox from "expo-checkbox";
-import * as SecureStore from "expo-secure-store";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { context } from "../context/global";
@@ -21,6 +20,11 @@ import { buttonStyles } from "../styles/buttons";
 import { imageStyles } from "../styles/image";
 import { StatusBar } from "react-native";
 import { statusBarStyles } from "../styles/statusBar";
+import {
+  putData,
+  removeData,
+  retrieveData,
+} from "../api/fetch/fetchFromSecureStorage";
 
 /**
  * Welcome to the Landing Screen – the gateway to foodie wonders and culinary adventures!
@@ -59,7 +63,7 @@ const LandingScreen = ({ navigation }) => {
   // Logging in automatically if the user has selected to do so
   useEffect(() => {
     const autoLogging = async () => {
-      const token = await SecureStore.getItemAsync("token");
+      const token = await retrieveData("token");
       if (token) {
         const user = await validateToken(token, setLoginError, domain);
         setActiveUser(user);
@@ -98,10 +102,10 @@ const LandingScreen = ({ navigation }) => {
 
       if (typeof user !== "undefined") {
         if (rememberMe) {
-          await SecureStore.setItemAsync("token", response.token);
+          await putData("token", response.token);
           console.log(`Stored token of ${username} in SecureStore`);
         } else {
-          await SecureStore.deleteItemAsync("token");
+          await removeData("token");
           console.log(`Removed token of ${username} from SecureStore`);
         }
         setLoginError("");

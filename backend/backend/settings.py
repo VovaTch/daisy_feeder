@@ -136,7 +136,10 @@ MEDIA_ROOT = BASE_DIR / "media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS_ALLOW_ALL_ORIGINS = True
-CORS_ORIGIN_WHITELIST = ["http://192.168.1.79:19000", "http://127.0.0.1:19000"]
+CORS_ORIGIN_WHITELIST = [
+    "http://192.168.1.79:19000",
+    "http://127.0.0.1:19000",
+]
 
 # User authentication related
 REST_FRAMEWORK = {

@@ -1,5 +1,6 @@
 import axios from "axios";
-import * as SecureStore from "expo-secure-store";
+
+import { putData } from "./fetchFromSecureStorage";
 
 export const fetchLoginUser = async (
   usernameQuery,
@@ -15,7 +16,7 @@ export const fetchLoginUser = async (
     });
 
     // Storing the token in async storage
-    await SecureStore.setItemAsync(`token`, response.data.token);
+    await putData(`token`, response.data.token);
     console.log(`User ${usernameQuery} has a token`);
     return response.data; // Explicitly return the response data
   } catch (error) {

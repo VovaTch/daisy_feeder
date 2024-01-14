@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { CustomDrawerContent } from "../components/CustomDrawer";
-import * as SecureStore from "expo-secure-store";
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -13,6 +12,7 @@ import LandingScreen from "../screens/Landing";
 import SignUpScreen from "../screens/SignUp";
 import { context } from "../context/global";
 import { drawerStyles } from "../styles/drawer";
+import { removeData } from "../api/fetch/fetchFromSecureStorage";
 
 const Drawer = createDrawerNavigator();
 const stack = createStackNavigator();
@@ -47,7 +47,7 @@ export function DrawerNavigator({ navigation }) {
   const handleLogout = async () => {
     try {
       console.log("Logging out");
-      await SecureStore.deleteItemAsync("token");
+      await removeData("token");
     } catch (error) {
       console.error(`Cannot remove token from SecureStorage: ${error}`);
       return error;

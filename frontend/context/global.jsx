@@ -32,7 +32,8 @@ const Provider = ({ children }) => {
   // Set domain
   // const [domain, setDomain] = useState("http://192.168.1.79:8000/");
   // eslint-disable-next-line no-undef
-  const [domain, setDomain] = useState(process.env.EXPO_PUBLIC_API_URL);
+  // const [domain, setDomain] = useState(process.env.EXPO_PUBLIC_API_URL);
+  const [domain, setDomain] = useState("https://vovatch.pythonanywhere.com/");
 
   // Data # TODO: to be updated
   const [feedItems, setFeedItems] = useState([]);

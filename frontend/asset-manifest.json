@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.js": "/daisy_feeder_web/static/js/main.545c5d66.js",
+    "static/js/265.31e1edac.js": "/daisy_feeder_web/static/js/265.31e1edac.js",
+    "static/media/MaterialCommunityIcons.ttf": "/daisy_feeder_web/static/media/MaterialCommunityIcons.5d42b4e60858731e7b65.ttf",
+    "static/media/Ionicons.ttf": "/daisy_feeder_web/static/media/Ionicons.3517aeaa34b2f8cd8eef.ttf",
+    "static/media/daisy_navigator.jpeg": "/daisy_feeder_web/static/media/daisy_navigator.5add0500bdc0bd283aab.jpeg",
+    "static/media/Landing-Background.jpg": "/daisy_feeder_web/static/media/Landing-Background.86a1b7850d1dc95a3611.jpg",
+    "static/media/Screen-Background.jpg": "/daisy_feeder_web/static/media/Screen-Background.d423ec4b24b5fef17f11.jpg",
+    "static/media/AntDesign.ttf": "/daisy_feeder_web/static/media/AntDesign.163adab9dbd7cb1ed12a.ttf",
+    "static/media/Drawer.jpg": "/daisy_feeder_web/static/media/Drawer.4c9ddb701578bca1e9cf.jpg",
+    "favicon.ico": "/daisy_feeder_web/favicon.ico",
+    "index.html": "/daisy_feeder_web/index.html",
+    "favicon-32.png": "/daisy_feeder_web/favicon-32.png",
+    "favicon-16.png": "/daisy_feeder_web/favicon-16.png",
+    "manifest.json": "/daisy_feeder_web/manifest.json",
+    "serve.json": "/daisy_feeder_web/serve.json",
+    "main.545c5d66.js.map": "/daisy_feeder_web/static/js/main.545c5d66.js.map",
+    "265.31e1edac.js.map": "/daisy_feeder_web/static/js/265.31e1edac.js.map"
+  },
+  "entrypoints": [
+    "static/js/265.31e1edac.js",
+    "static/js/main.545c5d66.js"
+  ]
+}

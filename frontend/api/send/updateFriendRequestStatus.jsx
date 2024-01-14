@@ -1,5 +1,6 @@
-import * as SecureStore from "expo-secure-store";
 import axios from "axios";
+
+import { retrieveData } from "../fetch/fetchFromSecureStorage";
 
 /**
  * Updates the friend list of the active user.
@@ -80,7 +81,7 @@ export const updateFriendRequestStatus = async (
         approved ? `approved` : `denied`
       }...`
     );
-    const token = await SecureStore.getItemAsync("token");
+    const token = await retrieveData("token");
     await axios.post(
       `${basePath}api/friend-request-response/${requestId}/`,
       {

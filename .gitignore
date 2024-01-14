@@ -166,3 +166,4 @@ cython_debug/
 *.swp
 *.swo
 frontend/eas.json
+frontend/daisy_feeder_web/
